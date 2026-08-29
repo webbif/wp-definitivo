@@ -11,6 +11,7 @@ jobs:
   php:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         php: ["7.4", "8.3"]
     steps:
@@ -20,7 +21,9 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
           tools: composer:v2
+      - run: composer validate --strict
       - run: composer install --no-interaction --prefer-dist
+      - run: composer check-platform-reqs
       - run: composer lint
       - run: composer test
 
