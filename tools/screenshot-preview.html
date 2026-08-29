@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>WP Definitivo screenshot preview</title>
+	<style>
+		@font-face { font-family: "Inter"; font-style: normal; font-weight: 400 800; src: url("../wp-definitivo/assets/fonts/inter-latin.woff2") format("woff2"); }
+		@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400 600; src: url("../wp-definitivo/assets/fonts/jetbrains-mono-latin.woff2") format("woff2"); }
+		:root { --background: #f6f8fc; --container: #f8fbff; --card: #fff; --ink: #0f172a; --muted: #5f6f83; --accent: #0f3d73; --secondary: #14599f; --line: rgb(15 48 87 / 0.14); --soft: #eef4fb; }
+		* { box-sizing: border-box; }
+		html, body { width: 1200px; height: 900px; margin: 0; overflow: hidden; }
+		body { background: var(--background); color: var(--ink); font-family: "Inter", sans-serif; font-size: 16px; line-height: 1.5; }
+		header { height: 82px; border-bottom: 1px solid var(--line); background: var(--container); }
+		.shell { width: 1080px; margin: 0 auto; }
+		.nav { display: flex; height: 82px; align-items: center; }
+		.brand { margin-right: auto; font-size: 25px; font-weight: 800; letter-spacing: -0.04em; }
+		nav { display: flex; gap: 30px; font-weight: 650; }
+		nav span:first-child { color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 7px; }
+		.search { display: grid; width: 38px; height: 38px; margin-left: 30px; place-items: center; border: 0; font-size: 21px; }
+		.hero { position: relative; height: 385px; padding-top: 52px; overflow: hidden; border-bottom: 1px solid var(--line); }
+		.hero::after { position: absolute; right: -80px; bottom: -180px; width: 500px; height: 500px; border: 2px solid var(--secondary); border-radius: 48% 52% 38% 62%; opacity: 0.48; content: ""; transform: rotate(18deg); }
+		.eyebrow { margin: 0 0 12px; color: var(--accent); font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+		h1 { width: 820px; margin: 0; font-size: 66px; font-weight: 800; letter-spacing: -0.055em; line-height: 0.98; }
+		.hero-row { display: flex; align-items: center; gap: 28px; margin-top: 26px; }
+		.hero p { width: 510px; margin: 0; color: var(--muted); font-size: 18px; }
+		.button { display: inline-flex; min-height: 48px; align-items: center; padding: 0 23px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 750; }
+		.benefits { display: grid; height: 155px; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 18px; background: var(--container); }
+		.benefit { display: grid; grid-template-columns: 55px 1fr; align-content: center; column-gap: 15px; padding: 25px 30px; border-right: 1px solid var(--line); }
+		.benefit:first-child { padding-left: 0; }
+		.benefit:last-child { padding-right: 0; border: 0; }
+		.number { grid-row: 1 / 3; color: var(--secondary); font-family: "JetBrains Mono", monospace; font-size: 34px; font-weight: 500; line-height: 1; }
+		.benefit h2 { margin: 0 0 4px; font-size: 19px; font-weight: 750; }
+		.benefit p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.35; }
+		.journal { padding-top: 29px; }
+		.journal-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 19px; }
+		.journal h2 { margin: 0; font-size: 31px; font-weight: 800; letter-spacing: -0.04em; }
+		.journal-link { color: var(--accent); font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+		.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+		.card { min-height: 142px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 19px; background: var(--card); }
+		.meta { margin-bottom: 7px; color: var(--accent); font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.11em; text-transform: uppercase; }
+		.card h3 { margin: 0 0 8px; font-size: 20px; font-weight: 750; line-height: 1.08; }
+		.card p { margin: 0; color: var(--muted); font-size: 13px; }
+	</style>
+</head>
+<body>
+	<header>
+		<div class="shell nav">
+			<div class="brand">Caderno Raiz</div>
+			<nav aria-label="Principal"><span>Início</span><span>Sobre</span><span>Serviços</span><span>Journal</span></nav>
+			<div class="search" aria-hidden="true">⌕</div>
+		</div>
+	</header>
+	<main>
+		<section class="hero">
+			<div class="shell">
+				<p class="eyebrow">Ideias que criam raízes</p>
+				<h1>Conteúdo com presença. Negócios com propósito.</h1>
+				<div class="hero-row">
+					<p>Estratégia, escrita e design para marcas que escolhem crescer com clareza — uma boa história de cada vez.</p>
+					<span class="button">Conheça nosso trabalho</span>
+				</div>
+			</div>
+		</section>
+		<section class="shell benefits" aria-label="Benefícios">
+			<article class="benefit"><span class="number">01</span><h2>Clareza primeiro</h2><p>Estratégia simples para decisões melhores.</p></article>
+			<article class="benefit"><span class="number">02</span><h2>Voz autêntica</h2><p>Palavras que soam como a sua marca.</p></article>
+			<article class="benefit"><span class="number">03</span><h2>Crescimento gentil</h2><p>Experiências bonitas, úteis e acessíveis.</p></article>
+		</section>
+		<section class="shell journal">
+			<div class="journal-head"><h2>Notas do caderno</h2><span class="journal-link">Ver todos os textos</span></div>
+			<div class="cards">
+				<article class="card"><div class="meta">Estratégia · 8 min</div><h3>Uma presença digital que cabe na rotina</h3><p>Menos ruído, mais intenção e consistência.</p></article>
+				<article class="card"><div class="meta">Escrita · 6 min</div><h3>Como encontrar a voz da sua marca</h3><p>Um exercício prático para escrever com verdade.</p></article>
+				<article class="card"><div class="meta">Design · 5 min</div><h3>Espaço em branco também comunica</h3><p>Respirar é parte essencial da experiência.</p></article>
+			</div>
+		</section>
+	</main>
+</body>
+</html>

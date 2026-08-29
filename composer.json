@@ -1,0 +1,22 @@
+{
+  "name": "leandrobiffi/wp-definitivo",
+  "description": "Development tooling for the WP Definitivo WordPress theme.",
+  "type": "wordpress-theme",
+  "license": "GPL-2.0-or-later",
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "phpunit/phpunit": "^9.6",
+    "wp-coding-standards/wpcs": "^3.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "sort-packages": true
+  },
+  "scripts": {
+    "lint": "phpcs",
+    "test": "phpunit"
+  }
+}

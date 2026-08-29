@@ -1,0 +1,34 @@
+{
+  "name": "wp-definitivo",
+	"version": "1.0.53",
+  "private": true,
+  "description": "Build, lint, and integration tooling for the WP Definitivo theme.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "i18n": "node tools/generate-pt-br.mjs",
+    "build": "npm run i18n && node tools/build.mjs",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:json",
+		"lint:js": "wp-scripts lint-js wp-definitivo/assets/js/navigation.js wp-definitivo/assets/js/customizer-controls.js wp-definitivo/assets/js/customizer-preview.js tests/e2e",
+		"lint:css": "wp-scripts lint-style wp-definitivo/assets/css/editor.css wp-definitivo/assets/css/theme.css wp-definitivo/assets/css/customizer-controls.css wp-definitivo/rtl.css",
+    "lint:json": "node tools/validate-theme-json.mjs",
+    "test:e2e": "playwright test",
+    "wp-env:start": "wp-env start",
+    "wp-env:stop": "wp-env stop",
+    "release:check": "npm run build && npm run lint && node tools/release-check.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.54.0",
+    "@wordpress/env": "^10.28.0",
+    "@wordpress/scripts": "^30.18.0",
+	"gettext-parser": "^1.4.0",
+    "lightningcss": "^1.29.2",
+	"postcss": "^8.5.26",
+	"postcss-selector-parser": "^6.1.4",
+    "terser": "^5.39.0",
+    "typescript": "5.8.3"
+  }
+}

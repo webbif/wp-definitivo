@@ -1,0 +1,31 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
+  "landingPage": "/",
+  "plugins": [
+    "theme-check"
+  ],
+  "steps": [
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "WP Definitivo Test",
+        "blogdescription": "Accessible theme release candidate"
+      }
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp theme activate wp-definitivo"
+    },
+    {
+      "step": "wp-cli",
+      "command": "wp plugin activate theme-check"
+    }
+  ]
+}

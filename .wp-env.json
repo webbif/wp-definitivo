@@ -1,0 +1,17 @@
+{
+  "core": null,
+  "phpVersion": "8.3",
+  "themes": [
+    "./wp-definitivo"
+  ],
+  "plugins": [
+    "https://downloads.wordpress.org/plugin/theme-check.zip",
+    "https://downloads.wordpress.org/plugin/woocommerce.zip",
+    "https://downloads.wordpress.org/plugin/elementor.zip"
+  ],
+  "config": {
+    "WP_DEBUG": true,
+    "WP_DEBUG_LOG": true,
+    "SCRIPT_DEBUG": true
+  }
+}

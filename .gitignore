@@ -1,0 +1,15 @@
+/node_modules/
+/vendor/
+/.wp-env/
+/artifacts/
+/test-results/
+/playwright-report/
+/.phpunit.result.cache
+/evidencias/
+/.phpcs-cache
+/*.zip
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

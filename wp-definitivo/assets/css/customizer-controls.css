@@ -1,0 +1,54 @@
+.customize-control-wpdef-section-link {
+	margin-bottom: 0;
+}
+
+/* Nested settings are reachable only through their parent section. */
+/* stylelint-disable selector-id-pattern */
+#accordion-section-wpdef_store_page:not(.wpdef-customizer-child-section--active),
+#accordion-section-wpdef_product:not(.wpdef-customizer-child-section--active),
+#accordion-section-wpdef_cart:not(.wpdef-customizer-child-section--active),
+#accordion-section-wpdef_checkout:not(.wpdef-customizer-child-section--active),
+#accordion-section-wpdef_account:not(.wpdef-customizer-child-section--active),
+#accordion-section-wpdef_theme_typography:not(.wpdef-customizer-child-section--active),
+#accordion-section-wpdef_woocommerce_typography:not(.wpdef-customizer-child-section--active),
+.wpdef-customizer-child-section {
+	display: none !important;
+}
+/* stylelint-enable selector-id-pattern */
+
+.wpdef-customizer-child-section.wpdef-customizer-child-section--active {
+	display: block !important;
+}
+
+.wpdef-customizer-section-link {
+	display: flex;
+	width: 100%;
+	min-height: 46px;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 12px;
+	border: 0;
+	border-bottom: 1px solid #dcdcde;
+	background: #fff;
+	color: #1d2327;
+	cursor: pointer;
+	font: inherit;
+	text-align: left;
+}
+
+.wpdef-customizer-section-link:hover,
+.wpdef-customizer-section-link:focus-visible {
+	background: #f6f7f7;
+	color: #2271b1;
+}
+
+.wpdef-customizer-section-link:focus-visible {
+	outline: 2px solid #2271b1;
+	outline-offset: -2px;
+}
+
+.wpdef-customizer-section-link .dashicons {
+	width: 18px;
+	height: 18px;
+	font-size: 18px;
+}

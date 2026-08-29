@@ -1,0 +1,40 @@
+body {
+	direction: rtl;
+	unicode-bidi: embed;
+}
+
+.primary-navigation .sub-menu {
+	right: -1rem;
+	left: auto;
+}
+
+.wp-block-quote.is-style-wpdef-organic-quote::before {
+	right: 0.25em;
+	left: auto;
+}
+
+.alignleft {
+	float: right;
+	margin: 0 0 1rem 1.5rem;
+}
+
+.alignright {
+	float: left;
+	margin: 0 1.5rem 1rem 0;
+}
+
+@media (max-width: 960px) {
+
+	.primary-navigation .sub-menu {
+		padding: 0 1.25rem 0 0;
+	}
+}
+
+@media (max-width: 700px) {
+
+	.alignleft,
+	.alignright {
+		float: none;
+		margin-inline: 0;
+	}
+}

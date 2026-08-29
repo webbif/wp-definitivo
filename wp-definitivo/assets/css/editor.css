@@ -1,0 +1,68 @@
+:root {
+	--wpdef-background: #f6f8fc;
+	--wpdef-container: #f8fbff;
+	--wpdef-surface: #fff;
+	--wpdef-foreground: #0f172a;
+	--wpdef-muted: #5f6f83;
+	--wpdef-accent: #0f3d73;
+	--wpdef-secondary: #14599f;
+	--wpdef-border: rgb(15 48 87 / 0.14);
+	--wpdef-soft: #eef4fb;
+	--wpdef-font-body: "Inter", system-ui, sans-serif;
+	--wpdef-font-heading: "Inter", system-ui, sans-serif;
+	--wpdef-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.editor-styles-wrapper {
+	background: var(--wpdef-background);
+	color: var(--wpdef-foreground);
+	font-family: var(--wpdef-font-body);
+	font-size: 18px;
+	line-height: 1.65;
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6,
+.editor-post-title__input {
+	font-family: var(--wpdef-font-heading);
+	font-weight: 700;
+	line-height: 1.12;
+}
+
+.editor-styles-wrapper a {
+	color: var(--wpdef-accent);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.editor-styles-wrapper code,
+.editor-styles-wrapper kbd,
+.editor-styles-wrapper pre,
+.editor-styles-wrapper samp {
+	font-family: var(--wpdef-font-mono);
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-wpdef-outline .wp-block-button__link {
+	border: 2px solid var(--wpdef-accent);
+	background: transparent;
+	color: var(--wpdef-accent);
+}
+
+.editor-styles-wrapper .wp-block-quote.is-style-wpdef-organic-quote,
+.editor-styles-wrapper .wp-block-group.is-style-wpdef-soft-panel {
+	padding: 1.5rem;
+	border: 0;
+	border-radius: 1.25rem;
+	background: var(--wpdef-soft);
+}
+
+.editor-styles-wrapper .wp-block-image.is-style-wpdef-framed img {
+	padding: 0.75rem;
+	border: 1px solid var(--wpdef-border);
+	border-radius: 0.5rem;
+	background: var(--wpdef-surface);
+}

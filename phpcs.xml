@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="WP Definitivo">
+	<description>WordPress.org coding standards for WP Definitivo.</description>
+	<file>wp-definitivo</file>
+	<arg name="basepath" value="."/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+	<config name="testVersion" value="7.4-"/>
+	<rule ref="WordPress">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+	</rule>
+	<rule ref="PHPCompatibilityWP"/>
+	<exclude-pattern>*/languages/*</exclude-pattern>
+	<exclude-pattern>*/assets/*</exclude-pattern>
+</ruleset>

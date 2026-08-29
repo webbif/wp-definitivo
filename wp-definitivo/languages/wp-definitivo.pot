@@ -1,0 +1,801 @@
+# Copyright (C) 2026 Leandro Biffi
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Definitivo 1.0.53\n"
+"Report-Msgid-Bugs-To: https://wpdefinitivo.com/tema-wp-definitivo/\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Portuguese (Brazil)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-08-25T18:02:43-03:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wp-definitivo\n"
+
+#. Theme Name of the theme
+#. Author of the theme
+#: style.css
+msgid "WP Definitivo"
+msgstr ""
+
+#. Theme URI of the theme
+#: style.css
+msgid "https://wpdefinitivo.com/tema-wp-definitivo/"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "An accessible, content-first classic theme with an organic editorial style for creators and small businesses."
+msgstr ""
+
+#. Author URI of the theme
+#: style.css
+msgid "https://wpdefinitivo.com/"
+msgstr ""
+
+#: 404.php:13
+msgid "Error 404"
+msgstr ""
+
+#: 404.php:14
+msgid "That page could not be found."
+msgstr ""
+
+#: 404.php:17
+msgid "It may have moved or no longer exists. Try a search or return to the home page."
+msgstr ""
+
+#: 404.php:19
+msgid "Return home"
+msgstr ""
+
+#: attachment.php:28
+msgid "Download attachment"
+msgstr ""
+
+#. translators: 1: comment count, 2: post title.
+#: comments.php:19
+#, php-format
+msgid "%1$s comment on “%2$s”"
+msgid_plural "%1$s comments on “%2$s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:41
+msgid "Older comments"
+msgstr ""
+
+#: comments.php:42
+msgid "Newer comments"
+msgstr ""
+
+#: comments.php:49
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:16
+#: inc/setup.php:72
+msgid "Footer menu"
+msgstr ""
+
+#: front-page.php:15
+#: home.php:12
+#: index.php:13
+msgid "Latest posts"
+msgstr ""
+
+#: header.php:17
+msgid "Skip to content"
+msgstr ""
+
+#: header.php:39
+msgid "Open menu"
+msgstr ""
+
+#: header.php:39
+msgid "Close menu"
+msgstr ""
+
+#: header.php:40
+msgid "Menu"
+msgstr ""
+
+#: header.php:42
+#: inc/setup.php:71
+msgid "Primary menu"
+msgstr ""
+
+#: header.php:59
+msgid "Open search"
+msgstr ""
+
+#: header.php:73
+msgid "Close search"
+msgstr ""
+
+#: inc/block-styles.php:18
+msgid "Definitivo outline"
+msgstr ""
+
+#: inc/block-styles.php:26
+msgid "Organic quote"
+msgstr ""
+
+#: inc/block-styles.php:34
+msgid "Framed"
+msgstr ""
+
+#: inc/block-styles.php:42
+msgid "Soft panel"
+msgstr ""
+
+#: inc/customizer.php:60
+msgid "Choose a valid hexadecimal color."
+msgstr ""
+
+#: inc/customizer.php:70
+msgid "The accent must have a contrast ratio of at least 4.5:1 against the selected scheme surfaces and button text."
+msgstr ""
+
+#: inc/customizer.php:86
+msgid "Theme options"
+msgstr ""
+
+#: inc/customizer.php:87
+msgid "Presentation controls for WP Definitivo."
+msgstr ""
+
+#: inc/customizer.php:95
+#: inc/customizer.php:115
+msgid "Color scheme"
+msgstr ""
+
+#: inc/customizer.php:135
+msgid "Custom accent"
+msgstr ""
+
+#: inc/customizer.php:136
+msgid "Optional. The color is saved only when it maintains WCAG AA contrast against the selected scheme surfaces and button text."
+msgstr ""
+
+#: inc/customizer.php:145
+msgid "Header"
+msgstr ""
+
+#: inc/customizer.php:160
+msgid "Keep the header visible while scrolling"
+msgstr ""
+
+#: inc/customizer.php:176
+msgid "Show search in the header"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Typography"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Choose which typography settings to configure."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Theme typography"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Typography settings for pages, posts, navigation, and widgets."
+msgstr ""
+
+#: inc/customizer.php
+msgid "WooCommerce typography"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Typography settings for the store, products, cart, checkout, and account pages."
+msgstr ""
+
+#: inc/customizer.php
+msgid "System UI"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Arial"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Trebuchet MS"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Body font"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Heading font"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Base text size"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Controls paragraph and interface text across the theme."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Heading scale"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Controls the size of headings across pages, posts, and cards."
+msgstr ""
+
+#: inc/customizer.php
+msgid "WooCommerce text size"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Controls descriptions, forms, cart, checkout, and account text."
+msgstr ""
+
+#: inc/customizer.php
+msgid "WooCommerce heading scale"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Controls product, product card, cart, checkout, and account headings."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Compact"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Standard"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Layout options for standard pages."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Blog"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Layout options for the posts page, archives, and search results."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Post"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Layout and content options for individual posts."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Store"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Choose a WooCommerce page to configure its container and sidebar."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Store Page"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Layout options for the main store, product categories, product tags, and product search results."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Layout options for individual WooCommerce products."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Layout options for the WooCommerce cart page."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Checkout"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Layout options for checkout and order confirmation."
+msgstr ""
+
+#: inc/customizer.php
+msgid "My Account"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Layout options for the account dashboard, orders, downloads, addresses, account details, and lost password views."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Show store hero"
+msgstr ""
+
+#: inc/customizer.php inc/integrations/woocommerce.php
+msgid "Templates for WordPress"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Hero label"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Leave blank to hide the label. The title and description come from the store page."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Show hero background decoration"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Product"
+msgstr ""
+
+#: inc/customizer.php
+msgid "No sidebar"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Left"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Right"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Sidebar position"
+msgstr ""
+
+#: inc/customizer.php
+msgid "The sidebar is displayed only when its widget area contains widgets."
+msgstr ""
+
+#: inc/customizer.php
+msgid "The store sidebar displays product search and categories when its widget area is empty."
+msgstr ""
+
+#: inc/customizer.php:220
+msgid "Archive layout"
+msgstr ""
+
+#: inc/customizer.php:224
+msgid "List"
+msgstr ""
+
+#: inc/customizer.php:225
+msgid "Grid"
+msgstr ""
+
+#: inc/customizer.php:240
+msgid "Grid columns"
+msgstr ""
+
+#: inc/customizer.php
+msgid "The three-column layout is not compatible with a sidebar. Select No sidebar to enable it."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Product grid columns"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Choose the number of products displayed in each row of the store catalog."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Product thumbnail shape"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Choose the image proportion used by product cards in the store catalog."
+msgstr ""
+
+#: inc/customizer.php:244
+msgid "Two"
+msgstr ""
+
+#: inc/customizer.php:245
+msgid "Three"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Four"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Square"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Vertical (4:5)"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Show product description"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Displays the short product description in store catalog cards."
+msgstr ""
+
+#: inc/customizer.php:260
+msgid "Posts on archive pages"
+msgstr ""
+
+#: inc/customizer.php:264
+msgid "Excerpt"
+msgstr ""
+
+#: inc/customizer.php:265
+msgid "Full content"
+msgstr ""
+
+#: inc/customizer.php:280
+msgid "Show featured images"
+msgstr ""
+
+#: inc/customizer.php:296
+msgid "Show post metadata"
+msgstr ""
+
+#: inc/customizer.php:305
+msgid "Footer"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Footer text"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Edit the text directly. Use [current_year] and [site_title] for dynamic values. Basic links and emphasis are allowed."
+msgstr ""
+
+#: inc/integrations/woocommerce.php:85
+#: inc/setup.php:128
+#: sidebar-shop.php:12
+msgid "Shop sidebar"
+msgstr ""
+
+#: inc/integrations/woocommerce.php
+msgid "Product sidebar"
+msgstr ""
+
+#: inc/integrations/woocommerce.php
+msgid "Search products"
+msgstr ""
+
+#: inc/integrations/woocommerce.php
+msgid "Product categories"
+msgstr ""
+
+#. translators: %s: number of products in the cart.
+#: inc/integrations/woocommerce.php:137
+#, php-format
+msgid "%s item in cart"
+msgid_plural "%s items in cart"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/integrations/woocommerce.php:142
+msgid "Cart"
+msgstr ""
+
+#: inc/setup.php:106
+msgid "Blog and archives sidebar"
+msgstr ""
+
+#: inc/setup.php
+msgid "Shown on single posts, the blog, archives, and search results when enabled in the Customizer and populated with widgets."
+msgstr ""
+
+#: inc/setup.php:117
+msgid "Pages sidebar"
+msgstr ""
+
+#: inc/setup.php
+msgid "Shown on pages when enabled in the Customizer and populated with widgets."
+msgstr ""
+
+#: inc/setup.php
+msgid "Shared by WooCommerce layouts when their sidebar is enabled. Added widgets replace the theme fallback."
+msgstr ""
+
+#: inc/template-functions.php:16
+msgid "White and navy"
+msgstr ""
+
+#: inc/template-functions.php:23
+msgid "Ivory and wine"
+msgstr ""
+
+#: inc/template-functions.php:30
+msgid "Sand and green"
+msgstr ""
+
+#: inc/template-functions.php:37
+msgid "Night and wine"
+msgstr ""
+
+#: inc/customizer.php inc/template-functions.php
+msgid "Copyright © [current_year] [site_title]. <a href=\"https://wpdefinitivo.com/\">Theme by WP Definitivo.</a>"
+msgstr ""
+
+#: inc/template-tags.php:20
+msgid "Published"
+msgstr ""
+
+#. translators: %s: author name.
+#: inc/template-tags.php:29
+#, php-format
+msgid " by %s"
+msgstr ""
+
+#: inc/template-tags.php:41
+#: inc/template-tags.php:42
+msgctxt "list item separator"
+msgid ", "
+msgstr ""
+
+#. translators: %s: categories.
+#: inc/template-tags.php:47
+#, php-format
+msgid "Filed under %s"
+msgstr ""
+
+#. translators: %s: tags.
+#: inc/template-tags.php:55
+#, php-format
+msgid "Tagged %s"
+msgstr ""
+
+#: inc/template-tags.php:64
+msgid "Leave a comment"
+msgstr ""
+
+#: inc/template-tags.php:65
+msgid "1 comment"
+msgstr ""
+
+#: inc/template-tags.php:66
+msgid "% comments"
+msgstr ""
+
+#: inc/template-tags.php:72
+#: template-parts/content-page.php:26
+msgid "Edit"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Landing page"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Page with sidebar"
+msgstr ""
+
+#. translators: %s: search query.
+#: search.php:14
+#, php-format
+msgid "Search results for: %s"
+msgstr ""
+
+#: searchform.php:12
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:13
+msgctxt "placeholder"
+msgid "Search…"
+msgstr ""
+
+#: searchform.php:15
+msgctxt "submit button"
+msgid "Search"
+msgstr ""
+
+#: sidebar.php:12
+msgid "Sidebar"
+msgstr ""
+
+#: single.php:20
+#: template-parts/archive-loop.php:39
+msgid "Previous"
+msgstr ""
+
+#: single.php:21
+#: template-parts/archive-loop.php:40
+msgid "Next"
+msgstr ""
+
+#: template-parts/content-none.php:11
+msgid "Nothing found"
+msgstr ""
+
+#: template-parts/content-none.php:15
+msgid "No results matched your search. Try different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:18
+msgid "There is no content here yet."
+msgstr ""
+
+#: inc/customizer.php
+#: template-parts/content-page.php:19
+#: template-parts/content-single.php:20
+msgid "Page"
+msgstr ""
+
+#: template-parts/content-single.php
+msgid "Breadcrumb"
+msgstr ""
+
+#: template-parts/content-single.php
+msgid "Home"
+msgstr ""
+
+#. translators: %s: post modified date.
+#: template-parts/content-single.php
+#, php-format
+msgid "Updated on %s"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Canvas"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Container"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Card"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Navy"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Deep blue"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Blue"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Ivory"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Charcoal"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Wine"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Rose"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Sand"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Forest"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Night"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "2XS"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "XS"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Medium"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "XL"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Inter"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "JetBrains Mono"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Medium"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Extra large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Display"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Container width"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Sets the maximum width of the content and optional sidebar. The page hero keeps its standard width."
+msgstr ""
+
+#: inc/customizer.php
+msgid "Compact (1080 px)"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Medium (1200 px)"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Wide (1440 px)"
+msgstr ""

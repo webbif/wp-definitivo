@@ -1,0 +1,36 @@
+=== Accessibility Statement ===
+
+WP Definitivo is developed to support accessible websites and follows the WordPress accessibility-ready requirements. Accessibility is treated as an ongoing part of development and regression testing. Site owners remain responsible for the accessibility of their content and their choice of plugins.
+
+== Quick Information ==
+
+Accessibility audit completed: No
+Tested to standard and conformance level: WordPress accessibility-ready requirements and applicable WCAG 2.2 AA success criteria
+
+== Testing Tools and Methodology ==
+
+Development checks include keyboard-only navigation, browser accessibility inspectors, automated axe checks, color contrast tests, responsive reflow checks at 320 CSS pixels, text resizing, and reduced-motion preferences. WordPress Theme Unit Test content is included in the pre-submission manual audit.
+
+Tests cover the skip link, landmarks, menus, search, forms, visible focus, link identification, headings, image alternatives, comments, archives, sidebars, responsive layouts, and optional WooCommerce and Elementor integrations. Accessibility regressions are included in the release checklist for theme updates.
+
+== Screen Reader Text Class ==
+
+`.screen-reader-text`
+
+== Accessibility Features ==
+
+* A visible-on-focus skip link that targets the main content landmark.
+* Semantic landmarks and labelled navigation, search, sidebar, and pagination regions.
+* Keyboard-operable menus and search controls with exposed state changes.
+* Visible focus indicators for interactive controls.
+* Underlined links in body text, comments, excerpts, text widgets, and editable footer text.
+* Bundled color schemes and custom accent validation designed to preserve WCAG AA text contrast in theme-controlled contexts.
+* Responsive reflow, text resizing support, reduced-motion support, and right-to-left language support.
+
+== Accessibility Help Contact ==
+
+For accessibility help, email contato@wpdefinitivo.com.
+
+== Where to Report Issues ==
+
+Report accessibility issues to contato@wpdefinitivo.com. Include the affected page, browser, assistive technology when applicable, and steps to reproduce the problem.
