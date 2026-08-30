@@ -12,6 +12,45 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Create the WooCommerce product used by responsive browser tests.
+ *
+ * Product data stores are not guaranteed to be ready while a batch of plugins
+ * is being activated by WP-CLI. Running this on init makes the fixture
+ * deterministic without coupling the browser tests to a database ID.
+ *
+ * @return int Product ID, or 0 when WooCommerce is unavailable.
+ */
+function wpdef_integration_fixture_product() {
+	if ( ! class_exists( 'WC_Product_Simple' ) ) {
+		return 0;
+	}
+
+	$product_id = wc_get_product_id_by_sku( 'WPDEF-INTEGRATION-RESPONSIVE' );
+	if ( $product_id ) {
+		return (int) $product_id;
+	}
+
+	$product = new WC_Product_Simple();
+
+	if ( ! $product instanceof WC_Product ) {
+		return 0;
+	}
+
+	$product->set_name( 'Produto com um título muito longo para testar quebras responsivas' );
+	$product->set_slug( 'wp-definitivo-responsive-test-product' );
+	$product->set_status( 'publish' );
+	$product->set_catalog_visibility( 'visible' );
+	$product->set_description( 'Produto criado exclusivamente para a integração automatizada.' );
+	$product->set_short_description( 'Fixture responsiva do WP Definitivo.' );
+	$product->set_regular_price( '99.90' );
+	$product->set_sku( 'WPDEF-INTEGRATION-RESPONSIVE' );
+	$product->set_manage_stock( false );
+	$product->set_stock_status( 'instock' );
+
+	return (int) $product->save();
+}
+
+/**
  * Create or update a fixture page.
  *
  * @param string $slug    Page slug.
@@ -125,25 +164,10 @@ function wpdef_integration_fixture_activate() {
 		}
 	}
 
-	if ( class_exists( 'WC_Product_Simple' ) ) {
-		$product_id = wc_get_product_id_by_sku( 'WPDEF-INTEGRATION-RESPONSIVE' );
-		$product    = $product_id ? wc_get_product( $product_id ) : new WC_Product_Simple();
-
-		if ( $product instanceof WC_Product ) {
-			$product->set_name( 'Produto com um título muito longo para testar quebras responsivas' );
-			$product->set_slug( 'wp-definitivo-responsive-test-product' );
-			$product->set_status( 'publish' );
-			$product->set_catalog_visibility( 'visible' );
-			$product->set_description( 'Produto criado exclusivamente para a integração automatizada.' );
-			$product->set_short_description( 'Fixture responsiva do WP Definitivo.' );
-			$product->set_regular_price( '99.90' );
-			$product->set_sku( 'WPDEF-INTEGRATION-RESPONSIVE' );
-			$product->set_stock_status( 'instock' );
-			$product->save();
-		}
-	}
+	wpdef_integration_fixture_product();
 
 	flush_rewrite_rules();
 }
 
 register_activation_hook( __FILE__, 'wpdef_integration_fixture_activate' );
+add_action( 'init', 'wpdef_integration_fixture_product', 20 );
