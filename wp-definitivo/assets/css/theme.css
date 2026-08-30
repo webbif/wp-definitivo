@@ -1793,6 +1793,20 @@ body.single-product.woocommerce div.product div.images {
 	box-shadow: none;
 }
 
+/* A standalone product image should not reserve the thumbnails column. */
+body.single-product.woocommerce div.product div.images:not(:has(.flex-control-thumbs li:nth-child(2))) {
+	grid-template-areas: "media";
+	grid-template-columns: minmax(0, 1fr);
+}
+
+body.single-product.woocommerce div.product div.images:not(:has(.flex-control-thumbs li:nth-child(2))) .flex-control-thumbs {
+	display: none;
+}
+
+body.single-product.woocommerce div.product:has(div.images:not(:has(.flex-control-thumbs li:nth-child(2)))) > span.onsale {
+	inset-inline-start: 0.75rem;
+}
+
 body.single-product .woocommerce-product-gallery .flex-viewport {
 	grid-area: media;
 	overflow: hidden;
