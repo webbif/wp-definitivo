@@ -96,6 +96,29 @@ function wpdef_woocommerce_loop_description() {
 add_action( 'woocommerce_after_shop_loop_item_title', 'wpdef_woocommerce_loop_description', 9 );
 
 /**
+ * Give products without a price an intentional label in store cards.
+ *
+ * WooCommerce omits the price markup for these products. Adding a compact
+ * consultation label keeps the card balanced and matches the single-product
+ * consultation state without changing any purchase behaviour.
+ *
+ * @return void
+ */
+function wpdef_woocommerce_loop_unpriced_label() {
+	global $product;
+
+	if ( ! wpdef_is_shop_archive() || ! $product instanceof WC_Product || '' !== (string) $product->get_price() || $product->is_purchasable() ) {
+		return;
+	}
+
+	printf(
+		'<span class="price wpdef-product-card__inquiry">%s</span>',
+		esc_html__( 'Price on request', 'wp-definitivo' )
+	);
+}
+add_action( 'woocommerce_after_shop_loop_item_title', 'wpdef_woocommerce_loop_unpriced_label', 11 );
+
+/**
  * Return the description for the current store archive.
  *
  * The main shop uses its explicit page excerpt. Product taxonomies retain
