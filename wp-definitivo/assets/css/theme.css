@@ -1511,6 +1511,19 @@ body.woocommerce .woocommerce-breadcrumb a {
 	margin: 0;
 }
 
+/* The empty-cart recommendations keep WooCommerce's has-4-columns class even
+ * when fewer products are returned. Override that flex layout so the cards
+ * remain centered and follow the theme's 3/2/1-column responsive scale. */
+body.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wc-block-grid__products {
+	display: grid;
+	width: 100%;
+	max-width: 100%;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(1rem, 3vw, 2rem);
+	margin: 0 auto;
+	padding: 0;
+}
+
 body.wpdef-shop-columns-2.woocommerce ul.products,
 body.wpdef-shop-columns-2.woocommerce-page ul.products {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1542,6 +1555,13 @@ body.woocommerce-page .site-main ul.products li.product,
 	box-shadow: 0 0.6rem 1.75rem rgb(15 48 87 / 0.04);
 	flex-direction: column;
 	text-align: start;
+}
+
+body.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wc-block-grid__product {
+	width: 100%;
+	max-width: none;
+	padding: 1rem 1rem 1.25rem;
+	flex: none;
 }
 
 /* WooCommerce loads competing image rules. */
@@ -2686,6 +2706,7 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 
 	.woocommerce ul.products,
 	.wc-block-grid__products,
+	body.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wc-block-grid__products,
 	body.wpdef-shop-columns-2.woocommerce ul.products,
 	body.wpdef-shop-columns-2.woocommerce-page ul.products,
 	body.wpdef-shop-columns-4.woocommerce ul.products,
@@ -3035,6 +3056,7 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 	.posts-list .post-card,
 	.woocommerce ul.products,
 	.wc-block-grid__products,
+	body.woocommerce-cart .wp-block-woocommerce-empty-cart-block .wc-block-grid__products,
 	body.wpdef-shop-columns-2.woocommerce ul.products,
 	body.wpdef-shop-columns-2.woocommerce-page ul.products,
 	body.wpdef-shop-columns-4.woocommerce ul.products,

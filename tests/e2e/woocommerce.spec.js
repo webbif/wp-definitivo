@@ -43,6 +43,80 @@ test( 'WooCommerce shop uses the theme shell without WCAG errors', async ( {
 	expect( results.violations ).toEqual( [] );
 } );
 
+test( 'WooCommerce empty cart keeps its product grid centered and responsive', async ( {
+	page,
+}, testInfo ) => {
+	test.skip(
+		'chromium' !== testInfo.project.name,
+		'The empty-cart layout matrix runs once in desktop Chromium.'
+	);
+
+	await page.goto( '/cart/' );
+	await expect(
+		page.locator( '.wp-block-woocommerce-empty-cart-block' )
+	).toBeVisible();
+
+	const expectedColumns = [
+		{ width: 1024, columns: 3 },
+		{ width: 768, columns: 2 },
+		{ width: 390, columns: 1 },
+	];
+
+	for ( const viewport of expectedColumns ) {
+		await page.setViewportSize( {
+			width: viewport.width,
+			height: 900,
+		} );
+
+		const layout = await page.evaluate( () => {
+			const container = document.querySelector(
+				'.wp-block-woocommerce-empty-cart-block'
+			);
+			const grid = container.querySelector( '.wc-block-grid__products' );
+			const items = [
+				...grid.querySelectorAll( '.wc-block-grid__product' ),
+			];
+			const containerRect = container.getBoundingClientRect();
+			const gridRect = grid.getBoundingClientRect();
+			const itemRects = items.map( ( item ) => {
+				const rect = item.getBoundingClientRect();
+
+				return {
+					right: rect.right,
+					x: rect.x,
+					y: rect.y,
+				};
+			} );
+			const firstRowY = itemRects[ 0 ]?.y;
+
+			return {
+				containerCenter: containerRect.x + containerRect.width / 2,
+				gridCenter: gridRect.x + gridRect.width / 2,
+				gridDisplay: window.getComputedStyle( grid ).display,
+				itemsInside: itemRects.every(
+					( item ) =>
+						item.x >= gridRect.x - 1 &&
+						item.right <= gridRect.right + 1
+				),
+				firstRowCount: itemRects.filter(
+					( item ) => Math.abs( item.y - firstRowY ) <= 1
+				).length,
+				withoutHorizontalOverflow:
+					document.documentElement.scrollWidth <=
+					document.documentElement.clientWidth + 2,
+			};
+		} );
+
+		expect( layout.gridDisplay ).toBe( 'grid' );
+		expect( layout.itemsInside ).toBe( true );
+		expect( layout.firstRowCount ).toBe( viewport.columns );
+		expect(
+			Math.abs( layout.gridCenter - layout.containerCenter )
+		).toBeLessThanOrEqual( 1 );
+		expect( layout.withoutHorizontalOverflow ).toBe( true );
+	}
+} );
+
 test( 'WooCommerce mobile cart keeps totals clear of product details', async ( {
 	page,
 }, testInfo ) => {
