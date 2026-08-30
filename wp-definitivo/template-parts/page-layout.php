@@ -32,13 +32,13 @@ while ( have_posts() ) :
 	}
 	?>
 	<div class="wpdef-common-shell wpdef-content-shell wpdef-shell<?php echo $wpdef_is_transaction_page ? ' wpdef-transaction-shell' : ''; ?>">
-		<?php if ( $wpdef_is_transaction_page ) : ?>
-			<header class="wpdef-transaction-header" aria-labelledby="wpdef-transaction-title">
-				<h1 id="wpdef-transaction-title" class="wpdef-transaction-header__title"><?php echo esc_html( get_the_title() ); ?></h1>
-			</header>
-		<?php endif; ?>
 		<div class="wpdef-common-layout<?php echo $wpdef_has_sidebar ? ' has-sidebar' : ''; ?>">
 			<main id="primary" class="site-main wpdef-common-main wpdef-content-card wpdef-page-main" tabindex="-1">
+				<?php if ( $wpdef_is_transaction_page ) : ?>
+					<header class="wpdef-transaction-header" aria-labelledby="wpdef-transaction-title">
+						<h1 id="wpdef-transaction-title" class="wpdef-transaction-header__title"><?php echo esc_html( get_the_title() ); ?></h1>
+					</header>
+				<?php endif; ?>
 				<?php
 				get_template_part(
 					'template-parts/content',

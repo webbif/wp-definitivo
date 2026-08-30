@@ -225,13 +225,13 @@ function wpdef_woocommerce_wrapper_start() {
 	}
 	?>
 	<div class="wpdef-common-shell wpdef-content-shell wpdef-shell<?php echo $is_transactional ? ' wpdef-transaction-shell' : ''; ?>">
-		<?php if ( $is_transactional ) : ?>
-			<header class="wpdef-transaction-header" aria-labelledby="wpdef-transaction-title">
-				<h1 id="wpdef-transaction-title" class="wpdef-transaction-header__title entry-title"><?php echo wp_kses_post( $hero['title'] ); ?></h1>
-			</header>
-		<?php endif; ?>
 		<div class="wpdef-common-layout<?php echo $has_sidebar ? ' has-sidebar' : ''; ?>">
 			<main id="primary" class="site-main wpdef-common-main wpdef-content-card woocommerce-main" tabindex="-1">
+				<?php if ( $is_transactional ) : ?>
+					<header class="wpdef-transaction-header" aria-labelledby="wpdef-transaction-title">
+						<h1 id="wpdef-transaction-title" class="wpdef-transaction-header__title entry-title"><?php echo wp_kses_post( $hero['title'] ); ?></h1>
+					</header>
+				<?php endif; ?>
 				<?php wpdef_woocommerce_archive_toolbar(); ?>
 	<?php
 }
