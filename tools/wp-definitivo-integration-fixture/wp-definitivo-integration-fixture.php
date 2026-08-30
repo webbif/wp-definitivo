@@ -89,12 +89,30 @@ function wpdef_integration_fixture_woocommerce() {
 	}
 
 	update_option( 'woocommerce_coming_soon', 'no' );
+	$generated_pages = array();
+	$capture_pages   = static function ( $pages ) use ( &$generated_pages ) {
+		$generated_pages = $pages;
+		return $pages;
+	};
+
+	add_filter( 'woocommerce_create_pages', $capture_pages, PHP_INT_MAX );
+	WC_Install::create_pages();
+	remove_filter( 'woocommerce_create_pages', $capture_pages, PHP_INT_MAX );
+
+	if (
+		! isset( $generated_pages['shop'] ) ||
+		! isset( $generated_pages['cart'] ) ||
+		! isset( $generated_pages['checkout'] ) ||
+		! isset( $generated_pages['myaccount'] )
+	) {
+		return 0;
+	}
 
 	$woocommerce_pages = array(
-		'woocommerce_shop_page_id'      => array( 'shop', 'Shop', '' ),
-		'woocommerce_cart_page_id'      => array( 'cart', 'Cart', '<!-- wp:woocommerce/cart /-->' ),
-		'woocommerce_checkout_page_id'  => array( 'checkout', 'Checkout', '<!-- wp:woocommerce/checkout /-->' ),
-		'woocommerce_myaccount_page_id' => array( 'my-account', 'My account', '[woocommerce_my_account]' ),
+		'woocommerce_shop_page_id'      => array( 'shop', 'Shop', $generated_pages['shop']['content'] ),
+		'woocommerce_cart_page_id'      => array( 'cart', 'Cart', $generated_pages['cart']['content'] ),
+		'woocommerce_checkout_page_id'  => array( 'checkout', 'Checkout', $generated_pages['checkout']['content'] ),
+		'woocommerce_myaccount_page_id' => array( 'my-account', 'My account', $generated_pages['myaccount']['content'] ),
 	);
 	$fixture_is_ready  = '1' === get_option( 'wpdef_integration_woocommerce_fixture_ready' );
 
@@ -116,8 +134,6 @@ function wpdef_integration_fixture_woocommerce() {
 			return (int) $product_id;
 		}
 	}
-
-	WC_Install::create_pages();
 
 	foreach ( $woocommerce_pages as $option_name => $page_data ) {
 		$page_id = (int) get_option( $option_name );
