@@ -2115,6 +2115,11 @@ body.single-product.woocommerce div.product .summary .woocommerce-variation-add-
 	display: block;
 }
 
+body.single-product.woocommerce div.product .summary .star-rating,
+body.single-product.woocommerce div.product .summary .star-rating span {
+	color: #eab308;
+}
+
 body.single-product.woocommerce div.product .woocommerce-tabs {
 	padding-top: 0;
 }
