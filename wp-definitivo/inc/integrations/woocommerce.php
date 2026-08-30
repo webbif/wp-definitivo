@@ -50,8 +50,10 @@ function wpdef_woocommerce_hooks() {
 	remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description', 10 );
 	remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 	remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
-	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
-	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+	if ( ! is_product() ) {
+		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+	}
 	add_filter( 'woocommerce_show_page_title', '__return_false' );
 
 	add_action( 'woocommerce_before_main_content', 'wpdef_woocommerce_wrapper_start', 10 );
@@ -243,7 +245,7 @@ function wpdef_woocommerce_wrapper_start() {
 	$hero             = wpdef_get_woocommerce_hero();
 	$is_transactional = wpdef_is_woocommerce_transaction_page();
 
-	if ( ! $is_transactional ) {
+	if ( ! $is_transactional && ! is_product() ) {
 		get_template_part( 'template-parts/standard-hero', null, $hero );
 	}
 	?>
