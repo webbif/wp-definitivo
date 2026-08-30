@@ -134,10 +134,64 @@
 		synchronizeButtons( select, controls );
 	}
 
+	function enhanceVariationSummary( form ) {
+		const summary = form.closest( '.summary' );
+		const rangePrice = summary
+			? summary.querySelector( ':scope > p.price' )
+			: null;
+		const variation = form.querySelector( '.woocommerce-variation' );
+
+		if (
+			! summary ||
+			! rangePrice ||
+			! variation ||
+			form.dataset.wpdefPriceEnhanced
+		) {
+			return;
+		}
+
+		form.dataset.wpdefPriceEnhanced = 'true';
+		const selectedPrice = document.createElement( 'div' );
+
+		selectedPrice.className = 'wpdef-selected-variation-summary';
+		selectedPrice.setAttribute( 'aria-live', 'polite' );
+		rangePrice.insertAdjacentElement( 'afterend', selectedPrice );
+
+		function synchronizePrice() {
+			const price = variation.querySelector(
+				'.woocommerce-variation-price'
+			);
+			const hasPrice = Boolean( price && price.innerHTML.trim() );
+
+			selectedPrice.innerHTML = hasPrice ? price.innerHTML : '';
+			summary.classList.toggle( 'wpdef-has-variation-summary', hasPrice );
+		}
+
+		form.addEventListener( 'change', function () {
+			window.setTimeout( synchronizePrice, 0 );
+		} );
+
+		const variationObserver = new window.MutationObserver(
+			synchronizePrice
+		);
+
+		variationObserver.observe( variation, {
+			childList: true,
+			subtree: true,
+			characterData: true,
+		} );
+		synchronizePrice();
+	}
+
 	function initializeVariationControls() {
 		document
-			.querySelectorAll( '.variations_form .variations select' )
-			.forEach( enhanceSelect );
+			.querySelectorAll( '.variations_form' )
+			.forEach( function ( form ) {
+				form.querySelectorAll( '.variations select' ).forEach(
+					enhanceSelect
+				);
+				enhanceVariationSummary( form );
+			} );
 	}
 
 	if ( 'loading' === document.readyState ) {
