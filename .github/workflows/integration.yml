@@ -37,6 +37,7 @@ jobs:
       - run: npx wp-env run cli wp theme activate wp-definitivo
       - run: npx wp-env run cli wp plugin activate theme-check woocommerce elementor wp-definitivo-integration-fixture
       - run: npx wp-env run cli wp eval 'if ( ! wpdef_integration_fixture_woocommerce() ) { WP_CLI::error( "The WooCommerce fixture was not prepared." ); }'
+      - run: npx wp-env run cli wp eval '$pages = array( "cart" => "woocommerce/cart", "checkout" => "woocommerce/checkout" ); foreach ( $pages as $page => $block ) { $page_id = wc_get_page_id( $page ); $content = (string) get_post_field( "post_content", $page_id ); if ( ! has_block( $block, $content ) ) { WP_CLI::error( sprintf( "WooCommerce %s page %d is missing the %s block. Stored content: %s", $page, $page_id, $block, wp_json_encode( $content ) ) ); } WP_CLI::success( sprintf( "WooCommerce %s page %d contains %s.", $page, $page_id, $block ) ); }'
       - run: npx wp-env run cli wp theme-check run wp-definitivo
       - run: npm run test:e2e
       - if: failure()

@@ -98,8 +98,13 @@ function wpdef_integration_fixture_woocommerce() {
 	);
 	$fixture_is_ready  = '1' === get_option( 'wpdef_integration_woocommerce_fixture_ready' );
 
-	foreach ( array_keys( $woocommerce_pages ) as $option_name ) {
-		if ( ! get_post( (int) get_option( $option_name ) ) ) {
+	foreach ( $woocommerce_pages as $option_name => $page_data ) {
+		$page = get_post( (int) get_option( $option_name ) );
+		if (
+			! $page instanceof WP_Post ||
+			'publish' !== $page->post_status ||
+			(string) $page_data[2] !== (string) $page->post_content
+		) {
 			$fixture_is_ready = false;
 			break;
 		}
@@ -120,14 +125,25 @@ function wpdef_integration_fixture_woocommerce() {
 			return 0;
 		}
 
-		wp_update_post(
+		$result = wp_update_post(
 			array(
 				'ID'           => $page_id,
+				'post_status'  => 'publish',
 				'post_name'    => $page_data[0],
 				'post_title'   => $page_data[1],
 				'post_content' => $page_data[2],
-			)
+			),
+			true
 		);
+
+		if ( is_wp_error( $result ) ) {
+			return 0;
+		}
+
+		clean_post_cache( $page_id );
+		if ( (string) $page_data[2] !== (string) get_post_field( 'post_content', $page_id ) ) {
+			return 0;
+		}
 	}
 
 	$product_id = wpdef_integration_fixture_product();
