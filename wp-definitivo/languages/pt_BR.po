@@ -329,6 +329,10 @@ msgid "Layout options for individual WooCommerce products."
 msgstr "Opções de layout para produtos individuais do WooCommerce."
 
 #: inc/customizer.php
+msgid "Individual product"
+msgstr "Produto individual"
+
+#: inc/customizer.php
 msgid "Layout options for the WooCommerce cart page."
 msgstr "Opções de layout para a página do carrinho do WooCommerce."
 
@@ -450,6 +454,14 @@ msgstr ""
 "Escolha a proporção das imagens usada nos cartões de produtos do catálogo "
 "da loja."
 
+#: inc/customizer.php
+msgid "Product image shape"
+msgstr "Formato da imagem do produto"
+
+#: inc/customizer.php
+msgid "Choose the proportion of the main image on individual product pages."
+msgstr "Escolha a proporção da imagem principal nas páginas de produtos individuais."
+
 #: inc/customizer.php:244
 msgid "Two"
 msgstr "Duas"
@@ -465,6 +477,10 @@ msgstr "Quatro"
 #: inc/customizer.php
 msgid "Square"
 msgstr "Quadrado"
+
+#: inc/customizer.php
+msgid "Original"
+msgstr "Original"
 
 #: inc/customizer.php
 msgid "Vertical (4:5)"
@@ -720,6 +736,22 @@ msgstr "Médio (1200 px)"
 #: inc/customizer.php
 msgid "Wide (1440 px)"
 msgstr "Amplo (1440 px)"
+
+#: inc/integrations/woocommerce.php
+msgid "Availability"
+msgstr "Disponibilidade"
+
+#: inc/integrations/woocommerce.php
+msgid "Price on request"
+msgstr "Preço sob consulta"
+
+#: inc/integrations/woocommerce.php
+msgid ""
+"Contact us to receive availability and a personalized proposal for this "
+"product."
+msgstr ""
+"Entre em contato para receber informações sobre disponibilidade e uma "
+"proposta personalizada para este produto."
 
 #: inc/template-tags.php:41
 #: inc/template-tags.php:42

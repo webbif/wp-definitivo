@@ -297,6 +297,10 @@ msgid "Layout options for individual WooCommerce products."
 msgstr ""
 
 #: inc/customizer.php
+msgid "Individual product"
+msgstr ""
+
+#: inc/customizer.php
 msgid "Layout options for the WooCommerce cart page."
 msgstr ""
 
@@ -400,6 +404,14 @@ msgstr ""
 msgid "Choose the image proportion used by product cards in the store catalog."
 msgstr ""
 
+#: inc/customizer.php
+msgid "Product image shape"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Choose the proportion of the main image on individual product pages."
+msgstr ""
+
 #: inc/customizer.php:244
 msgid "Two"
 msgstr ""
@@ -414,6 +426,10 @@ msgstr ""
 
 #: inc/customizer.php
 msgid "Square"
+msgstr ""
+
+#: inc/customizer.php
+msgid "Original"
 msgstr ""
 
 #: inc/customizer.php
@@ -798,4 +814,16 @@ msgstr ""
 
 #: inc/customizer.php
 msgid "Wide (1440 px)"
+msgstr ""
+
+#: inc/integrations/woocommerce.php
+msgid "Availability"
+msgstr ""
+
+#: inc/integrations/woocommerce.php
+msgid "Price on request"
+msgstr ""
+
+#: inc/integrations/woocommerce.php
+msgid "Contact us to receive availability and a personalized proposal for this product."
 msgstr ""
