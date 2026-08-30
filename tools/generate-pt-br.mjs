@@ -38,6 +38,7 @@ const translations = {
 	'Header': 'Cabeçalho',
 	'Keep the header visible while scrolling': 'Manter o cabeçalho visível durante a rolagem',
 	'Show search in the header': 'Mostrar pesquisa no cabeçalho',
+	'Show cart in the header': 'Mostrar carrinho no cabeçalho',
 	'Typography': 'Tipografia',
 	'Choose which typography settings to configure.': 'Escolha quais configurações de tipografia deseja ajustar.',
 	'Theme typography': 'Tipografia do tema',

@@ -64,7 +64,7 @@
 							</svg>
 						</button>
 					<?php endif; ?>
-					<?php if ( class_exists( 'WooCommerce' ) ) : ?>
+					<?php if ( class_exists( 'WooCommerce' ) && get_theme_mod( 'wpdef_header_cart', true ) ) : ?>
 						<?php wpdef_cart_link(); ?>
 					<?php endif; ?>
 				</div>

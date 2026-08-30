@@ -204,6 +204,22 @@ function wpdef_customize_register( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'wpdef_header_cart',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'wpdef_sanitize_checkbox',
+		)
+	);
+	$wp_customize->add_control(
+		'wpdef_header_cart',
+		array(
+			'label'   => __( 'Show cart in the header', 'wp-definitivo' ),
+			'section' => 'wpdef_header',
+			'type'    => 'checkbox',
+		)
+	);
+
 	$wp_customize->add_section(
 		'wpdef_typography',
 		array(
