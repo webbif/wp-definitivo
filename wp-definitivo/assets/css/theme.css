@@ -1936,8 +1936,8 @@ body.single-product.woocommerce div.product .summary .woocommerce-review-link {
 
 .woocommerce div.product .summary p.price,
 .woocommerce div.product .summary span.price {
-	margin: 1.25rem 0;
-	padding: 1.125rem 0;
+	margin: 0.875rem 0;
+	padding: 0.75rem 0;
 	border: 0;
 	border-block: 1px solid var(--wpdef-border);
 	border-radius: 0;
@@ -1979,7 +1979,7 @@ body.single-product.woocommerce div.product .summary .woocommerce-review-link {
 }
 
 .woocommerce div.product .woocommerce-product-details__short-description {
-	margin: 0 0 1.5rem;
+	margin: 0 0 1rem;
 	color: var(--wpdef-muted);
 	font-size: calc(1rem * var(--wpdef-woocommerce-text-scale));
 	line-height: 1.7;
@@ -1999,7 +1999,7 @@ body.single-product.woocommerce div.product .summary .variations_form .variation
 	margin: 0;
 	border: 0;
 	border-collapse: separate;
-	border-spacing: 0 0.875rem;
+	border-spacing: 0 0.55rem;
 }
 
 body.single-product.woocommerce div.product .summary .variations_form .variations th,
@@ -2014,7 +2014,7 @@ body.single-product.woocommerce div.product .summary .variations_form .variation
 
 body.single-product.woocommerce div.product .summary .variations_form .variations th.label {
 	width: auto;
-	padding: 0 0 0.45rem;
+	padding: 0 0 0.35rem;
 	text-align: start;
 }
 
@@ -2035,19 +2035,19 @@ body.single-product.woocommerce div.product .summary .variations_form .variation
 
 body.single-product.woocommerce div.product .summary .variations_form .reset_variations {
 	display: inline-flex;
-	margin-top: -0.2rem;
+	margin-top: -0.1rem;
 	font-size: calc(0.8125rem * var(--wpdef-woocommerce-text-scale));
 }
 
 body.single-product.woocommerce div.product .summary .single_variation_wrap {
-	margin-top: 0.25rem;
-	padding-top: 1rem;
+	margin-top: 0;
+	padding-top: 0.75rem;
 	border-top: 1px solid var(--wpdef-border);
 }
 
 body.single-product.woocommerce div.product .summary .woocommerce-variation-price .price {
 	display: inline-block;
-	margin: 1rem 0 0;
+	margin: 0.75rem 0 0;
 	padding: 0;
 	border: 0;
 	border-radius: 0;
@@ -2099,7 +2099,7 @@ body.single-product.woocommerce div.product .summary .woocommerce-variation-avai
 }
 
 body.single-product.woocommerce div.product .summary .woocommerce-variation-add-to-cart {
-	margin: 1rem 0 0;
+	margin: 0.75rem 0 0;
 }
 
 .woocommerce div.product .product_meta {
