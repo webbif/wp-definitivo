@@ -130,7 +130,6 @@ function wpdef_integration_fixture_woocommerce() {
 
 	$product_id = wpdef_integration_fixture_product();
 	if ( $product_id ) {
-		flush_rewrite_rules();
 		update_option( 'wpdef_integration_woocommerce_fixture_ready', '1' );
 	}
 
@@ -184,8 +183,6 @@ function wpdef_integration_fixture_rest_routes() {
 function wpdef_integration_fixture_activate() {
 	update_option( 'blogname', 'WP Definitivo — Um título de site deliberadamente longo para testes de responsividade' );
 	update_option( 'blogdescription', 'Uma descrição extensa para verificar cabeçalhos, quebras de linha e navegação em diferentes larguras de tela.' );
-	update_option( 'permalink_structure', '/%postname%/' );
-
 	$front_page_id = wpdef_integration_fixture_page(
 		'front-page',
 		'Front Page',
@@ -240,8 +237,6 @@ function wpdef_integration_fixture_activate() {
 	}
 
 	wpdef_integration_fixture_woocommerce();
-
-	flush_rewrite_rules();
 }
 
 register_activation_hook( __FILE__, 'wpdef_integration_fixture_activate' );
