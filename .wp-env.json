@@ -5,6 +5,7 @@
     "./wp-definitivo"
   ],
   "plugins": [
+    "./tools/wp-definitivo-integration-fixture",
     "https://downloads.wordpress.org/plugin/theme-check.zip",
     "https://downloads.wordpress.org/plugin/woocommerce.zip",
     "https://downloads.wordpress.org/plugin/elementor.zip"

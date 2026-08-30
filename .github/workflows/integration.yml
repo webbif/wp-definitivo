@@ -2,11 +2,22 @@ name: WordPress integration
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "wp-definitivo/**"
+      - "tests/e2e/**"
+      - "tools/wp-definitivo-integration-fixture/**"
+      - ".wp-env.json"
+      - ".github/workflows/integration.yml"
   pull_request:
     paths:
       - "wp-definitivo/**"
       - "tests/e2e/**"
+      - "tools/wp-definitivo-integration-fixture/**"
       - ".wp-env.json"
+      - ".github/workflows/integration.yml"
 
 permissions:
   contents: read
@@ -15,8 +26,8 @@ jobs:
   browser:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 20
           cache: npm
@@ -24,7 +35,7 @@ jobs:
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run wp-env:start
       - run: npx wp-env run cli wp theme activate wp-definitivo
-      - run: npx wp-env run cli wp plugin activate theme-check woocommerce elementor
+      - run: npx wp-env run cli wp plugin activate theme-check woocommerce elementor wp-definitivo-integration-fixture
       - run: npx wp-env run cli wp theme-check run wp-definitivo
       - run: npm run test:e2e
       - if: always()

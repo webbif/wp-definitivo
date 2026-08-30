@@ -1,6 +1,18 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
+async function addResponsiveTestProductToCart( page ) {
+	const response = await page.request.get(
+		'/wp-json/wc/store/v1/products?slug=wp-definitivo-responsive-test-product'
+	);
+	expect( response.ok() ).toBe( true );
+
+	const products = await response.json();
+	expect( products ).toHaveLength( 1 );
+
+	await page.goto( `/?add-to-cart=${ products[ 0 ].id }` );
+}
+
 test( 'WooCommerce shop uses the theme shell without WCAG errors', async ( {
 	page,
 }, testInfo ) => {
@@ -29,7 +41,7 @@ test( 'WooCommerce mobile cart keeps totals clear of product details', async ( {
 	);
 
 	await page.setViewportSize( { width: 390, height: 844 } );
-	await page.goto( '/?add-to-cart=1834' );
+	await addResponsiveTestProductToCart( page );
 	await page.goto( '/cart/' );
 
 	const row = page
@@ -51,9 +63,11 @@ test( 'WooCommerce mobile cart keeps totals clear of product details', async ( {
 	expect( mobilePanelPadding.main ).toBeGreaterThanOrEqual( 12 );
 	expect( mobilePanelPadding.sidebar ).toBeGreaterThanOrEqual( 12 );
 
-	await page.getByRole( 'button', { name: 'Adicionar cupons' } ).click();
+	await page
+		.getByRole( 'button', { name: /^(Add coupons|Adicionar cupons)$/ } )
+		.click();
 	const couponInput = page.getByRole( 'textbox', {
-		name: 'Digite o código',
+		name: /^(Enter code|Digite o código)$/,
 	} );
 	await couponInput.click();
 	const couponLayout = await page.evaluate( () => {
@@ -121,7 +135,7 @@ test( 'WooCommerce tablet cart keeps padding in both stacked panels', async ( {
 	);
 
 	await page.setViewportSize( { width: 768, height: 1024 } );
-	await page.goto( '/?add-to-cart=1834' );
+	await addResponsiveTestProductToCart( page );
 	await page.goto( '/cart/' );
 
 	const panelPadding = await page.evaluate( () => ( {
@@ -150,7 +164,7 @@ test( 'WooCommerce tablet checkout hides the compact duplicate summary', async (
 	);
 
 	await page.setViewportSize( { width: 768, height: 1024 } );
-	await page.goto( '/?add-to-cart=1834' );
+	await addResponsiveTestProductToCart( page );
 	await page.goto( '/checkout/' );
 
 	const checkout = page.locator(
