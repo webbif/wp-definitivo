@@ -88,6 +88,8 @@ function wpdef_integration_fixture_woocommerce() {
 		return 0;
 	}
 
+	update_option( 'woocommerce_coming_soon', 'no' );
+
 	$woocommerce_pages = array(
 		'woocommerce_shop_page_id'      => array( 'shop', 'Shop', '' ),
 		'woocommerce_cart_page_id'      => array( 'cart', 'Cart', '<!-- wp:woocommerce/cart /-->' ),
