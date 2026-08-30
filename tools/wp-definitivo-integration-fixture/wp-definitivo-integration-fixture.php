@@ -130,6 +130,7 @@ function wpdef_integration_fixture_woocommerce() {
 
 	$product_id = wpdef_integration_fixture_product();
 	if ( $product_id ) {
+		flush_rewrite_rules();
 		update_option( 'wpdef_integration_woocommerce_fixture_ready', '1' );
 	}
 
