@@ -9,7 +9,7 @@
 	--wpdef-border: rgb(15 48 87 / 0.14);
 	--wpdef-soft: #eef4fb;
 	--wpdef-button-text: #fff;
-	--wpdef-button-radius: 0.5rem;
+	--wpdef-button-radius: 0.375rem;
 	--wpdef-category-accent: #2563eb;
 	--wpdef-font-body: "Inter", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", sans-serif;
 	--wpdef-font-heading: "Inter", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", sans-serif;
@@ -24,7 +24,7 @@
 	--wpdef-shell: 1440px;
 	--wpdef-content-width: 1440px;
 	--wpdef-gutter: clamp(1rem, 4vw, 3rem);
-	--wpdef-radius: 1.25rem;
+	--wpdef-radius: 0.75rem;
 	--wpdef-shadow: 0 1.25rem 3rem rgb(15 48 87 / 0.08);
 }
 
