@@ -137,6 +137,20 @@ function wpdef_get_woocommerce_hero() {
 }
 
 /**
+ * Determine whether the current WooCommerce view is a transactional page.
+ *
+ * Cart, checkout, and account pages benefit from a compact, task-focused
+ * heading placed beside their content instead of the editorial store hero.
+ *
+ * @return bool
+ */
+function wpdef_is_woocommerce_transaction_page() {
+	return ( function_exists( 'is_cart' ) && is_cart() ) ||
+		( function_exists( 'is_checkout' ) && is_checkout() ) ||
+		( function_exists( 'is_account_page' ) && is_account_page() );
+}
+
+/**
  * Render the result count and ordering controls inside the store container.
  *
  * @return void
@@ -202,12 +216,20 @@ function wpdef_woocommerce_sidebar_fallback() {
  * @return void
  */
 function wpdef_woocommerce_wrapper_start() {
-	$has_sidebar = wpdef_woocommerce_has_sidebar();
-	$hero        = wpdef_get_woocommerce_hero();
+	$has_sidebar      = wpdef_woocommerce_has_sidebar();
+	$hero             = wpdef_get_woocommerce_hero();
+	$is_transactional = wpdef_is_woocommerce_transaction_page();
 
-	get_template_part( 'template-parts/standard-hero', null, $hero );
+	if ( ! $is_transactional ) {
+		get_template_part( 'template-parts/standard-hero', null, $hero );
+	}
 	?>
-	<div class="wpdef-common-shell wpdef-content-shell wpdef-shell">
+	<div class="wpdef-common-shell wpdef-content-shell wpdef-shell<?php echo $is_transactional ? ' wpdef-transaction-shell' : ''; ?>">
+		<?php if ( $is_transactional ) : ?>
+			<header class="wpdef-transaction-header" aria-labelledby="wpdef-transaction-title">
+				<h1 id="wpdef-transaction-title" class="wpdef-transaction-header__title entry-title"><?php echo wp_kses_post( $hero['title'] ); ?></h1>
+			</header>
+		<?php endif; ?>
 		<div class="wpdef-common-layout<?php echo $has_sidebar ? ' has-sidebar' : ''; ?>">
 			<main id="primary" class="site-main wpdef-common-main wpdef-content-card woocommerce-main" tabindex="-1">
 				<?php wpdef_woocommerce_archive_toolbar(); ?>
