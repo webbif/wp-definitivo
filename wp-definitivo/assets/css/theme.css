@@ -1714,11 +1714,17 @@ body.wpdef-shop-thumbnail-vertical.woocommerce-page ul.products li.product a img
 .woocommerce span.onsale {
 	min-width: auto;
 	min-height: auto;
-	padding: 0.35rem 0.65rem;
-	border-radius: 999px;
-	background: var(--wpdef-accent);
-	color: var(--wpdef-button-text);
+	padding: 0.4rem 0.6rem;
+	border: 1px solid #b42318;
+	border-radius: 0.25rem;
+	background: #b42318;
+	color: #fff;
+	font-family: var(--wpdef-font-mono);
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
 	line-height: 1.2;
+	text-transform: uppercase;
 }
 
 .woocommerce div.product {
@@ -1743,10 +1749,20 @@ body.single-product .woocommerce-breadcrumb {
 }
 
 body.single-product.woocommerce div.product {
+	position: relative;
 	display: grid;
 	grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
 	align-items: start;
 	gap: clamp(2.5rem, 6vw, 5.5rem);
+}
+
+body.single-product.woocommerce div.product > span.onsale {
+	position: absolute;
+	top: 0.75rem;
+	inset-inline-start: calc(clamp(4rem, 9vw, 5.5rem) + clamp(0.75rem, 1.5vw, 1.25rem) + 0.75rem);
+	z-index: 2;
+	margin: 0;
+	box-shadow: 0 0.25rem 0.75rem rgb(66 20 20 / 0.18);
 }
 
 body.single-product.woocommerce div.product::before,
@@ -3046,6 +3062,11 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 
 /* stylelint-disable no-descending-specificity */
 @media (max-width: 700px) {
+
+	body.single-product.woocommerce div.product > span.onsale {
+		top: 0.75rem;
+		inset-inline-start: 0.75rem;
+	}
 
 	.post-password-form > p:last-child {
 		grid-template-columns: 1fr;
