@@ -796,6 +796,10 @@ input[type="submit"]:hover {
 	background: var(--wpdef-surface);
 }
 
+.wpdef-standard-hero--title-only {
+	padding-block: clamp(1.875rem, 3.25vw, 3rem);
+}
+
 .wpdef-standard-hero__inner {
 	width: min(100%, var(--wpdef-hero));
 	margin-inline: auto;
@@ -2629,6 +2633,10 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 		padding-block: 2.5rem;
 	}
 
+	.wpdef-standard-hero--title-only {
+		padding-block: 2rem;
+	}
+
 	.wpdef-standard-hero__inner {
 		width: min(calc(100% - 1.5rem), var(--wpdef-hero));
 	}
@@ -2851,6 +2859,10 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 
 	.wpdef-standard-hero {
 		padding-block: 1.75rem;
+	}
+
+	.wpdef-standard-hero--title-only {
+		padding-block: 1.25rem;
 	}
 
 	.wpdef-standard-hero__inner {
