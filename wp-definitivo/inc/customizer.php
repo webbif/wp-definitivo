@@ -411,7 +411,7 @@ function wpdef_customize_register( $wp_customize ) {
 			'description' => __( 'Layout options for the main store, product categories, product tags, and product search results.', 'wp-definitivo' ),
 		),
 		'wpdef_product'    => array(
-			'title'       => __( 'Product', 'wp-definitivo' ),
+			'title'       => __( 'Individual product', 'wp-definitivo' ),
 			'description' => __( 'Layout options for individual WooCommerce products.', 'wp-definitivo' ),
 		),
 		'wpdef_cart'       => array(
@@ -580,6 +580,29 @@ function wpdef_customize_register( $wp_customize ) {
 				2 => __( 'Two', 'wp-definitivo' ),
 				3 => __( 'Three', 'wp-definitivo' ),
 				4 => __( 'Four', 'wp-definitivo' ),
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'wpdef_product_image_ratio',
+		array(
+			'default'           => 'original',
+			'sanitize_callback' => 'wpdef_sanitize_select',
+		)
+	);
+	$wp_customize->add_control(
+		'wpdef_product_image_ratio',
+		array(
+			'label'       => __( 'Product image shape', 'wp-definitivo' ),
+			'description' => __( 'Choose the proportion of the main image on individual product pages.', 'wp-definitivo' ),
+			'section'     => 'wpdef_product',
+			'type'        => 'radio',
+			'priority'    => 30,
+			'choices'     => array(
+				'original' => __( 'Original', 'wp-definitivo' ),
+				'square'   => __( 'Square', 'wp-definitivo' ),
+				'vertical' => __( 'Vertical (4:5)', 'wp-definitivo' ),
 			),
 		)
 	);

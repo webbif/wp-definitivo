@@ -1710,8 +1710,29 @@ body.single-product .woocommerce div.product div.images {
 
 /* WooCommerce owns the product-gallery image markup. */
 /* stylelint-disable no-descending-specificity */
-body.single-product .woocommerce-product-gallery__image img {
+body.single-product .woocommerce-product-gallery__image img,
+body.single-product .woocommerce-product-gallery__image--placeholder img {
 	border-radius: 0.75rem;
+}
+
+body.wpdef-product-image-square.single-product .woocommerce-product-gallery__image img,
+body.wpdef-product-image-square.single-product .woocommerce-product-gallery__image--placeholder img,
+body.wpdef-product-image-vertical.single-product .woocommerce-product-gallery__image img {
+	object-fit: cover;
+}
+
+body.wpdef-product-image-vertical.single-product .woocommerce-product-gallery__image--placeholder img {
+	object-fit: cover;
+}
+
+body.wpdef-product-image-square.single-product .woocommerce-product-gallery__image img,
+body.wpdef-product-image-square.single-product .woocommerce-product-gallery__image--placeholder img {
+	aspect-ratio: 1 / 1;
+}
+
+body.wpdef-product-image-vertical.single-product .woocommerce-product-gallery__image img,
+body.wpdef-product-image-vertical.single-product .woocommerce-product-gallery__image--placeholder img {
+	aspect-ratio: 4 / 5;
 }
 /* stylelint-enable no-descending-specificity */
 

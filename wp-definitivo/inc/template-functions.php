@@ -147,6 +147,13 @@ function wpdef_body_classes( $classes ) {
 		$classes[]    = 'wpdef-shop-thumbnail-' . $shop_ratio;
 	}
 
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		$product_image_ratio = get_theme_mod( 'wpdef_product_image_ratio', 'original' );
+
+		$product_image_ratio = in_array( $product_image_ratio, array( 'original', 'square', 'vertical' ), true ) ? $product_image_ratio : 'original';
+		$classes[]           = 'wpdef-product-image-' . $product_image_ratio;
+	}
+
 	if ( get_theme_mod( 'wpdef_sticky_header', false ) ) {
 		$classes[] = 'wpdef-sticky-header';
 	}
