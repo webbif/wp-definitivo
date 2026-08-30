@@ -138,6 +138,47 @@ function wpdef_integration_fixture_woocommerce() {
 }
 
 /**
+ * Return canonical WooCommerce fixture URLs to the browser tests.
+ *
+ * @return WP_REST_Response|WP_Error Fixture response or an initialization error.
+ */
+function wpdef_integration_fixture_rest_response() {
+	$product_id = wpdef_integration_fixture_woocommerce();
+	if ( ! $product_id ) {
+		return new WP_Error(
+			'wpdef_integration_fixture_unavailable',
+			'The WooCommerce integration fixture is unavailable.',
+			array( 'status' => 503 )
+		);
+	}
+
+	return rest_ensure_response(
+		array(
+			'product_id'   => $product_id,
+			'product_url'  => get_permalink( $product_id ),
+			'shop_url'     => wc_get_page_permalink( 'shop' ),
+			'cart_url'     => wc_get_cart_url(),
+			'checkout_url' => wc_get_checkout_url(),
+		)
+	);
+}
+
+/**
+ * Register the public endpoint used only inside the disposable test site.
+ */
+function wpdef_integration_fixture_rest_routes() {
+	register_rest_route(
+		'wp-definitivo-integration/v1',
+		'/fixture',
+		array(
+			'methods'             => WP_REST_Server::READABLE,
+			'callback'            => 'wpdef_integration_fixture_rest_response',
+			'permission_callback' => '__return_true',
+		)
+	);
+}
+
+/**
  * Prepare a clean WordPress installation for browser integration tests.
  */
 function wpdef_integration_fixture_activate() {
@@ -205,3 +246,4 @@ function wpdef_integration_fixture_activate() {
 
 register_activation_hook( __FILE__, 'wpdef_integration_fixture_activate' );
 add_action( 'init', 'wpdef_integration_fixture_woocommerce', 20 );
+add_action( 'rest_api_init', 'wpdef_integration_fixture_rest_routes' );
