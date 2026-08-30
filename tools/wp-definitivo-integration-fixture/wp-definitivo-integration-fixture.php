@@ -79,6 +79,64 @@ function wpdef_integration_fixture_page( $slug, $title, $content = '' ) {
 }
 
 /**
+ * Prepare WooCommerce pages and product after its data stores are available.
+ *
+ * @return int Product ID, or 0 when the fixture could not be prepared.
+ */
+function wpdef_integration_fixture_woocommerce() {
+	if ( ! class_exists( 'WC_Install' ) ) {
+		return 0;
+	}
+
+	$woocommerce_pages = array(
+		'woocommerce_shop_page_id'      => array( 'shop', 'Shop', '' ),
+		'woocommerce_cart_page_id'      => array( 'cart', 'Cart', '<!-- wp:woocommerce/cart /-->' ),
+		'woocommerce_checkout_page_id'  => array( 'checkout', 'Checkout', '<!-- wp:woocommerce/checkout /-->' ),
+		'woocommerce_myaccount_page_id' => array( 'my-account', 'My account', '[woocommerce_my_account]' ),
+	);
+	$fixture_is_ready  = '1' === get_option( 'wpdef_integration_woocommerce_fixture_ready' );
+
+	foreach ( array_keys( $woocommerce_pages ) as $option_name ) {
+		if ( ! get_post( (int) get_option( $option_name ) ) ) {
+			$fixture_is_ready = false;
+			break;
+		}
+	}
+
+	if ( $fixture_is_ready ) {
+		$product_id = wc_get_product_id_by_sku( 'WPDEF-INTEGRATION-RESPONSIVE' );
+		if ( $product_id ) {
+			return (int) $product_id;
+		}
+	}
+
+	WC_Install::create_pages();
+
+	foreach ( $woocommerce_pages as $option_name => $page_data ) {
+		$page_id = (int) get_option( $option_name );
+		if ( ! $page_id ) {
+			return 0;
+		}
+
+		wp_update_post(
+			array(
+				'ID'           => $page_id,
+				'post_name'    => $page_data[0],
+				'post_title'   => $page_data[1],
+				'post_content' => $page_data[2],
+			)
+		);
+	}
+
+	$product_id = wpdef_integration_fixture_product();
+	if ( $product_id ) {
+		update_option( 'wpdef_integration_woocommerce_fixture_ready', '1' );
+	}
+
+	return $product_id;
+}
+
+/**
  * Prepare a clean WordPress installation for browser integration tests.
  */
 function wpdef_integration_fixture_activate() {
@@ -139,35 +197,10 @@ function wpdef_integration_fixture_activate() {
 		);
 	}
 
-	if ( class_exists( 'WC_Install' ) ) {
-		WC_Install::create_pages();
-
-		$woocommerce_pages = array(
-			'woocommerce_shop_page_id'      => array( 'shop', 'Shop', '' ),
-			'woocommerce_cart_page_id'      => array( 'cart', 'Cart', '<!-- wp:woocommerce/cart /-->' ),
-			'woocommerce_checkout_page_id'  => array( 'checkout', 'Checkout', '<!-- wp:woocommerce/checkout /-->' ),
-			'woocommerce_myaccount_page_id' => array( 'my-account', 'My account', '[woocommerce_my_account]' ),
-		);
-
-		foreach ( $woocommerce_pages as $option_name => $page_data ) {
-			$page_id = (int) get_option( $option_name );
-			if ( $page_id ) {
-				wp_update_post(
-					array(
-						'ID'           => $page_id,
-						'post_name'    => $page_data[0],
-						'post_title'   => $page_data[1],
-						'post_content' => $page_data[2],
-					)
-				);
-			}
-		}
-	}
-
-	wpdef_integration_fixture_product();
+	wpdef_integration_fixture_woocommerce();
 
 	flush_rewrite_rules();
 }
 
 register_activation_hook( __FILE__, 'wpdef_integration_fixture_activate' );
-add_action( 'init', 'wpdef_integration_fixture_product', 20 );
+add_action( 'init', 'wpdef_integration_fixture_woocommerce', 20 );

@@ -36,7 +36,7 @@ jobs:
       - run: npm run wp-env:start
       - run: npx wp-env run cli wp theme activate wp-definitivo
       - run: npx wp-env run cli wp plugin activate theme-check woocommerce elementor wp-definitivo-integration-fixture
-      - run: npx wp-env run cli wp eval 'if ( ! wpdef_integration_fixture_product() ) { WP_CLI::error( "The WooCommerce fixture product was not created." ); }'
+      - run: npx wp-env run cli wp eval 'if ( ! wpdef_integration_fixture_woocommerce() ) { WP_CLI::error( "The WooCommerce fixture was not prepared." ); }'
       - run: npx wp-env run cli wp theme-check run wp-definitivo
       - run: npm run test:e2e
       - if: always()
