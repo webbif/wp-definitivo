@@ -11,7 +11,7 @@
     "i18n": "node tools/generate-pt-br.mjs",
     "build": "npm run i18n && node tools/build.mjs",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:json",
-		"lint:js": "wp-scripts lint-js wp-definitivo/assets/js/navigation.js wp-definitivo/assets/js/customizer-controls.js wp-definitivo/assets/js/customizer-preview.js tests/e2e",
+		"lint:js": "wp-scripts lint-js wp-definitivo/assets/js/navigation.js wp-definitivo/assets/js/product-variations.js wp-definitivo/assets/js/customizer-controls.js wp-definitivo/assets/js/customizer-preview.js tests/e2e",
 		"lint:css": "wp-scripts lint-style wp-definitivo/assets/css/editor.css wp-definitivo/assets/css/theme.css wp-definitivo/assets/css/customizer-controls.css wp-definitivo/rtl.css",
     "lint:json": "node tools/validate-theme-json.mjs",
     "test:e2e": "playwright test",

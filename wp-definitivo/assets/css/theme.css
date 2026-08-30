@@ -2033,6 +2033,88 @@ body.single-product.woocommerce div.product .summary .variations_form .variation
 	background-color: var(--wpdef-surface);
 }
 
+body.single-product.woocommerce div.product .summary .variations_form .variations .wpdef-variation-row-enhanced td {
+	position: relative;
+}
+
+body.single-product.woocommerce div.product .summary .variations_form .variations .wpdef-variation-row-enhanced select {
+	position: absolute;
+	overflow: hidden;
+	width: 1px;
+	height: 1px;
+	min-height: 0;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.woocommerce div.product .wpdef-variation-options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.woocommerce div.product button.wpdef-variation-option {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 3.125rem;
+	min-height: 2.5rem;
+	margin: 0;
+	padding: 0.5rem 0.875rem;
+	border: 1px solid var(--wpdef-border);
+	border-radius: 0.375rem;
+	background: var(--wpdef-surface);
+	box-shadow: none;
+	color: var(--wpdef-text);
+	font-size: calc(0.9375rem * var(--wpdef-woocommerce-text-scale));
+	font-weight: 600;
+	line-height: 1;
+	transition: border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+}
+
+.woocommerce div.product button.wpdef-variation-option.is-selected {
+	border-color: var(--wpdef-accent);
+	box-shadow: 0 0 0 1px var(--wpdef-accent);
+	color: var(--wpdef-accent);
+}
+
+.woocommerce div.product button.wpdef-variation-option:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+.woocommerce div.product button.wpdef-variation-option:hover:not(:disabled) {
+	border-color: var(--wpdef-accent);
+	color: var(--wpdef-accent);
+}
+
+.woocommerce div.product button.wpdef-variation-option--color {
+	position: relative;
+	min-width: 2.25rem;
+	min-height: 2.25rem;
+	padding: 0;
+	border-radius: 50%;
+	background: var(--wpdef-variation-color);
+	color: transparent;
+}
+
+.woocommerce div.product button.wpdef-variation-option--color::after {
+	position: absolute;
+	inset: 0.25rem;
+	border: 1px solid rgb(255 255 255 / 0.8);
+	border-radius: inherit;
+	content: "";
+}
+
+.woocommerce div.product button.wpdef-variation-option--color.is-selected {
+	box-shadow: 0 0 0 1px var(--wpdef-surface), 0 0 0 3px var(--wpdef-accent);
+}
+
 body.single-product.woocommerce div.product .summary .variations_form .reset_variations {
 	display: inline-flex;
 	margin-top: -0.1rem;

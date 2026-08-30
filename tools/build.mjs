@@ -128,12 +128,14 @@ for ( const moduleName of moduleNames ) {
 	await writeFile( `wp-definitivo/assets/css/${ moduleName }.min.css`, result.code );
 }
 
-const jsSource = await readFile( 'wp-definitivo/assets/js/navigation.js', 'utf8' );
-const jsResult = await minify( jsSource, {
-	compress: true,
-	mangle: true,
-	format: {
-		comments: /^!/,
-	},
-} );
-await writeFile( 'wp-definitivo/assets/js/navigation.min.js', `${ jsResult.code }\n` );
+for ( const scriptName of [ 'navigation', 'product-variations' ] ) {
+	const jsSource = await readFile( `wp-definitivo/assets/js/${ scriptName }.js`, 'utf8' );
+	const jsResult = await minify( jsSource, {
+		compress: true,
+		mangle: true,
+		format: {
+			comments: /^!/,
+		},
+	} );
+	await writeFile( `wp-definitivo/assets/js/${ scriptName }.min.js`, `${ jsResult.code }\n` );
+}

@@ -262,6 +262,17 @@ function wpdef_scripts() {
 		wp_script_add_data( 'wpdef-navigation', 'strategy', 'defer' );
 	}
 
+	if ( $context['woocommerce'] && wpdef_query_condition( 'is_product' ) ) {
+		wp_enqueue_script(
+			'wpdef-product-variations',
+			get_theme_file_uri( '/assets/js/product-variations.min.js' ),
+			array( 'wc-add-to-cart-variation' ),
+			WPDEF_VERSION,
+			true
+		);
+		wp_script_add_data( 'wpdef-product-variations', 'strategy', 'defer' );
+	}
+
 	if ( $context['content'] && is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
