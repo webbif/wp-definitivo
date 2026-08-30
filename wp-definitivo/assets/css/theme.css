@@ -1028,8 +1028,7 @@ input[type="submit"]:hover {
 }
 
 .posts-list .post-card {
-	display: grid;
-	grid-template-columns: minmax(14rem, 0.75fr) minmax(0, 1fr);
+	display: block;
 }
 
 .post-thumbnail {
@@ -1416,6 +1415,14 @@ body .widget-area .widget.widget_block .wc-block-product-categories-list-item > 
 	border-radius: 0.5rem;
 	background: var(--wpdef-surface);
 	box-shadow: var(--wpdef-shadow);
+}
+
+.posts-list .post-card > .post-thumbnail {
+	aspect-ratio: 16 / 9;
+}
+
+.posts-list .post-card > .post-thumbnail img {
+	min-height: 0;
 }
 
 .wp-block-group.is-style-wpdef-soft-panel {
