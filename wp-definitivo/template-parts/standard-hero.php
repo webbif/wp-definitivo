@@ -7,8 +7,8 @@
  * @var array<string, string> $args Template arguments.
  */
 
-$wpdef_title       = isset( $args['title'] ) ? $args['title'] : '';
-$wpdef_description = isset( $args['description'] ) ? $args['description'] : '';
+$wpdef_title           = isset( $args['title'] ) ? $args['title'] : '';
+$wpdef_description     = isset( $args['description'] ) ? $args['description'] : '';
 $wpdef_has_description = '' !== trim( wp_strip_all_tags( $wpdef_description ) );
 
 if ( ! $wpdef_title ) {
