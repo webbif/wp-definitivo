@@ -306,6 +306,32 @@ function wpdef_cart_link_fragment( $fragments ) {
 add_filter( 'woocommerce_add_to_cart_fragments', 'wpdef_cart_link_fragment' );
 
 /**
+ * Display a clear consultation state for products without a defined price.
+ *
+ * Products with an empty price are not purchasable in WooCommerce, which
+ * otherwise leaves the product summary with only its metadata. The message
+ * keeps that state intentional without inventing a purchase flow or contact
+ * destination for the site owner.
+ *
+ * @return void
+ */
+function wpdef_woocommerce_unpriced_product_notice() {
+	global $product;
+
+	if ( ! $product instanceof WC_Product || '' !== (string) $product->get_price() || $product->is_purchasable() ) {
+		return;
+	}
+	?>
+	<section class="wpdef-product-inquiry" aria-labelledby="wpdef-product-inquiry-title">
+		<p class="wpdef-product-inquiry__eyebrow"><?php esc_html_e( 'Availability', 'wp-definitivo' ); ?></p>
+		<h2 id="wpdef-product-inquiry-title" class="wpdef-product-inquiry__title"><?php esc_html_e( 'Price on request', 'wp-definitivo' ); ?></h2>
+		<p class="wpdef-product-inquiry__description"><?php esc_html_e( 'Contact us to receive availability and a personalized proposal for this product.', 'wp-definitivo' ); ?></p>
+	</section>
+	<?php
+}
+add_action( 'woocommerce_single_product_summary', 'wpdef_woocommerce_unpriced_product_notice', 20 );
+
+/**
  * Print the header cart link.
  *
  * @return void

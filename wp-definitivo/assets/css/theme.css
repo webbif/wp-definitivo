@@ -1785,6 +1785,38 @@ body.single-product .woocommerce div.product > .upsells.products {
 	line-height: 1.2;
 }
 
+.wpdef-product-inquiry {
+	margin-block: 1rem 1.5rem;
+	padding: clamp(1.25rem, 2vw, 1.75rem);
+	border: 1px solid var(--wpdef-border);
+	border-left: 0.25rem solid var(--wpdef-accent);
+	border-radius: 0.875rem;
+	background: var(--wpdef-surface);
+}
+
+.wpdef-product-inquiry__eyebrow {
+	margin: 0 0 0.5rem;
+	color: var(--wpdef-accent);
+	font-size: 0.6875rem;
+	font-weight: 750;
+	letter-spacing: 0.12em;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.wpdef-product-inquiry__title {
+	margin: 0;
+	font-size: calc(1.35rem * var(--wpdef-woocommerce-heading-scale));
+	line-height: 1.2;
+}
+
+.wpdef-product-inquiry__description {
+	margin: 0.65rem 0 0;
+	color: var(--wpdef-muted);
+	font-size: calc(0.9375rem * var(--wpdef-woocommerce-text-scale));
+	line-height: 1.65;
+}
+
 .woocommerce div.product .woocommerce-product-details__short-description {
 	color: var(--wpdef-muted);
 	font-size: calc(1rem * var(--wpdef-woocommerce-text-scale));
