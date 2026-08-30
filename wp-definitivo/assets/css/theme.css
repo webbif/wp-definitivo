@@ -1962,6 +1962,12 @@ body.single-product .woocommerce div.product > .upsells.products {
 	min-width: 0;
 }
 
+/* Keep anonymous account flows focused without narrowing the dashboard. */
+body.woocommerce-account:not(.logged-in) .wpdef-page-main .entry-content > .woocommerce {
+	width: min(100%, 36rem);
+	margin-inline: auto;
+}
+
 .woocommerce-cart .wpdef-reading > article,
 .woocommerce-checkout .wpdef-reading > article,
 .woocommerce-account .wpdef-reading > article {
