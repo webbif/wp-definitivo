@@ -172,6 +172,10 @@ msgstr ""
 msgid "Show search in the header"
 msgstr ""
 
+#: inc/customizer.php:217
+msgid "Show cart in the header"
+msgstr ""
+
 #: inc/customizer.php
 msgid "Typography"
 msgstr ""

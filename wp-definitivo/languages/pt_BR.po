@@ -190,6 +190,10 @@ msgstr "Manter o cabeçalho visível durante a rolagem"
 msgid "Show search in the header"
 msgstr "Mostrar pesquisa no cabeçalho"
 
+#: inc/customizer.php:217
+msgid "Show cart in the header"
+msgstr "Mostrar carrinho no cabeçalho"
+
 #: inc/customizer.php
 msgid "Typography"
 msgstr "Tipografia"
