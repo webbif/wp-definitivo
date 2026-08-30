@@ -791,7 +791,7 @@ input[type="submit"]:hover {
 
 .wpdef-standard-hero {
 	width: 100%;
-	padding-block: clamp(3.25rem, 6vw, 5.5rem);
+	padding-block: clamp(2.5rem, 4.5vw, 4.25rem);
 	border-bottom: 1px solid var(--wpdef-border);
 	background: var(--wpdef-surface);
 }
