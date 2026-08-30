@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 
 async function addResponsiveTestProductToCart( page ) {
 	const response = await page.request.get(
-		'/wp-json/wc/store/v1/products?slug=wp-definitivo-responsive-test-product'
+		'/?rest_route=/wc/store/v1/products&slug=wp-definitivo-responsive-test-product'
 	);
 	expect( response.ok() ).toBe( true );
 
@@ -21,7 +21,7 @@ test( 'WooCommerce shop uses the theme shell without WCAG errors', async ( {
 		'The integration route runs once in desktop Chromium.'
 	);
 
-	const response = await page.goto( '/shop/' );
+	const response = await page.goto( '/?post_type=product' );
 	expect( response?.status() ).toBe( 200 );
 	await expect( page.locator( 'main#primary' ) ).toBeVisible();
 	await expect( page.locator( 'body' ) ).not.toContainText( 'Fatal error' );
@@ -42,7 +42,7 @@ test( 'WooCommerce mobile cart keeps totals clear of product details', async ( {
 
 	await page.setViewportSize( { width: 390, height: 844 } );
 	await addResponsiveTestProductToCart( page );
-	await page.goto( '/cart/' );
+	await page.goto( '/?pagename=cart' );
 
 	const row = page
 		.locator( '.wc-block-cart-items__row' )
@@ -136,7 +136,7 @@ test( 'WooCommerce tablet cart keeps padding in both stacked panels', async ( {
 
 	await page.setViewportSize( { width: 768, height: 1024 } );
 	await addResponsiveTestProductToCart( page );
-	await page.goto( '/cart/' );
+	await page.goto( '/?pagename=cart' );
 
 	const panelPadding = await page.evaluate( () => ( {
 		main: Number.parseFloat(
@@ -165,7 +165,7 @@ test( 'WooCommerce tablet checkout hides the compact duplicate summary', async (
 
 	await page.setViewportSize( { width: 768, height: 1024 } );
 	await addResponsiveTestProductToCart( page );
-	await page.goto( '/checkout/' );
+	await page.goto( '/?pagename=checkout' );
 
 	const checkout = page.locator(
 		'.wc-block-components-sidebar-layout.wc-block-checkout.is-medium'
