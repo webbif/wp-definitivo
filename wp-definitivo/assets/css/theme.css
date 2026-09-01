@@ -24,7 +24,7 @@
 	--wpdef-shell: 1440px;
 	--wpdef-content-width: 1440px;
 	--wpdef-gutter: clamp(1rem, 4vw, 3rem);
-	--wpdef-radius: 0.75rem;
+	--wpdef-radius: 0.35rem;
 	--wpdef-shadow: 0 1.25rem 3rem rgb(15 48 87 / 0.08);
 }
 
