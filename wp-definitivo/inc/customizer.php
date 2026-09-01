@@ -113,6 +113,31 @@ function wpdef_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_section(
+		'wpdef_general',
+		array(
+			'title'    => __( 'General', 'wp-definitivo' ),
+			'panel'    => 'wpdef_theme_options',
+			'priority' => 5,
+		)
+	);
+
+	$wp_customize->add_setting(
+		'wpdef_back_to_top',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'wpdef_sanitize_checkbox',
+		)
+	);
+	$wp_customize->add_control(
+		'wpdef_back_to_top',
+		array(
+			'label'   => __( 'Show back-to-top button', 'wp-definitivo' ),
+			'section' => 'wpdef_general',
+			'type'    => 'checkbox',
+		)
+	);
+
+	$wp_customize->add_section(
 		'wpdef_colors',
 		array(
 			'title'    => __( 'Color scheme', 'wp-definitivo' ),

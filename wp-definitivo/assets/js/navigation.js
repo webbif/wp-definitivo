@@ -95,6 +95,35 @@
 		} );
 	}
 
+	function initializeBackToTop() {
+		const button = document.querySelector( '.wpdef-back-to-top' );
+
+		if ( ! button ) {
+			return;
+		}
+
+		const reduceMotion = window.matchMedia(
+			'(prefers-reduced-motion: reduce)'
+		);
+
+		function updateVisibility() {
+			button.classList.toggle( 'is-visible', window.scrollY > 480 );
+		}
+
+		button.addEventListener( 'click', function () {
+			window.scrollTo( {
+				top: 0,
+				behavior: reduceMotion.matches ? 'auto' : 'smooth',
+			} );
+		} );
+
+		window.addEventListener( 'scroll', updateVisibility, {
+			passive: true,
+		} );
+		updateVisibility();
+	}
+
 	initializeNavigation();
 	initializeSearch();
+	initializeBackToTop();
 } )();

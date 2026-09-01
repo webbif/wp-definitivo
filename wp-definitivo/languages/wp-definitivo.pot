@@ -147,6 +147,14 @@ msgstr ""
 msgid "Presentation controls for WP Definitivo."
 msgstr ""
 
+#: inc/customizer.php:118
+msgid "General"
+msgstr ""
+
+#: inc/customizer.php:134
+msgid "Show back-to-top button"
+msgstr ""
+
 #: inc/customizer.php:95
 #: inc/customizer.php:115
 msgid "Color scheme"
@@ -658,6 +666,10 @@ msgstr ""
 
 #: template-parts/content-single.php
 msgid "Breadcrumb"
+msgstr ""
+
+#: inc/template-functions.php:486
+msgid "Back to top"
 msgstr ""
 
 #: template-parts/content-single.php

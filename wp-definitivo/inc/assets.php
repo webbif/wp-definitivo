@@ -257,7 +257,7 @@ function wpdef_scripts() {
 		wp_enqueue_style( 'wpdef-rtl', get_theme_file_uri( '/rtl.css' ), array( 'wpdef-style' ), WPDEF_VERSION );
 	}
 
-	if ( $context['navigation'] ) {
+	if ( $context['navigation'] || ( $context['base'] && get_theme_mod( 'wpdef_back_to_top', true ) ) ) {
 		wp_enqueue_script( 'wpdef-navigation', get_theme_file_uri( '/assets/js/navigation.min.js' ), array(), WPDEF_VERSION, true );
 		wp_script_add_data( 'wpdef-navigation', 'strategy', 'defer' );
 	}

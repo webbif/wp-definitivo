@@ -470,6 +470,26 @@ function wpdef_show_post_meta() {
 }
 
 /**
+ * Print the optional floating back-to-top button.
+ *
+ * @return void
+ */
+function wpdef_back_to_top_button() {
+	if ( ! get_theme_mod( 'wpdef_back_to_top', true ) ) {
+		return;
+	}
+	?>
+	<button type="button" class="wpdef-button wpdef-back-to-top">
+		<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+			<path d="M12 19V5M6.5 10.5 12 5l5.5 5.5" />
+		</svg>
+		<span><?php esc_html_e( 'Back to top', 'wp-definitivo' ); ?></span>
+	</button>
+	<?php
+}
+add_action( 'wp_footer', 'wpdef_back_to_top_button', 5 );
+
+/**
  * Print the editable footer text with dynamic tag replacements.
  *
  * @return void
