@@ -323,6 +323,7 @@ input[type="submit"] {
 	padding: 0.7rem 1rem;
 	border-width: 1px;
 	border-radius: 999px;
+	font-size: 0.8125rem;
 	box-shadow: 0 0.75rem 1.75rem rgb(15 48 87 / 0.2);
 	opacity: 0;
 	pointer-events: none;
