@@ -75,6 +75,11 @@ WP Definitivo does not include forms, SEO tools, analytics, custom post types, s
 
 == Changelog ==
 
+= 1.0.58 - 2026-09-02 =
+
+* Added third-level page hierarchy support to the native fallback menu used by the Theme Unit Test.
+* Aligned desktop dropdowns with their parent items and refined panel width and padding.
+
 = 1.0.57 - 2026-09-02 =
 
 * Made the native page-list fallback menu use the same accessible desktop dropdown and responsive submenu controls as assigned custom menus.
