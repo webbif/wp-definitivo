@@ -3,7 +3,7 @@ Contributors: leandrobiffi
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.53
+Stable tag: 1.0.54
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,12 @@ When comments or WooCommerce are enabled, WordPress and those plugins may proces
 WP Definitivo does not include forms, SEO tools, analytics, custom post types, shortcodes, custom blocks, social sharing, favicons, or demo content. These features belong in plugins or WordPress core.
 
 == Changelog ==
+
+= 1.0.54 - 2026-09-02 =
+
+* Added an optional back-to-top control and ensured its styles are cache-busted with the release version.
+* Improved responsive navigation submenus and refined global component radius, account, comment, footer, and WooCommerce layouts.
+* Refined WooCommerce product galleries, variation controls, offer labels, and no-price presentation.
 
 = 1.0.53 - 2026-08-29 =
 

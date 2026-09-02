@@ -204,7 +204,7 @@
     "elements": {
       "button": {
         "border": {
-          "radius": "8px"
+          "radius": "0.35rem"
         },
         "color": {
           "background": "#0F3D73",

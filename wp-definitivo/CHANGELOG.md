@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.54 — 2026-09-02
+
+- Added an optional back-to-top control with resilient fixed positioning and a release-versioned asset URL for reliable cache invalidation.
+- Improved responsive navigation submenus and refined global component radius, account, comment, footer, and WooCommerce layouts.
+- Refined WooCommerce product galleries, variation controls, offer labels, and no-price presentation.
+
 ## 1.0.53 — 2026-08-29
 
 - Split the theme stylesheet into contextual base, header, footer, content, Elementor, and WooCommerce modules.

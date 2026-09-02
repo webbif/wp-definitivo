@@ -475,7 +475,9 @@ function wpdef_show_post_meta() {
  * @return void
  */
 function wpdef_back_to_top_button() {
-	if ( ! get_theme_mod( 'wpdef_back_to_top', true ) ) {
+	$context = wpdef_get_asset_context();
+
+	if ( ! get_theme_mod( 'wpdef_back_to_top', true ) || empty( $context['base'] ) ) {
 		return;
 	}
 	?>

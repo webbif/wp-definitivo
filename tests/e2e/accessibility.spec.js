@@ -80,6 +80,40 @@ test.describe( 'public theme', () => {
 		await expect( menu ).toBeFocused();
 	} );
 
+	test( 'mobile submenus expand independently with accessible controls', async ( {
+		page,
+	} ) => {
+		await page.setViewportSize( { width: 390, height: 844 } );
+		await page.goto( '/' );
+		await page.getByRole( 'button', { name: 'Menu' } ).click();
+
+		const levelOneItem = page
+			.locator( '.primary-navigation li' )
+			.filter( {
+				has: page.getByRole( 'link', {
+					exact: true,
+					name: 'Level 1',
+				} ),
+			} )
+			.first();
+		const levelOneToggle = levelOneItem.locator(
+			':scope > .wpdef-submenu-toggle'
+		);
+
+		await expect( levelOneToggle ).toHaveAttribute(
+			'aria-expanded',
+			'false'
+		);
+		await levelOneToggle.click();
+		await expect( levelOneToggle ).toHaveAttribute(
+			'aria-expanded',
+			'true'
+		);
+		await expect(
+			levelOneItem.locator( ':scope > .sub-menu' )
+		).toBeVisible();
+	} );
+
 	test( 'desktop navigation labels stay intact and compact mode starts before crowding', async ( {
 		page,
 	} ) => {
