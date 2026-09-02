@@ -28,9 +28,51 @@ for ( const file of requiredFiles ) {
 }
 
 const style = await readFile( `${ themeRoot }/style.css`, 'utf8' );
+const themeCss = await readFile( `${ themeRoot }/assets/css/theme.css`, 'utf8' );
 for ( const header of [ 'Theme Name: WP Definitivo', 'Text Domain: wp-definitivo', 'Domain Path: /languages', 'Requires PHP: 7.4' ] ) {
 	if ( ! style.includes( header ) ) {
 		throw new Error( `Missing style.css header: ${ header }` );
+	}
+}
+
+function relativeLuminance( hex ) {
+	const normalized = 4 === hex.length
+		? `#${ [ ...hex.slice( 1 ) ].map( ( value ) => value.repeat( 2 ) ).join( '' ) }`
+		: hex;
+	const channels = normalized
+		.slice( 1 )
+		.match( /.{2}/g )
+		.map( ( value ) => Number.parseInt( value, 16 ) / 255 )
+		.map( ( value ) =>
+			value <= 0.04045
+				? value / 12.92
+				: ( ( value + 0.055 ) / 1.055 ) ** 2.4
+		);
+
+	return 0.2126 * channels[ 0 ] + 0.7152 * channels[ 1 ] + 0.0722 * channels[ 2 ];
+}
+
+function contrastRatio( foreground, background ) {
+	const values = [ relativeLuminance( foreground ), relativeLuminance( background ) ].sort( ( a, b ) => b - a );
+	return ( values[ 0 ] + 0.05 ) / ( values[ 1 ] + 0.05 );
+}
+
+for ( const selector of [ ':root', '.wpdef-scheme-ivory-wine', '.wpdef-scheme-sand-green', '.wpdef-scheme-night-wine' ] ) {
+	const escapedSelector = selector.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' );
+	const block = themeCss.match( new RegExp( `${ escapedSelector }\\s*\\{([^}]*)\\}` ) )?.[ 1 ];
+	const surface = block?.match( /--wpdef-surface:\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?)/i )?.[ 1 ];
+	const controlBorder = block?.match( /--wpdef-control-border:\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?)/i )?.[ 1 ];
+	if ( ! surface || ! controlBorder || contrastRatio( controlBorder, surface ) < 3 ) {
+		throw new Error( `${ selector } form-control border must have at least 3:1 contrast against its surface.` );
+	}
+}
+
+for ( const requiredFocusRule of [
+	'outline: 3px solid var(--wpdef-accent);',
+	'outline: 3px solid var(--wpdef-accent) !important;',
+] ) {
+	if ( ! themeCss.includes( requiredFocusRule ) ) {
+		throw new Error( `Missing accessible focus rule: ${ requiredFocusRule }` );
 	}
 }
 

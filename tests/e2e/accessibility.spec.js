@@ -159,11 +159,19 @@ test.describe( 'public theme', () => {
 		} );
 		await searchButton.click();
 		await expect( searchButton ).toHaveAttribute( 'aria-expanded', 'true' );
-		await expect(
-			page.getByRole( 'searchbox', {
-				name: /^(Search for:|Pesquisar por:)$/,
-			} )
-		).toBeFocused();
+		const searchField = page.getByRole( 'searchbox', {
+			name: /^(Search for:|Pesquisar por:)$/,
+		} );
+		await expect( searchField ).toBeFocused();
+		const focusIndicator = await searchField.evaluate( ( field ) => {
+			const styles = window.getComputedStyle( field );
+			return {
+				style: styles.outlineStyle,
+				width: Number.parseFloat( styles.outlineWidth ),
+			};
+		} );
+		expect( focusIndicator.style ).toBe( 'solid' );
+		expect( focusIndicator.width ).toBeGreaterThanOrEqual( 2 );
 		await page.keyboard.press( 'Escape' );
 		await expect( searchButton ).toHaveAttribute(
 			'aria-expanded',
