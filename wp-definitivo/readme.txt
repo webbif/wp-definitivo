@@ -3,7 +3,7 @@ Contributors: leandrobiffi
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.54
+Stable tag: 1.0.56
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,14 @@ When comments or WooCommerce are enabled, WordPress and those plugins may proces
 WP Definitivo does not include forms, SEO tools, analytics, custom post types, shortcodes, custom blocks, social sharing, favicons, or demo content. These features belong in plugins or WordPress core.
 
 == Changelog ==
+
+= 1.0.56 - 2026-09-02 =
+
+* Prevented explicit page excerpts from appearing before WordPress password verification, including native pages, Elementor fallbacks, the posts page, and the WooCommerce shop page.
+
+= 1.0.55 - 2026-09-02 =
+
+* Preserved the main content landmark and skip-link target when Elementor Pro replaces singular, archive, blog, and WooCommerce templates through Theme Builder.
 
 = 1.0.54 - 2026-09-02 =
 

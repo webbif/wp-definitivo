@@ -18,7 +18,7 @@ $wpdef_is_transaction_page =
 <?php
 while ( have_posts() ) :
 	the_post();
-	$wpdef_page_description = trim( (string) get_post_field( 'post_excerpt', get_the_ID() ) );
+	$wpdef_page_description = wpdef_get_visible_explicit_excerpt( get_the_ID() );
 
 	if ( ! $wpdef_is_transaction_page ) {
 		get_template_part(

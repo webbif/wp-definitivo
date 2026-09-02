@@ -13,7 +13,7 @@ if ( ! $wpdef_title ) {
 }
 
 $wpdef_posts_page_id          = absint( get_option( 'page_for_posts' ) );
-$wpdef_posts_page_description = $wpdef_posts_page_id ? trim( (string) get_post_field( 'post_excerpt', $wpdef_posts_page_id ) ) : '';
+$wpdef_posts_page_description = $wpdef_posts_page_id ? wpdef_get_visible_explicit_excerpt( $wpdef_posts_page_id ) : '';
 
 if ( ! wpdef_elementor_do_content_location( 'archive' ) ) {
 	get_template_part(

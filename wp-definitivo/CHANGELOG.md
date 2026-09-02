@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.56 — 2026-09-02
+
+- Prevented explicit page excerpts from appearing before WordPress password verification, including native pages, Elementor fallbacks, the posts page, and the WooCommerce shop page.
+
+## 1.0.55 — 2026-09-02
+
+- Preserved the main content landmark and skip-link target when Elementor Pro replaces singular, archive, blog, and WooCommerce templates through Theme Builder.
+
 ## 1.0.54 — 2026-09-02
 
 - Added an optional back-to-top control with resilient fixed positioning and a release-versioned asset URL for reliable cache invalidation.

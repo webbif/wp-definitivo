@@ -6,6 +6,26 @@
  */
 
 /**
+ * Return an explicit excerpt only when it is visible to the current visitor.
+ *
+ * This intentionally does not generate an automatic excerpt. It preserves the
+ * theme's title-only presentation for content without an author-written
+ * excerpt while respecting WordPress post-password protection.
+ *
+ * @param int|WP_Post|null $post Post ID or object. Defaults to the global post.
+ * @return string
+ */
+function wpdef_get_visible_explicit_excerpt( $post = null ) {
+	$post = get_post( $post );
+
+	if ( ! $post || post_password_required( $post ) ) {
+		return '';
+	}
+
+	return trim( (string) get_post_field( 'post_excerpt', $post, 'display' ) );
+}
+
+/**
  * Return the built-in color schemes.
  *
  * @return array<string, array<string, string>>

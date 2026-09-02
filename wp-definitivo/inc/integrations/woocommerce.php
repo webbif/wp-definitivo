@@ -132,7 +132,7 @@ function wpdef_get_shop_description() {
 	if ( function_exists( 'is_shop' ) && is_shop() ) {
 		$shop_page_id = function_exists( 'wc_get_page_id' ) ? wc_get_page_id( 'shop' ) : 0;
 
-		return $shop_page_id > 0 ? trim( (string) get_post_field( 'post_excerpt', $shop_page_id ) ) : '';
+		return $shop_page_id > 0 ? wpdef_get_visible_explicit_excerpt( $shop_page_id ) : '';
 	}
 
 	return function_exists( 'term_description' ) ? term_description() : '';

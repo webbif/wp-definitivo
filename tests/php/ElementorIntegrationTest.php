@@ -20,6 +20,7 @@ final class ElementorIntegrationTest extends TestCase {
 		$GLOBALS['wpdef_test_elementor_location_calls'] = array();
 		$GLOBALS['wpdef_test_elementor_locations']      = array();
 		$GLOBALS['wpdef_test_elementor_location_matches'] = array();
+		$GLOBALS['wpdef_elementor_content_landmark_depth'] = 0;
 		$GLOBALS['wpdef_test_post_meta']                = array();
 		$GLOBALS['wpdef_test_queried_object_id']        = 0;
 		$GLOBALS['wpdef_test_query_conditions']         = array();
@@ -62,11 +63,11 @@ final class ElementorIntegrationTest extends TestCase {
 	}
 
 	/**
-	 * Assigned locations receive an isolated accessible main wrapper.
+	 * Assigned locations delegate their markup directly to Elementor.
 	 *
 	 * @return void
 	 */
-	public function test_assigned_content_location_is_rendered_without_theme_layout_class() {
+	public function test_assigned_content_location_delegates_markup_to_elementor() {
 		$GLOBALS['wpdef_test_elementor_locations']['archive'] = '<div class="elementor-location-archive">Archive</div>';
 
 		ob_start();
@@ -74,10 +75,31 @@ final class ElementorIntegrationTest extends TestCase {
 		$output   = ob_get_clean();
 
 		$this->assertTrue( $rendered );
-		$this->assertStringContainsString( 'id="primary"', $output );
-		$this->assertStringContainsString( 'wpdef-elementor-location--archive', $output );
-		$this->assertStringContainsString( 'elementor-location-archive', $output );
-		$this->assertStringNotContainsString( 'site-main', $output );
+		$this->assertSame( '<div class="elementor-location-archive">Archive</div>', $output );
+	}
+
+	/**
+	 * Elementor content hooks provide one accessible main landmark.
+	 *
+	 * @return void
+	 */
+	public function test_content_landmark_wraps_nested_elementor_locations_once() {
+		ob_start();
+		wpdef_elementor_content_landmark_open();
+		wpdef_elementor_content_landmark_open();
+		$opening = ob_get_clean();
+
+		ob_start();
+		wpdef_elementor_content_landmark_close();
+		$nested_close = ob_get_clean();
+
+		ob_start();
+		wpdef_elementor_content_landmark_close();
+		$closing = ob_get_clean();
+
+		$this->assertSame( '<main id="primary" class="wpdef-elementor-location" tabindex="-1">', $opening );
+		$this->assertSame( '', $nested_close );
+		$this->assertSame( '</main>', $closing );
 	}
 
 	/**

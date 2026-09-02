@@ -33,6 +33,54 @@ function wpdef_elementor_do_location( $location ) {
 }
 
 /**
+ * Open the main landmark around Elementor content locations.
+ *
+ * Elementor Pro may replace the template before WordPress reaches the theme's
+ * archive or singular file, notably for WooCommerce and Theme Builder archive
+ * conditions. Its location hooks are therefore the only reliable point shared
+ * by both the regular theme flow and those early overrides.
+ *
+ * @return void
+ */
+function wpdef_elementor_content_landmark_open() {
+	global $wpdef_elementor_content_landmark_depth;
+
+	if ( ! is_int( $wpdef_elementor_content_landmark_depth ) ) {
+		$wpdef_elementor_content_landmark_depth = 0;
+	}
+
+	if ( 0 === $wpdef_elementor_content_landmark_depth ) {
+		echo '<main id="primary" class="wpdef-elementor-location" tabindex="-1">';
+	}
+
+	++$wpdef_elementor_content_landmark_depth;
+}
+
+/**
+ * Close the main landmark opened for an Elementor content location.
+ *
+ * @return void
+ */
+function wpdef_elementor_content_landmark_close() {
+	global $wpdef_elementor_content_landmark_depth;
+
+	if ( ! is_int( $wpdef_elementor_content_landmark_depth ) || $wpdef_elementor_content_landmark_depth < 1 ) {
+		return;
+	}
+
+	--$wpdef_elementor_content_landmark_depth;
+
+	if ( 0 === $wpdef_elementor_content_landmark_depth ) {
+		echo '</main>';
+	}
+}
+
+add_action( 'elementor/theme/before_do_single', 'wpdef_elementor_content_landmark_open', 0, 0 );
+add_action( 'elementor/theme/after_do_single', 'wpdef_elementor_content_landmark_close', PHP_INT_MAX, 0 );
+add_action( 'elementor/theme/before_do_archive', 'wpdef_elementor_content_landmark_open', 0, 0 );
+add_action( 'elementor/theme/after_do_archive', 'wpdef_elementor_content_landmark_close', PHP_INT_MAX, 0 );
+
+/**
  * Determine whether Elementor Pro has a matching document for a location.
  *
  * The second API argument checks the current display conditions without
@@ -282,31 +330,15 @@ function wpdef_elementor_page_title_is_hidden( $post_id = 0 ) {
 }
 
 /**
- * Render an Elementor content location inside the theme's main landmark.
+ * Render an Elementor content location.
  *
- * Buffering keeps the skip-link target present only when the location exists.
+ * The location-specific before/after hooks above provide the main landmark.
+ * They also cover Elementor Pro flows that replace the WordPress template
+ * before this helper can run.
  *
  * @param string $location Location name.
  * @return bool
  */
 function wpdef_elementor_do_content_location( $location ) {
-	if ( ! function_exists( 'elementor_theme_do_location' ) ) {
-		return false;
-	}
-
-	ob_start();
-	$rendered = elementor_theme_do_location( $location );
-	$content  = ob_get_clean();
-
-	if ( ! $rendered ) {
-		return false;
-	}
-
-	$location_class = 'wpdef-elementor-location wpdef-elementor-location--' . sanitize_html_class( $location );
-
-	printf( '<main id="primary" class="%s" tabindex="-1">', esc_attr( $location_class ) );
-	echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by Elementor.
-	echo '</main>';
-
-	return true;
+	return wpdef_elementor_do_location( $location );
 }

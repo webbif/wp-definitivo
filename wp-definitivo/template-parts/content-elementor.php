@@ -13,7 +13,7 @@ $wpdef_show_comments = ! isset( $args['show_comments'] ) || $args['show_comments
 	<?php
 	while ( have_posts() ) :
 		the_post();
-		$wpdef_page_description = trim( (string) get_post_field( 'post_excerpt', get_the_ID() ) );
+		$wpdef_page_description = wpdef_get_visible_explicit_excerpt( get_the_ID() );
 
 		if ( ! wpdef_elementor_page_title_is_hidden( get_the_ID() ) ) {
 			get_template_part(

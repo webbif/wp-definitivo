@@ -43,6 +43,28 @@ if ( ! function_exists( 'get_post_meta' ) ) {
 	}
 }
 
+if ( ! function_exists( 'get_post' ) ) {
+	function get_post( $post = null ) {
+		$post_id = is_object( $post ) && isset( $post->ID ) ? (int) $post->ID : (int) $post;
+
+		return isset( $GLOBALS['wpdef_test_posts'][ $post_id ] ) ? $GLOBALS['wpdef_test_posts'][ $post_id ] : null;
+	}
+}
+
+if ( ! function_exists( 'post_password_required' ) ) {
+	function post_password_required( $post = null ) {
+		return is_object( $post ) && ! empty( $GLOBALS['wpdef_test_protected_posts'][ $post->ID ] );
+	}
+}
+
+if ( ! function_exists( 'get_post_field' ) ) {
+	function get_post_field( $field, $post = null, $context = 'display' ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+		$post = get_post( $post );
+
+		return $post && isset( $post->{$field} ) ? $post->{$field} : '';
+	}
+}
+
 if ( ! function_exists( 'sanitize_html_class' ) ) {
 	function sanitize_html_class( $class ) {
 		return preg_replace( '/[^A-Za-z0-9_-]/', '', (string) $class );
