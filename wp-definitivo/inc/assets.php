@@ -259,7 +259,22 @@ function wpdef_scripts() {
 
 	if ( $context['navigation'] || ( $context['base'] && get_theme_mod( 'wpdef_back_to_top', true ) ) ) {
 		wp_enqueue_script( 'wpdef-navigation', get_theme_file_uri( '/assets/js/navigation.min.js' ), array(), WPDEF_VERSION, true );
+		wp_localize_script(
+			'wpdef-navigation',
+			'wpdefNavigationL10n',
+			array(
+				/* translators: %s: navigation item label. */
+				'openSubmenu'  => __( 'Open submenu for %s', 'wp-definitivo' ),
+				/* translators: %s: navigation item label. */
+				'closeSubmenu' => __( 'Close submenu for %s', 'wp-definitivo' ),
+			)
+		);
 		wp_script_add_data( 'wpdef-navigation', 'strategy', 'defer' );
+	}
+
+	if ( $context['content'] && is_page( 'tema-wp-definitivo' ) ) {
+		wp_enqueue_script( 'wpdef-docs-language', get_theme_file_uri( '/assets/js/docs-language.min.js' ), array(), WPDEF_VERSION, true );
+		wp_script_add_data( 'wpdef-docs-language', 'strategy', 'defer' );
 	}
 
 	if ( $context['woocommerce'] && wpdef_query_condition( 'is_product' ) ) {

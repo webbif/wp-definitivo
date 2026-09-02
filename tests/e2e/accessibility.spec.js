@@ -104,10 +104,18 @@ test.describe( 'public theme', () => {
 			'aria-expanded',
 			'false'
 		);
+		await expect( levelOneToggle ).toHaveAttribute(
+			'aria-label',
+			'Open submenu for Level 1'
+		);
 		await levelOneToggle.click();
 		await expect( levelOneToggle ).toHaveAttribute(
 			'aria-expanded',
 			'true'
+		);
+		await expect( levelOneToggle ).toHaveAttribute(
+			'aria-label',
+			'Close submenu for Level 1'
 		);
 		await expect(
 			levelOneItem.locator( ':scope > .sub-menu' )

@@ -22,6 +22,8 @@ const translations = {
 	'Primary menu': 'Menu principal',
 	'Open menu': 'Abrir menu',
 	'Close menu': 'Fechar menu',
+	'Open submenu for %s': 'Abrir submenu de %s',
+	'Close submenu for %s': 'Fechar submenu de %s',
 	'Open search': 'Abrir pesquisa',
 	'Close search': 'Fechar pesquisa',
 	'Definitivo outline': 'Contorno Definitivo',

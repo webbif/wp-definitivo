@@ -98,6 +98,18 @@ msgstr ""
 msgid "Close menu"
 msgstr ""
 
+#. translators: %s: navigation item label.
+#: inc/assets.php
+#, php-format
+msgid "Open submenu for %s"
+msgstr ""
+
+#. translators: %s: navigation item label.
+#: inc/assets.php
+#, php-format
+msgid "Close submenu for %s"
+msgstr ""
+
 #: header.php:40
 msgid "Menu"
 msgstr ""

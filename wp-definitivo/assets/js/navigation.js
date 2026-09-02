@@ -54,10 +54,19 @@
 		}
 
 		const compactNavigation = window.matchMedia( '(max-width: 1280px)' );
+		const submenuLabels = window.wpdefNavigationL10n || {};
+
+		function formatSubmenuLabel( template, itemLabel ) {
+			return template.replace( '%s', itemLabel );
+		}
 
 		function setSubmenuState( item, toggle, expanded ) {
 			item.classList.toggle( 'is-submenu-open', expanded );
 			toggle.setAttribute( 'aria-expanded', expanded ? 'true' : 'false' );
+			toggle.setAttribute(
+				'aria-label',
+				expanded ? toggle.dataset.closeLabel : toggle.dataset.openLabel
+			);
 		}
 
 		function closeSiblingSubmenus( item ) {
@@ -103,11 +112,24 @@
 			}
 
 			const toggle = document.createElement( 'button' );
+			const itemLabel = link.textContent.trim();
+			const openLabel =
+				submenuLabels.openSubmenu || 'Open submenu for %s';
+			const closeLabel =
+				submenuLabels.closeSubmenu || 'Close submenu for %s';
+
 			toggle.className = 'wpdef-submenu-toggle';
 			toggle.type = 'button';
 			toggle.setAttribute( 'aria-controls', submenu.id );
-			toggle.setAttribute( 'aria-expanded', 'false' );
-			toggle.setAttribute( 'aria-label', link.textContent.trim() );
+			toggle.dataset.openLabel = formatSubmenuLabel(
+				openLabel,
+				itemLabel
+			);
+			toggle.dataset.closeLabel = formatSubmenuLabel(
+				closeLabel,
+				itemLabel
+			);
+			setSubmenuState( item, toggle, false );
 			link.insertAdjacentElement( 'afterend', toggle );
 
 			toggle.addEventListener( 'click', function () {

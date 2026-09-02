@@ -542,9 +542,47 @@
 		break-inside: avoid;
 	}
 }
+
+.wpdef-docs__language-switcher {
+	display: flex;
+	justify-content: flex-end;
+	gap: .35rem;
+	margin: 0 auto 1rem;
+	max-width: 1180px;
+	padding-inline: 1.25rem;
+}
+
+.wpdef-docs__language-switcher button {
+	border: 1px solid var(--docs-line);
+	border-radius: 999px;
+	background: var(--docs-surface);
+	color: var(--docs-muted);
+	padding: .45rem .8rem;
+	font: inherit;
+	cursor: pointer;
+}
+
+.wpdef-docs__language-switcher button[aria-pressed="true"] {
+	background: var(--docs-accent);
+	border-color: var(--docs-accent);
+	color: #fff;
+}
+
+.wpdef-docs [data-language-panel] {
+	display: none;
+}
+
+.wpdef-docs [data-language-panel].is-active {
+	display: block;
+}
 </style>
 
 <div class="wpdef-docs">
+	<div class="wpdef-docs__language-switcher" role="group" aria-label="Escolha do idioma">
+		<button type="button" data-language-toggle="pt" aria-pressed="true">Português</button>
+		<button type="button" data-language-toggle="en" aria-pressed="false">English</button>
+	</div>
+	<div data-language-panel="pt" class="is-active">
 	<a class="wpdef-docs__skip" href="#conteudo-documentacao">Pular para a documentação</a>
 
 	<div class="wpdef-docs__hero">
@@ -997,6 +1035,57 @@
 			<p><strong>WP Definitivo 1.0.47</strong><br>Documentação atualizada em agosto de 2026.</p>
 			<p><a href="https://wpdefinitivo.com/contato/">Solicitar suporte</a></p>
 		</div>
+	</div>
+	</div>
+
+	<div data-language-panel="en" lang="en">
+		<div class="wpdef-docs__hero">
+			<div class="wpdef-docs__hero-inner">
+				<div>
+					<p class="wpdef-docs__eyebrow">Official documentation</p>
+					<h2>WP Definitivo</h2>
+					<p class="wpdef-docs__lead">A classic, accessible, content-focused theme for blogs, institutional websites, and WooCommerce stores — with native integration for the block editor and Elementor.</p>
+				</div>
+				<dl class="wpdef-docs__status">
+					<div><dt>Documented version</dt><dd>1.0.58</dd></div>
+					<div><dt>WordPress</dt><dd>6.6 or later</dd></div>
+					<div><dt>PHP</dt><dd>7.4 or later</dd></div>
+					<div><dt>License</dt><dd>GPL v2 or later</dd></div>
+				</dl>
+			</div>
+		</div>
+		<div class="wpdef-docs__layout">
+			<aside class="wpdef-docs__toc wpdef-docs__toc--desktop">
+				<nav class="wpdef-docs__nav" aria-label="WP Definitivo documentation index">
+					<p class="wpdef-docs__nav-title">Getting started</p>
+					<ul><li><a href="#en-overview">Overview</a></li><li><a href="#en-requirements">Requirements</a></li><li><a href="#en-installation">Installation and updates</a></li><li><a href="#en-setup">Recommended setup</a></li></ul>
+					<p class="wpdef-docs__nav-title">Customization</p>
+					<ul><li><a href="#en-layouts">Layouts</a></li><li><a href="#en-customizer">Customizer</a></li><li><a href="#en-design">Colors and typography</a></li><li><a href="#en-navigation">Header and footer</a></li><li><a href="#en-content">Blog and posts</a></li></ul>
+					<p class="wpdef-docs__nav-title">Integrations</p>
+					<ul><li><a href="#en-woocommerce">WooCommerce</a></li><li><a href="#en-elementor">Elementor</a></li></ul>
+					<p class="wpdef-docs__nav-title">Quality and support</p>
+					<ul><li><a href="#en-responsive">Responsive behavior</a></li><li><a href="#en-accessibility">Accessibility</a></li><li><a href="#en-privacy">Privacy</a></li><li><a href="#en-support">Support and license</a></li></ul>
+				</nav>
+			</aside>
+			<main id="en-documentation" class="wpdef-docs__content" tabindex="-1">
+				<section id="en-overview" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Introduction</span><h2>Overview</h2><p>WP Definitivo combines the classic WordPress PHP template hierarchy with <code>theme.json</code>. The result is a lightweight, predictable theme that works with the modern editor without turning plugin features into proprietary theme features.</p><div class="wpdef-docs__cards"><article class="wpdef-docs__card"><h3>Content first</h3><p>Controlled reading widths, fluid typography, editorial page summaries, and list or grid archives.</p></article><article class="wpdef-docs__card"><h3>Optional integrations</h3><p>WooCommerce styles, free-form Elementor pages, and Elementor Pro Theme Builder support.</p></article><article class="wpdef-docs__card"><h3>Accessibility</h3><p>Keyboard navigation, skip links, visible focus, semantic landmarks, underlined text links, and validated contrast.</p></article><article class="wpdef-docs__card"><h3>No tracking</h3><p>Local fonts and assets, with no telemetry, CDN, demo importer, or remote requests.</p></article></div></section>
+				<section id="en-requirements" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Compatibility</span><h2>System requirements</h2><div class="wpdef-docs__table-wrap" role="region" aria-label="System requirements" tabindex="0"><table><thead><tr><th>Component</th><th>Requirement</th><th>Notes</th></tr></thead><tbody><tr><td>WordPress</td><td>6.6 or later</td><td>Tested through version 7.1.</td></tr><tr><td>PHP</td><td>7.4 or later</td><td>Use a version still supported by your host.</td></tr><tr><td>Editor</td><td>Native block editor</td><td>Elementor is optional.</td></tr><tr><td>WooCommerce</td><td>Optional</td><td>Integration loads only when active.</td></tr></tbody></table></div><aside class="wpdef-docs__callout"><strong>Recommendation</strong>Back up the site before changing themes and validate changes in a staging environment.</aside></section>
+				<section id="en-installation" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Getting started</span><h2>Installation and updates</h2><ol class="wpdef-docs__steps"><li>Go to <strong>Appearance → Themes → Add New Theme</strong>.</li><li>Choose <strong>Upload Theme</strong> and select the WP Definitivo ZIP file.</li><li>Install, activate the theme, and open <strong>Appearance → Customize → Theme Options</strong>.</li><li>Assign the primary and footer menus, then add widgets only to the sidebars you want to display.</li></ol><p>Before updating, back up the database and theme folder. After updating, clear WordPress, server, and browser caches.</p></section>
+				<section id="en-setup" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Configuration</span><h2>Recommended initial setup</h2><ol><li>Choose the front page and posts page under <strong>Settings → Reading</strong>.</li><li>Assign the primary and footer menu locations under <strong>Appearance → Menus</strong>.</li><li>Configure the site title, description, and logo under <strong>Appearance → Customize → Site Identity</strong>.</li><li>Choose the color scheme, typography, width, and sidebar for each context under <strong>Theme Options</strong>.</li></ol></section>
+				<section id="en-layouts" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Structure</span><h2>Layouts and page templates</h2><p>Standard pages support an editorial summary, normal, wide, and full-width block alignments, plus optional sidebars. The landing page template keeps the header and footer while removing the native title and sidebar.</p></section>
+				<section id="en-customizer" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Theme options</span><h2>Customizer</h2><p>Theme settings are organized by context so a store change does not affect the blog or regular pages. Configure color schemes, header behavior, typography, page and archive layouts, WooCommerce views, and footer text.</p></section>
+				<section id="en-design" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Design</span><h2>Colors and typography</h2><p>The theme includes four color schemes: White and navy, Ivory and wine, Sand and green, and Night and wine. Available fonts are Inter, System UI, Arial, and Trebuchet MS. Inter and JetBrains Mono are bundled locally.</p></section>
+				<section id="en-navigation" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Navigation</span><h2>Header and footer</h2><p>The header supports a custom logo, primary menu with submenus, expandable search, WooCommerce cart link, and an optional sticky mode. The footer supports its own menu and editable text with <code>[current_year]</code> and <code>[site_title]</code> tags.</p></section>
+				<section id="en-content" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Publishing</span><h2>Blog, archives, and posts</h2><p>Archives can use list or grid layouts with two or three columns, excerpts or full content, featured images, and metadata. Individual posts include taxonomies, post navigation, and comments according to the Customizer settings.</p></section>
+				<section id="en-woocommerce" class="wpdef-docs__section"><span class="wpdef-docs__kicker">E-commerce</span><h2>WooCommerce compatibility</h2><p>WooCommerce is optional. When active, the theme adapts catalogs, products, cart, checkout, and My Account with responsive layouts, independent widths and sidebars, product galleries, variation controls, and modern or classic WooCommerce structures.</p></section>
+				<section id="en-elementor" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Page builder</span><h2>Elementor and Elementor Pro</h2><p>Elementor pages receive a free-form content area without the theme’s native card and reading-width restrictions. Elementor Pro Theme Builder templates can replace the native header, footer, singular, archive, WooCommerce, and 404 locations when their display conditions match.</p></section>
+				<section id="en-responsive" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Devices</span><h2>Responsive behavior</h2><p>Fluid typography and flexible grids adapt to available space. Sidebars move below the main content on tablets and phones; post grids become single-column and product grids become one column on phones.</p></section>
+				<section id="en-accessibility" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Accessibility ready</span><h2>Accessibility</h2><p>The theme includes skip links, semantic landmarks, keyboard-operable menus and search, visible focus, contrast validation, text resizing, reflow, reduced-motion support, and right-to-left language support. User-created content and templates must also be accessible.</p></section>
+				<section id="en-privacy" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Data</span><h2>Privacy and external resources</h2><p>The theme does not track visitors or administrators, send settings to external services, or load resources from a CDN. Fonts, CSS, and JavaScript are served by the installation itself.</p></section>
+				<section id="en-support" class="wpdef-docs__section"><span class="wpdef-docs__kicker">Project</span><h2>Support, license, and credits</h2><p>For questions, accessibility issues, or bug reports, use the <a href="https://wpdefinitivo.com/contato/">contact page</a> or email <a href="mailto:contato@wpdefinitivo.com">contato@wpdefinitivo.com</a>. WP Definitivo is distributed under the GNU General Public License v2 or later. Inter and JetBrains Mono use the SIL Open Font License 1.1.</p><p>WP Definitivo is an independent project and is not affiliated with WordPress Foundation, Automattic, WooCommerce, or Elementor.</p></section>
+			</main>
+		</div>
+		<div class="wpdef-docs__footer"><div class="wpdef-docs__footer-inner"><p><strong>WP Definitivo 1.0.58</strong><br>Documentation updated in September 2026.</p><p><a href="https://wpdefinitivo.com/contato/">Request support</a></p></div></div>
 	</div>
 </div>
 <!-- /wp:html -->
