@@ -3,30 +3,15 @@ Contributors: leandrobiffi
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.58
+Stable tag: 1.0.59
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-An accessible, content-first classic theme with organic typography for creators and small businesses.
+A lightweight WordPress theme for blogs, business sites and WooCommerce stores, with block editor and Elementor integration.
 
 == Description ==
 
-WP Definitivo is a classic WordPress theme that combines traditional PHP templates with theme.json. It is designed for readable publishing, service websites, and optional online shops.
-
-Features include:
-
-* A content-driven front page that supports the block editor and unconstrained Elementor layouts.
-* Standard reading, page-with-sidebar, and title-free landing page layouts.
-* List or two/three-column grid archives.
-* Two menu locations and separate blog, page, and shop widget areas.
-* Four tested color schemes and an optional custom accent with WCAG AA validation.
-* Four block styles: Definitivo outline, Organic quote, Framed, and Soft panel.
-* Local variable fonts with system fallbacks and no remote requests.
-* Optional WooCommerce styling and gallery support without template overrides.
-* Optional editorial store hero using the WooCommerce shop page title and excerpt.
-* Elementor Theme Builder support for header, footer, singular, archive, WooCommerce, and 404 display conditions when Elementor Pro is active.
-
-The theme has no telemetry, remote assets, demo importer, onboarding, upselling, plugin installer, or proprietary update system. It works without WooCommerce or Elementor.
+WP Definitivo is a lightweight, content-focused WordPress theme for blogs, business websites and WooCommerce stores. It provides polished layouts out of the box, flexible controls for blogs and shops, locally hosted fonts, responsive design and optional integrations with the block editor, Elementor, Elementor Pro Theme Builder and WooCommerce. Context-specific assets are loaded only when needed, helping keep configuration simple and the front end lean. The theme works without required plugins and avoids proprietary content features, remote assets and tracking.
 
 == Installation ==
 
@@ -74,6 +59,10 @@ When comments or WooCommerce are enabled, WordPress and those plugins may proces
 WP Definitivo does not include forms, SEO tools, analytics, custom post types, shortcodes, custom blocks, social sharing, favicons, or demo content. These features belong in plugins or WordPress core.
 
 == Changelog ==
+
+= 1.0.59 - 2026-09-02 =
+
+* Updated the public theme descriptions to reflect the current feature set and positioning.
 
 = 1.0.58 - 2026-09-02 =
 

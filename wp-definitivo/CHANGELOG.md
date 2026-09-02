@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.59 — 2026-09-02
+
+- Updated the public theme descriptions to reflect the current feature set and positioning.
+
 ## 1.0.58 — 2026-09-02
 
 - Added third-level page hierarchy support to the native fallback menu used by the Theme Unit Test.

@@ -4,7 +4,7 @@ import gettextParser from 'gettext-parser';
 const translations = {
 	'WP Definitivo': 'WP Definitivo',
 	'https://wpdefinitivo.com/tema-wp-definitivo/': 'https://wpdefinitivo.com/tema-wp-definitivo/',
-	'An accessible, content-first classic theme with an organic editorial style for creators and small businesses.': 'Um tema clássico acessível, orientado a conteúdo e com estilo editorial orgânico para criadores e pequenos negócios.',
+	'A lightweight WordPress theme for blogs, business sites and WooCommerce stores, with block editor and Elementor integration.': 'Um tema WordPress leve para blogs, sites empresariais e lojas WooCommerce, com integração ao editor de blocos e ao Elementor.',
 	'https://wpdefinitivo.com/': 'https://wpdefinitivo.com/',
 	'Error 404': 'Erro 404',
 	'That page could not be found.': 'Essa página não foi encontrada.',

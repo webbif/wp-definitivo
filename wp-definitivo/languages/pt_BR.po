@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Definitivo 1.0.58\n"
+"Project-Id-Version: WP Definitivo 1.0.59\n"
 "Report-Msgid-Bugs-To: https://wpdefinitivo.com/tema-wp-definitivo/\n"
 "Last-Translator: Leandro Biffi <contato@wpdefinitivo.com>\n"
 "Language-Team: Portuguese (Brazil)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-25T18:02:43-03:00\n"
+"POT-Creation-Date: 2026-09-02T19:45:00-03:00\n"
 "PO-Revision-Date: 2026-08-28 22:15-0300\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wp-definitivo\n"
@@ -30,11 +30,11 @@ msgstr "https://wpdefinitivo.com/tema-wp-definitivo/"
 #: style.css
 #. Description of the theme
 msgid ""
-"An accessible, content-first classic theme with an organic editorial style "
-"for creators and small businesses."
+"A lightweight WordPress theme for blogs, business sites and WooCommerce "
+"stores, with block editor and Elementor integration."
 msgstr ""
-"Um tema clássico acessível, orientado a conteúdo e com estilo editorial "
-"orgânico para criadores e pequenos negócios."
+"Um tema WordPress leve para blogs, sites empresariais e lojas WooCommerce, "
+"com integração ao editor de blocos e ao Elementor."
 
 #: style.css
 #. Author URI of the theme

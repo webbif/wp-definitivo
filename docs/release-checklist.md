@@ -1,4 +1,4 @@
-# WP Definitivo 1.0.58 release checklist
+# WP Definitivo 1.0.59 release checklist
 
 ## Code and package
 
@@ -9,7 +9,7 @@
 - [ ] The ZIP excludes `.git`, `.github`, dependencies, caches, logs, IDE files, tests, and build configuration.
 - [ ] Readable sources for minified CSS and JavaScript are present in the theme.
 - [ ] Font files and both OFL license files are present and credited.
-- [ ] `readme.txt`, POT, screenshot, GPL license, and changelog match version 1.0.58.
+- [ ] `readme.txt`, POT, screenshot, GPL license, and changelog match version 1.0.59.
 
 ## Functional and visual QA
 
@@ -30,7 +30,7 @@
 
 ## Owner approval and WordPress.org
 
-- [ ] Leandro Biffi completes final RC acceptance and explicitly approves the 1.0.58 ZIP.
+- [ ] Leandro Biffi completes final RC acceptance and explicitly approves the 1.0.59 ZIP.
 - [ ] `leandrobiffi` login is confirmed.
 - [ ] No other theme is awaiting review on the account.
 - [ ] `wp-definitivo` slug is accepted by the uploader; otherwise rename slug, text domain, and code prefixes before resubmission.
