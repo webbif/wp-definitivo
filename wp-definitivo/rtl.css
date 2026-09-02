@@ -3,8 +3,9 @@ body {
 	unicode-bidi: embed;
 }
 
-.primary-navigation .sub-menu {
-	right: -1rem;
+.primary-navigation .sub-menu,
+.primary-navigation :where(.children) {
+	right: 0;
 	left: auto;
 }
 
@@ -25,7 +26,8 @@ body {
 
 @media (max-width: 960px) {
 
-	.primary-navigation .sub-menu {
+	.primary-navigation .sub-menu,
+	.primary-navigation :where(.children) {
 		padding: 0 1.25rem 0 0;
 	}
 }

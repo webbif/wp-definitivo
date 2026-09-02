@@ -87,7 +87,9 @@
 		}
 
 		navigation.querySelectorAll( 'li' ).forEach( function ( item, index ) {
-			const submenu = item.querySelector( ':scope > .sub-menu' );
+			const submenu = item.querySelector(
+				':scope > .sub-menu, :scope > .children'
+			);
 			const link = item.querySelector( ':scope > a' );
 
 			if ( ! submenu || ! link ) {

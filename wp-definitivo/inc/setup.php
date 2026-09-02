@@ -128,7 +128,7 @@ function wpdef_primary_menu_fallback() {
 		wp_list_pages(
 			array(
 				'title_li' => '',
-				'depth'    => 2,
+				'depth'    => 3,
 			)
 		);
 		?>

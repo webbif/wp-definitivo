@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.58 — 2026-09-02
+
+- Added third-level page hierarchy support to the native fallback menu used by the Theme Unit Test.
+- Aligned desktop dropdowns with their parent items and refined panel width and padding.
+
+## 1.0.57 — 2026-09-02
+
+- Made the native page-list fallback menu use the same accessible desktop dropdown and responsive submenu controls as assigned custom menus.
+
 ## 1.0.56 — 2026-09-02
 
 - Prevented explicit page excerpts from appearing before WordPress password verification, including native pages, Elementor fallbacks, the posts page, and the WooCommerce shop page.

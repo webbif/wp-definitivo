@@ -506,7 +506,7 @@ input[type="submit"]:hover {
 	font-size: 0.8rem;
 }
 
-.primary-navigation ul,
+.primary-navigation :where(ul),
 .footer-navigation ul {
 	margin: 0;
 	padding: 0;
@@ -565,27 +565,33 @@ input[type="submit"]:hover {
 	text-decoration: none;
 }
 
-.primary-navigation .sub-menu {
+.primary-navigation .sub-menu,
+.primary-navigation :where(.children) {
 	position: absolute;
 	top: 100%;
-	left: -1rem;
+	left: 0;
 	z-index: 1;
 	display: none;
-	min-width: 13rem;
-	padding: 0.65rem 1rem;
+	min-width: 14rem;
+	padding: 0.5rem;
 	border: 1px solid var(--wpdef-border);
 	border-radius: var(--wpdef-radius);
 	background: var(--wpdef-surface);
 	box-shadow: var(--wpdef-shadow);
 }
 
+.primary-navigation :where(.children) :where(.children),
+.primary-navigation :where(.children) .sub-menu,
+.primary-navigation .sub-menu :where(.children),
 .primary-navigation .sub-menu .sub-menu {
-	top: -0.65rem;
+	top: -0.5rem;
 	left: calc(100% - 1px);
 }
 
 .primary-navigation li:hover > .sub-menu,
-.primary-navigation li:focus-within > .sub-menu {
+.primary-navigation li:hover > :where(.children),
+.primary-navigation li:focus-within > .sub-menu,
+.primary-navigation li:focus-within > :where(.children) {
 	display: block;
 }
 
@@ -3146,7 +3152,8 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 		white-space: normal;
 	}
 
-	.primary-navigation .sub-menu {
+	.primary-navigation .sub-menu,
+	.primary-navigation :where(.children) {
 		position: static;
 		display: block;
 		padding: 0 0 0 1.25rem;
@@ -3155,6 +3162,9 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 		box-shadow: none;
 	}
 
+	.primary-navigation :where(.children) :where(.children),
+	.primary-navigation :where(.children) .sub-menu,
+	.primary-navigation .sub-menu :where(.children),
 	.primary-navigation .sub-menu .sub-menu {
 		position: static;
 	}
@@ -3203,12 +3213,14 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 		color: var(--wpdef-foreground);
 	}
 
-	.wpdef-js .primary-navigation .wpdef-has-submenu > .sub-menu {
+	.wpdef-js .primary-navigation .wpdef-has-submenu > .sub-menu,
+	.wpdef-js .primary-navigation .wpdef-has-submenu > :where(.children) {
 		display: none;
 		grid-column: 1 / -1;
 	}
 
-	.wpdef-js .primary-navigation .wpdef-has-submenu.is-submenu-open > .sub-menu {
+	.wpdef-js .primary-navigation .wpdef-has-submenu.is-submenu-open > .sub-menu,
+	.wpdef-js .primary-navigation .wpdef-has-submenu.is-submenu-open > :where(.children) {
 		display: block;
 	}
 

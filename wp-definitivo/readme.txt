@@ -3,7 +3,7 @@ Contributors: leandrobiffi
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.56
+Stable tag: 1.0.58
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,10 @@ When comments or WooCommerce are enabled, WordPress and those plugins may proces
 WP Definitivo does not include forms, SEO tools, analytics, custom post types, shortcodes, custom blocks, social sharing, favicons, or demo content. These features belong in plugins or WordPress core.
 
 == Changelog ==
+
+= 1.0.57 - 2026-09-02 =
+
+* Made the native page-list fallback menu use the same accessible desktop dropdown and responsive submenu controls as assigned custom menus.
 
 = 1.0.56 - 2026-09-02 =
 
