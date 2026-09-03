@@ -2,7 +2,7 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Definitivo 1.0.62\n"
+"Project-Id-Version: WP Definitivo 1.0.64\n"
 "Report-Msgid-Bugs-To: https://wpdefinitivo.com/tema-wp-definitivo/\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -574,8 +574,14 @@ msgstr ""
 msgid "Published"
 msgstr ""
 
+#. translators: 1: publication date, 2: post title.
+#: inc/template-tags.php:23
+#, php-format
+msgid "%1$s for %2$s"
+msgstr ""
+
 #. translators: %s: author name.
-#: inc/template-tags.php:29
+#: inc/template-tags.php:41
 #, php-format
 msgid " by %s"
 msgstr ""
@@ -598,16 +604,24 @@ msgstr ""
 msgid "Tagged %s"
 msgstr ""
 
-#: inc/template-tags.php:64
+#: inc/template-tags.php:75
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/template-tags.php:65
+#: inc/template-tags.php:78
 msgid "1 comment"
 msgstr ""
 
-#: inc/template-tags.php:66
-msgid "% comments"
+#. translators: %s: number of comments.
+#: inc/template-tags.php:82
+#, php-format
+msgid "%s comments"
+msgstr ""
+
+#. translators: 1: visible comment-link text, 2: post title.
+#: inc/template-tags.php:93
+#, php-format
+msgid "%1$s on %2$s"
 msgstr ""
 
 #: inc/template-tags.php:72

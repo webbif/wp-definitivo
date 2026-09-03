@@ -146,10 +146,6 @@ a {
 	text-underline-offset: 0.14em;
 }
 
-:where(.widget li > a, .widget nav a) {
-	text-decoration: none;
-}
-
 :where(.entry-content, .entry-summary, .widget, .comment-content, .site-info, .entry-footer) a:hover {
 	text-decoration-thickness: 0.12em;
 }
@@ -725,12 +721,26 @@ input[type="submit"]:hover {
 .search-form {
 	display: flex;
 	flex: 1;
+	align-items: flex-end;
 	gap: 0.5rem;
 }
 
 .search-form__label {
-	position: relative;
+	display: grid;
 	flex: 1;
+	gap: 0.4rem;
+}
+
+.search-form__label-text {
+	color: var(--wpdef-foreground);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+.search-form__control {
+	position: relative;
+	display: block;
 }
 
 .search-form__icon {
@@ -750,36 +760,23 @@ input[type="submit"]:hover {
 	transform: translateY(-50%);
 }
 
-#page .search-form__label .search-field {
+#page .search-form__control .search-field {
 	padding-inline: 2.65rem 0.75rem;
 }
 
 .header-search .search-form {
 	flex: 0 1 52rem;
 	gap: 0.35rem;
-	padding: 0.3rem;
-	border: 1px solid var(--wpdef-control-border);
-	border-radius: var(--wpdef-radius);
-	background: var(--wpdef-surface);
-	box-shadow: 0 0.4rem 1.25rem rgb(15 48 87 / 0.05);
 }
 
 #header-search .search-form input[type="search"].search-field {
 	min-height: 2.6rem;
 	padding-block: 0.55rem;
-	border: 0;
-	background: transparent;
-	box-shadow: none;
 }
 
 #header-search .search-form input[type="search"].search-field:focus-visible {
 	outline: 3px solid var(--wpdef-accent);
 	outline-offset: 1px;
-}
-
-.header-search .search-form:focus-within {
-	border-color: var(--wpdef-accent);
-	box-shadow: 0 0.4rem 1.25rem rgb(15 48 87 / 0.05);
 }
 
 .header-search .search-submit {
@@ -791,6 +788,7 @@ input[type="submit"]:hover {
 
 .search-close {
 	flex: 0 0 auto;
+	align-self: flex-end;
 	width: 2.75rem;
 	height: 2.75rem;
 	min-height: 2.75rem;
@@ -1434,13 +1432,6 @@ input[type="submit"]:hover {
 .widget li:last-child {
 	padding-bottom: 0;
 	border-bottom: 0;
-}
-
-body .widget.widget_block .wp-block-latest-posts li > a,
-body .widget-area .widget.widget_recent_entries li > a,
-body .widget-area .widget.widget_product_categories li > a,
-body .widget-area .widget.widget_block .wc-block-product-categories-list-item > a {
-	text-decoration: none;
 }
 
 .widget li > :where(ul, ol) {

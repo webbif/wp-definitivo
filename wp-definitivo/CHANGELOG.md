@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.0.64 — 2026-09-03
+
+- Kept text links in sidebar widgets permanently underlined with a non-color hover change.
+- Made archive date and comment-link accessible names unique by including the post title.
+
+## 1.0.63 — 2026-09-03
+
+- Added visible, persistent labels to the theme search form while preserving its programmatic label association.
+
+## 1.0.62 — 2026-09-03
+
+- Improved text-link identification in post metadata.
+- Made preformatted content reflow without creating inaccessible horizontal scrolling regions.
+- Prevented the standard page hero from creating a duplicate banner landmark.
+
+## 1.0.61 — 2026-09-02
+
+- Made desktop dropdown submenus dismissible with Escape, including nested levels.
+- Kept the no-JavaScript header search fallback visible to assistive technologies.
+
+## 1.0.60 — 2026-09-02
+
+- Increased form-control contrast and restored strong keyboard focus indicators in header search, cart, and checkout fields.
+
 ## 1.0.59 — 2026-09-02
 
 - Updated the public theme descriptions to reflect the current feature set and positioning.

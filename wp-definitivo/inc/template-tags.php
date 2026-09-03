@@ -15,13 +15,25 @@ function wpdef_posted_on() {
 		return;
 	}
 
+	$date       = get_the_date();
+	$post_title = get_the_title();
+	$date_label = $post_title
+		? sprintf(
+			/* translators: 1: publication date, 2: post title. */
+			esc_html__( '%1$s for %2$s', 'wp-definitivo' ),
+			$date,
+			$post_title
+		)
+		: $date;
+
 	printf(
-		'<span class="posted-on">%1$s <a href="%2$s" rel="bookmark"><time class="entry-date published%3$s" datetime="%4$s">%5$s</time></a></span>',
+		'<span class="posted-on">%1$s <a href="%2$s" rel="bookmark" aria-label="%6$s"><time class="entry-date published%3$s" datetime="%4$s">%5$s</time></a></span>',
 		esc_html__( 'Published', 'wp-definitivo' ),
 		esc_url( get_permalink() ),
 		get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ? ' has-update' : '',
 		esc_attr( get_the_date( DATE_W3C ) ),
-		esc_html( get_the_date() )
+		esc_html( $date ),
+		esc_attr( $date_label )
 	);
 
 	printf(
@@ -59,13 +71,37 @@ function wpdef_entry_footer() {
 	}
 
 	if ( ! is_singular() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-		echo '<span class="comments-link">';
-		comments_popup_link(
-			esc_html__( 'Leave a comment', 'wp-definitivo' ),
-			esc_html__( '1 comment', 'wp-definitivo' ),
-			esc_html__( '% comments', 'wp-definitivo' )
+		$comments_number = (int) get_comments_number();
+		$comments_text   = esc_html__( 'Leave a comment', 'wp-definitivo' );
+
+		if ( 1 === $comments_number ) {
+			$comments_text = esc_html__( '1 comment', 'wp-definitivo' );
+		} elseif ( $comments_number > 1 ) {
+			$comments_text = sprintf(
+				/* translators: %s: number of comments. */
+				esc_html__( '%s comments', 'wp-definitivo' ),
+				number_format_i18n( $comments_number )
+			);
+		}
+
+		$comments_label = $comments_text;
+		$post_title     = get_the_title();
+
+		if ( $post_title ) {
+			$comments_label = sprintf(
+				/* translators: 1: visible comment-link text, 2: post title. */
+				esc_html__( '%1$s on %2$s', 'wp-definitivo' ),
+				$comments_text,
+				$post_title
+			);
+		}
+
+		printf(
+			'<span class="comments-link"><a href="%1$s" aria-label="%2$s">%3$s</a></span>',
+			esc_url( get_comments_link() ),
+			esc_attr( $comments_label ),
+			esc_html( $comments_text )
 		);
-		echo '</span>';
 	}
 
 	edit_post_link(

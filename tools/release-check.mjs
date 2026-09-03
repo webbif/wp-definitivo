@@ -60,10 +60,38 @@ function contrastRatio( foreground, background ) {
 for ( const selector of [ ':root', '.wpdef-scheme-ivory-wine', '.wpdef-scheme-sand-green', '.wpdef-scheme-night-wine' ] ) {
 	const escapedSelector = selector.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' );
 	const block = themeCss.match( new RegExp( `${ escapedSelector }\\s*\\{([^}]*)\\}` ) )?.[ 1 ];
-	const surface = block?.match( /--wpdef-surface:\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?)/i )?.[ 1 ];
-	const controlBorder = block?.match( /--wpdef-control-border:\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?)/i )?.[ 1 ];
-	if ( ! surface || ! controlBorder || contrastRatio( controlBorder, surface ) < 3 ) {
-		throw new Error( `${ selector } form-control border must have at least 3:1 contrast against its surface.` );
+	const color = ( name ) =>
+		block?.match(
+			new RegExp(
+				`--wpdef-${ name }:\\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?)`,
+				'i'
+			)
+		)?.[ 1 ];
+	const ratios = [
+		[ 'foreground', 'background', 4.5, 'body text' ],
+		[ 'foreground', 'surface', 4.5, 'surface text' ],
+		[ 'muted', 'background', 4.5, 'muted body text' ],
+		[ 'muted', 'surface', 4.5, 'muted surface text' ],
+		[ 'accent', 'background', 4.5, 'accent body text' ],
+		[ 'accent', 'surface', 4.5, 'accent surface text' ],
+		[ 'button-text', 'accent', 4.5, 'button text' ],
+		[ 'control-border', 'surface', 3, 'form-control border' ],
+		[ 'accent', 'soft', 3, 'focus indicator on soft surfaces' ],
+	];
+
+	for ( const [ foregroundName, backgroundName, minimum, label ] of ratios ) {
+		const foreground = color( foregroundName );
+		const background = color( backgroundName );
+
+		if (
+			! foreground ||
+			! background ||
+			contrastRatio( foreground, background ) < minimum
+		) {
+			throw new Error(
+				`${ selector } ${ label } must have at least ${ minimum }:1 contrast.`
+			);
+		}
 	}
 }
 

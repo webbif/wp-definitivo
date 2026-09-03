@@ -80,23 +80,72 @@ test.describe( 'public theme', () => {
 		} );
 	}
 
-	test( 'required routes reflow at 320 CSS pixels without page-level horizontal scrolling', async ( {
+	test( 'required routes reflow at 200 and 400 percent equivalents', async ( {
 		page,
 	} ) => {
-		await page.setViewportSize( { width: 320, height: 800 } );
+		for ( const width of [ 640, 320 ] ) {
+			await page.setViewportSize( { width, height: 800 } );
+
+			for ( const route of accessibilityRoutes ) {
+				await test.step( `${ width }px: ${ route.name }`, async () => {
+					await page.goto( route.path );
+					const dimensions = await page.evaluate( () => ( {
+						clientWidth: document.documentElement.clientWidth,
+						scrollWidth: document.documentElement.scrollWidth,
+					} ) );
+
+					expect(
+						dimensions.scrollWidth,
+						`${ route.name } overflows the ${ width } CSS pixel viewport`
+					).toBeLessThanOrEqual( dimensions.clientWidth + 1 );
+				} );
+			}
+
+			await page.goto( '/' );
+			const menu = page.locator( '.menu-toggle' );
+			await menu.click();
+			await expect( menu ).toHaveAttribute( 'aria-expanded', 'true' );
+			await page.keyboard.press( 'Escape' );
+			await expect( menu ).toBeFocused();
+			const searchButton = page.getByRole( 'button', {
+				name: /^(Open search|Abrir pesquisa)$/,
+			} );
+			await searchButton.click();
+			await expect(
+				page.getByRole( 'searchbox', {
+					name: /^(Search for:|Pesquisar por:)$/,
+				} )
+			).toBeFocused();
+		}
+	} );
+
+	test( 'required routes tolerate WCAG text spacing overrides', async ( {
+		page,
+	} ) => {
+		await page.setViewportSize( { width: 1280, height: 900 } );
 
 		for ( const route of accessibilityRoutes ) {
 			await test.step( route.name, async () => {
 				await page.goto( route.path );
+				await page.addStyleTag( {
+					content: `
+						*:not(svg):not(path) {
+							line-height: 1.5 !important;
+							letter-spacing: 0.12em !important;
+							word-spacing: 0.16em !important;
+						}
+						p {
+							margin-bottom: 2em !important;
+						}
+					`,
+				} );
 				const dimensions = await page.evaluate( () => ( {
 					clientWidth: document.documentElement.clientWidth,
 					scrollWidth: document.documentElement.scrollWidth,
 				} ) );
-
-				expect(
-					dimensions.scrollWidth,
-					`${ route.name } overflows the 320 CSS pixel viewport`
-				).toBeLessThanOrEqual( dimensions.clientWidth + 1 );
+				expect( dimensions.scrollWidth ).toBeLessThanOrEqual(
+					dimensions.clientWidth + 1
+				);
 			} );
 		}
 	} );
@@ -129,6 +178,137 @@ test.describe( 'public theme', () => {
 						/\b(navigation|navega(?:ç|c)[aã]o)\b/i.test( name )
 					)
 				).toBe( false );
+			} );
+		}
+	} );
+
+	test( 'text links remain underlined and gain a non-color hover change', async ( {
+		page,
+	} ) => {
+		const textLinkSelector = [
+			'.entry-content p a',
+			'.entry-summary p a',
+			'.comment-content a',
+			'.widget a:not(.wp-block-button__link)',
+			'.site-info a',
+			'.entry-footer a',
+		].join( ', ' );
+
+		for ( const route of accessibilityRoutes ) {
+			await test.step( route.name, async () => {
+				await page.goto( route.path );
+				const violations = await page
+					.locator( textLinkSelector )
+					.evaluateAll( ( links ) =>
+						links
+							.filter(
+								( link ) =>
+									link.textContent.trim() &&
+									link.getClientRects().length
+							)
+							.filter(
+								( link ) =>
+									! window
+										.getComputedStyle( link )
+										.textDecorationLine.includes(
+											'underline'
+										)
+							)
+							.map( ( link ) => ( {
+								text: link.textContent.trim(),
+								href: link.href,
+							} ) )
+					);
+				expect( violations ).toEqual( [] );
+			} );
+		}
+
+		for ( const sample of [
+			{ path: '/', selector: '.entry-content p a' },
+			{ path: '/template-comments/', selector: '.comment-content a' },
+			{ path: '/?s=block', selector: '.widget a' },
+			{ path: '/', selector: '.site-info a' },
+		] ) {
+			await page.goto( sample.path );
+			const link = page.locator( sample.selector ).first();
+			await expect( link ).toBeVisible();
+			const normalThickness = await link.evaluate( ( element ) => {
+				const styles = window.getComputedStyle( element );
+				return Number.parseFloat( styles.textDecorationThickness );
+			} );
+			await link.hover();
+			const hoverThickness = await link.evaluate( ( element ) => {
+				const styles = window.getComputedStyle( element );
+				return Number.parseFloat( styles.textDecorationThickness );
+			} );
+			expect( hoverThickness ).toBeGreaterThan( normalThickness );
+		}
+	} );
+
+	test( 'links avoid ambiguous names and conflicting destinations', async ( {
+		page,
+	} ) => {
+		const themeLinkSelector = [
+			'.site-header a[href]',
+			'.post-card .entry-title a[href]',
+			'.post-card .entry-meta a[href]',
+			'.post-card .entry-footer a[href]',
+			'.navigation a[href]',
+			'.site-footer a[href]',
+		].join( ', ' );
+
+		for ( const route of accessibilityRoutes ) {
+			await test.step( route.name, async () => {
+				await page.goto( route.path );
+				const links = await page
+					.locator( themeLinkSelector )
+					.evaluateAll( ( elements ) =>
+						elements
+							.filter(
+								( element ) => element.getClientRects().length
+							)
+							.map( ( element ) => {
+								const visibleText = element.innerText.trim();
+								const imageText = Array.from(
+									element.querySelectorAll( 'img[alt]' )
+								)
+									.map( ( image ) => image.alt.trim() )
+									.filter( Boolean )
+									.join( ' ' );
+								return {
+									name: (
+										element.getAttribute( 'aria-label' ) ||
+										visibleText ||
+										imageText
+									).trim(),
+									href: element.href,
+								};
+							} )
+					);
+				const ambiguous = links.filter( ( link ) =>
+					/^(?:click here|here|more|read more|link|clique aqui|aqui|mais|leia mais)$/i.test(
+						link.name
+					)
+				);
+				const destinations = new Map();
+
+				for ( const link of links ) {
+					const name = link.name.toLocaleLowerCase();
+					if ( ! destinations.has( name ) ) {
+						destinations.set( name, new Set() );
+					}
+					destinations.get( name ).add( link.href );
+				}
+
+				const conflicting = Array.from( destinations.entries() )
+					.filter( ( [ name, urls ] ) => name && urls.size > 1 )
+					.map( ( [ name, urls ] ) => ( {
+						name,
+						urls: Array.from( urls ),
+					} ) );
+
+				expect( ambiguous ).toEqual( [] );
+				expect( conflicting ).toEqual( [] );
 			} );
 		}
 	} );
@@ -290,6 +470,40 @@ test.describe( 'public theme', () => {
 		await context.close();
 	} );
 
+	test( 'reduced motion disables smooth scrolling and minimizes transitions', async ( {
+		page,
+	} ) => {
+		await page.emulateMedia( { reducedMotion: 'reduce' } );
+		await page.goto( '/' );
+
+		const motionStyles = await page.evaluate( () => {
+			const button = document.querySelector( '.wpdef-back-to-top' );
+			const buttonStyles = button
+				? window.getComputedStyle( button )
+				: null;
+
+			return {
+				scrollBehavior: window.getComputedStyle(
+					document.documentElement
+				).scrollBehavior,
+				transitionDuration: buttonStyles?.transitionDuration || '',
+				animationDuration: buttonStyles?.animationDuration || '',
+			};
+		} );
+
+		expect( motionStyles.scrollBehavior ).toBe( 'auto' );
+		for ( const duration of [
+			motionStyles.transitionDuration,
+			motionStyles.animationDuration,
+		] ) {
+			expect(
+				duration
+					.split( ',' )
+					.every( ( value ) => Number.parseFloat( value ) <= 0.001 )
+			).toBe( true );
+		}
+	} );
+
 	test( 'header search moves focus and closes with Escape', async ( {
 		page,
 	} ) => {
@@ -318,5 +532,82 @@ test.describe( 'public theme', () => {
 			'false'
 		);
 		await expect( searchButton ).toBeFocused();
+	} );
+
+	test( 'search forms expose visible labels associated with their fields', async ( {
+		page,
+	} ) => {
+		for ( const route of accessibilityRoutes.map(
+			( item ) => item.path
+		) ) {
+			await test.step( route, async () => {
+				await page.goto( route );
+				await page
+					.getByRole( 'button', {
+						name: /^(Open search|Abrir pesquisa)$/,
+					} )
+					.click();
+
+				const searchForms = page.locator( '.search-form' );
+				const formCount = await searchForms.count();
+				expect( formCount ).toBeGreaterThan( 0 );
+
+				for ( let index = 0; index < formCount; index++ ) {
+					const form = searchForms.nth( index );
+					const field = form.getByRole( 'searchbox' );
+					const fieldId = await field.getAttribute( 'id' );
+					expect( fieldId ).toBeTruthy();
+					await expect(
+						form.locator(
+							`label[for="${ fieldId }"] .search-form__label-text`
+						)
+					).toBeVisible();
+				}
+			} );
+		}
+	} );
+
+	test( 'block search form keeps its visible associated label', async ( {
+		page,
+	} ) => {
+		for ( const route of [
+			'/blog/',
+			'/template-comments/',
+			'/category/block/',
+			'/?s=block',
+		] ) {
+			await test.step( route, async () => {
+				await page.goto( route );
+				const field = page.locator( '.wp-block-search__input' );
+				const fieldId = await field.getAttribute( 'id' );
+
+				expect( fieldId ).toBeTruthy();
+				await expect(
+					page.locator(
+						`.wp-block-search__label[for="${ fieldId }"]`
+					)
+				).toBeVisible();
+			} );
+		}
+	} );
+
+	test( 'comment form labels and required fields are explicit', async ( {
+		page,
+	} ) => {
+		await page.goto( '/template-comments/' );
+
+		for ( const fieldId of [ 'comment', 'author', 'email' ] ) {
+			const field = page.locator( `#${ fieldId }` );
+
+			if ( 0 === ( await field.count() ) ) {
+				continue;
+			}
+
+			await expect( field ).toBeVisible();
+			await expect(
+				page.locator( `label[for="${ fieldId }"]` )
+			).toBeVisible();
+			await expect( field ).toHaveAttribute( 'required', '' );
+		}
 	} );
 } );
