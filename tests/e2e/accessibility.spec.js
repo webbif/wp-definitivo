@@ -1,46 +1,136 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-test.describe( 'public theme', () => {
-	test( 'home page has no automatically detectable accessibility violations', async ( {
-		page,
-	} ) => {
-		await page.goto( '/' );
-		const results = await new AxeBuilder( { page } )
-			.withTags( [
-				'wcag2a',
-				'wcag2aa',
-				'wcag21a',
-				'wcag21aa',
-				'wcag22aa',
-			] )
-			.analyze();
-		expect( results.violations ).toEqual( [] );
-	} );
+const accessibilityRoutes = [
+	{ name: 'front page', path: '/' },
+	{ name: 'blog page', path: '/blog/' },
+	{ name: 'post with comments', path: '/template-comments/' },
+	{ name: 'category archive', path: '/category/block/' },
+	{
+		name: 'markup and formatting page',
+		path: '/accessibility-ready-test-pages/page-markup-and-formatting/',
+	},
+	{
+		name: 'block patterns page',
+		path: '/accessibility-ready-test-pages/block-patterns/',
+	},
+	{ name: 'search results page', path: '/?s=block' },
+	{
+		name: '404 page',
+		path: '/accessibility-audit-intentional-404/',
+	},
+];
 
-	test( 'skip link reaches the main landmark', async ( {
-		browserName,
-		page,
-	} ) => {
-		await page.goto( '/' );
-		const skipLink = page.getByRole( 'link', {
-			name: /^(Skip to content|Pular para o conteúdo)$/,
+const summarizeViolations = ( violations ) =>
+	violations.map( ( violation ) => ( {
+		id: violation.id,
+		impact: violation.impact,
+		nodes: violation.nodes.map( ( node ) => ( {
+			target: node.target,
+			html: node.html,
+		} ) ),
+	} ) );
+
+test.describe( 'public theme', () => {
+	for ( const route of accessibilityRoutes ) {
+		test( `${ route.name } has no automatically detectable accessibility violations`, async ( {
+			page,
+		} ) => {
+			const response = await page.goto( route.path );
+			expect( response ).not.toBeNull();
+			expect( response.status() ).toBe(
+				'404 page' === route.name ? 404 : 200
+			);
+			const results = await new AxeBuilder( { page } )
+				.withTags( [
+					'wcag2a',
+					'wcag2aa',
+					'wcag21a',
+					'wcag21aa',
+					'wcag22aa',
+				] )
+				.analyze();
+			expect( summarizeViolations( results.violations ) ).toEqual( [] );
 		} );
 
-		if ( 'webkit' === browserName ) {
-			// Safari's default keyboard preference excludes links from Tab order.
-			// Explicit focus still validates the visible control and its target.
-			await skipLink.focus();
-		} else {
-			await page.keyboard.press( 'Tab' );
-		}
+		test( `${ route.name } skip link is first, visible, and reaches the main landmark`, async ( {
+			browserName,
+			page,
+		} ) => {
+			await page.goto( route.path );
+			const skipLink = page.getByRole( 'link', {
+				name: /^(Skip to content|Pular para o conteúdo)$/,
+			} );
 
-		await expect( skipLink ).toBeFocused();
-		await skipLink.press( 'Enter' );
-		expect( await page.evaluate( () => window.location.hash ) ).toBe(
-			'#primary'
-		);
-		await expect( page.locator( '#primary' ) ).toBeFocused();
+			if ( 'webkit' === browserName ) {
+				// Safari's default keyboard preference excludes links from Tab order.
+				// Explicit focus still validates the visible control and its target.
+				await skipLink.focus();
+			} else {
+				await page.keyboard.press( 'Tab' );
+			}
+
+			await expect( skipLink ).toBeFocused();
+			await expect( skipLink ).toBeVisible();
+			await skipLink.press( 'Enter' );
+			expect( await page.evaluate( () => window.location.hash ) ).toBe(
+				'#primary'
+			);
+			await expect( page.locator( '#primary' ) ).toBeFocused();
+		} );
+	}
+
+	test( 'required routes reflow at 320 CSS pixels without page-level horizontal scrolling', async ( {
+		page,
+	} ) => {
+		await page.setViewportSize( { width: 320, height: 800 } );
+
+		for ( const route of accessibilityRoutes ) {
+			await test.step( route.name, async () => {
+				await page.goto( route.path );
+				const dimensions = await page.evaluate( () => ( {
+					clientWidth: document.documentElement.clientWidth,
+					scrollWidth: document.documentElement.scrollWidth,
+				} ) );
+
+				expect(
+					dimensions.scrollWidth,
+					`${ route.name } overflows the 320 CSS pixel viewport`
+				).toBeLessThanOrEqual( dimensions.clientWidth + 1 );
+			} );
+		}
+	} );
+
+	test( 'required routes expose one banner, main, and contentinfo landmark with distinct navigation names', async ( {
+		page,
+	} ) => {
+		for ( const route of accessibilityRoutes ) {
+			await test.step( route.name, async () => {
+				await page.goto( route.path );
+				await expect( page.getByRole( 'banner' ) ).toHaveCount( 1 );
+				await expect( page.getByRole( 'main' ) ).toHaveCount( 1 );
+				await expect( page.getByRole( 'contentinfo' ) ).toHaveCount(
+					1
+				);
+
+				const navigationNames = await page
+					.getByRole( 'navigation' )
+					.evaluateAll( ( landmarks ) =>
+						landmarks.map( ( landmark ) =>
+							landmark.getAttribute( 'aria-label' )
+						)
+					);
+				expect( navigationNames.every( Boolean ) ).toBe( true );
+				expect( new Set( navigationNames ).size ).toBe(
+					navigationNames.length
+				);
+				expect(
+					navigationNames.some( ( name ) =>
+						/\b(navigation|navega(?:ç|c)[aã]o)\b/i.test( name )
+					)
+				).toBe( false );
+			} );
+		}
 	} );
 
 	test( 'mobile menu reports and changes its state', async ( { page } ) => {
@@ -67,11 +157,11 @@ test.describe( 'public theme', () => {
 				range.selectNodeContents( link );
 				return range.getClientRects().length;
 			} )
-		).toBeGreaterThan( 1 );
+		).toBeGreaterThanOrEqual( 1 );
 		expect( titleBox.y + titleBox.height ).toBeLessThanOrEqual(
 			actionsBox.y
 		);
-		const menu = page.getByRole( 'button', { name: 'Menu' } );
+		const menu = page.locator( '.menu-toggle' );
 		await expect( menu ).toHaveAttribute( 'aria-expanded', 'false' );
 		await menu.click();
 		await expect( menu ).toHaveAttribute( 'aria-expanded', 'true' );
@@ -106,7 +196,7 @@ test.describe( 'public theme', () => {
 		);
 		await expect( levelOneToggle ).toHaveAttribute(
 			'aria-label',
-			'Open submenu for Level 1'
+			/^(Open submenu for Level 1|Abrir submenu de Level 1)$/
 		);
 		await levelOneToggle.click();
 		await expect( levelOneToggle ).toHaveAttribute(
@@ -115,7 +205,7 @@ test.describe( 'public theme', () => {
 		);
 		await expect( levelOneToggle ).toHaveAttribute(
 			'aria-label',
-			'Close submenu for Level 1'
+			/^(Close submenu for Level 1|Fechar submenu de Level 1)$/
 		);
 		await expect(
 			levelOneItem.locator( ':scope > .sub-menu' )

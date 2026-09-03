@@ -3,7 +3,7 @@ Contributors: leandrobiffi
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.61
+Stable tag: 1.0.62
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,12 @@ When comments or WooCommerce are enabled, WordPress and those plugins may proces
 WP Definitivo does not include forms, SEO tools, analytics, custom post types, shortcodes, custom blocks, social sharing, favicons, or demo content. These features belong in plugins or WordPress core.
 
 == Changelog ==
+
+= 1.0.62 - 2026-09-03 =
+
+* Improved text-link identification in post metadata.
+* Made preformatted content reflow without creating inaccessible horizontal scrolling regions.
+* Prevented the standard page hero from creating a duplicate banner landmark.
 
 = 1.0.61 - 2026-09-02 =
 

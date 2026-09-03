@@ -9,7 +9,7 @@
 
 		var buttons = docs.querySelectorAll('[data-language-toggle]');
 		var panels = docs.querySelectorAll('[data-language-panel]');
-		var saved = window.localStorage.getItem('wpdef-docs-language') || 'pt';
+		var saved = window.localStorage.getItem('wpdef-docs-language-v3') || 'pt';
 		var hero = docs.querySelector('.wpdef-docs__hero');
 		var footer = docs.querySelector('.wpdef-docs__footer-inner');
 		var skip = docs.querySelector('.wpdef-docs__skip');
@@ -60,7 +60,7 @@
 			});
 			setSidebar(language);
 			setHeroAndFooter(language);
-			window.localStorage.setItem('wpdef-docs-language', language);
+			window.localStorage.setItem('wpdef-docs-language-v3', language);
 		}
 
 		buttons.forEach(function (button) {

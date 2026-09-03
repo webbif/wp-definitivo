@@ -139,7 +139,7 @@ a {
 	text-decoration: none;
 }
 
-:where(.entry-content, .entry-summary, .widget, .comment-content, .site-info) a {
+:where(.entry-content, .entry-summary, .widget, .comment-content, .site-info, .entry-footer) a {
 	font-weight: 600;
 	text-decoration-line: underline;
 	text-decoration-thickness: 0.08em;
@@ -150,7 +150,7 @@ a {
 	text-decoration: none;
 }
 
-:where(.entry-content, .entry-summary, .widget, .comment-content, .site-info) a:hover {
+:where(.entry-content, .entry-summary, .widget, .comment-content, .site-info, .entry-footer) a:hover {
 	text-decoration-thickness: 0.12em;
 }
 
@@ -217,11 +217,13 @@ samp {
 }
 
 pre {
-	overflow-x: auto;
+	overflow-x: visible;
 	padding: 1rem;
 	border: 1px solid var(--wpdef-border);
 	border-radius: var(--wpdef-radius);
 	background: var(--wpdef-soft);
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
 }
 
 table {

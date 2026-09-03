@@ -568,6 +568,19 @@
 	color: #fff;
 }
 
+/* English is the visual call-to-action; Portuguese remains the initial content. */
+.wpdef-docs__language-switcher button[data-language-toggle="en"] {
+	background: var(--docs-accent);
+	border-color: var(--docs-accent);
+	color: #fff;
+}
+
+.wpdef-docs__language-switcher button[data-language-toggle="pt"][aria-pressed="true"] {
+	background: var(--docs-surface);
+	border-color: var(--docs-line);
+	color: var(--docs-muted);
+}
+
 .wpdef-docs [data-language-panel] {
 	display: none;
 }

@@ -273,7 +273,7 @@ function wpdef_scripts() {
 	}
 
 	if ( $context['content'] && is_page( 'tema-wp-definitivo' ) ) {
-		wp_enqueue_script( 'wpdef-docs-language', get_theme_file_uri( '/assets/js/docs-language.min.js' ), array(), WPDEF_VERSION, true );
+		wp_enqueue_script( 'wpdef-docs-language', get_theme_file_uri( '/assets/js/docs-language.min.js' ), array(), WPDEF_VERSION . '-language-highlight-en-3', true );
 		wp_script_add_data( 'wpdef-docs-language', 'strategy', 'defer' );
 	}
 
