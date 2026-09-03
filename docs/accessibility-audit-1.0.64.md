@@ -11,7 +11,8 @@ This file tracks internal execution and evidence. The official Google Sheet rema
 
 - [x] The audit started from clean, synchronized release `fe3c59d` / `v1.0.61`.
 - [x] Accessibility remediation is prepared as version `1.0.64` in the working tree.
-- [ ] Create the final candidate commit and tag after the formal audit is complete.
+- [x] Create the version 1.0.64 audit-candidate commit (`848e477`).
+- [ ] Create the final tag after the formal audit is complete.
 - [x] `style.css`, `readme.txt`, and `package.json` report version `1.0.64`.
 - [x] MyTemplatesWoo runs WordPress 7.1.
 - [x] Synchronize WP Definitivo 1.0.64 to MyTemplatesWoo and verify the final hashes.
@@ -103,8 +104,8 @@ Record page-by-page statuses and detailed evidence in the official report.
 - [ ] The official Summary tab accurately reflects the Full Review evidence.
 - [ ] The generated Markdown for Trac is reviewed and ready to paste into the submission ticket.
 - [ ] `accessibility.txt` is updated with the final, truthful audit status and methodology.
-- [ ] A new release candidate is built only if source files changed during remediation.
-- [ ] Final ZIP contents and hashes are recorded.
+- [x] A new release candidate is built because source files changed during remediation.
+- [x] Final ZIP contents and hashes are recorded.
 
 ## Execution log
 
@@ -138,4 +139,5 @@ Record page-by-page statuses and detailed evidence in the official report.
 | 2026-09-03 | Reflow and text spacing automation | Pass | All eight required routes passed at 640 and 320 CSS pixels and with WCAG text-spacing overrides in all five browser profiles. Browser zoom, visual overlap/cropping judgment, and Firefox Text Only remain manual before requirement 12 is closed. |
 | 2026-09-03 | Final deployed integrity | Pass | After the final 1.0.64 build, the local and MyTemplatesWoo copies each contain 68 files with zero missing, extra, or SHA-256-mismatched files. MyTemplatesWoo has no regular active plugins, no residual Theme Check directory, the default color scheme is restored, and `WP_DEBUG` is false. |
 | 2026-09-03 | Normal-state contrast | Pass | Axe passed all eight routes in every browser profile and in all four built-in color schemes. The release checker independently verifies text/accent contrast at 4.5:1 and control-boundary contrast at 3:1. Full Review rows 94–95 were marked Pass; hover and focus states remain pending manual review. |
-| 2026-09-03 | Repository state | In progress | Local commit `24949e0` appeared from concurrent work during the audit and remains ahead of `origin/main`; the 1.0.64 remediation and expanded tests remain uncommitted pending completion of the formal review. |
+| 2026-09-03 | Repository state | Controlled | Commit `848e477` records the 1.0.64 remediation and expanded tests. The earlier local commit `24949e0` is preserved. Both commits remain ahead of `origin/main`; no push or final tag has been made. |
+| 2026-09-03 | Submission package | Pass | `wp-definitivo-1.0.64.zip` contains exactly one `wp-definitivo/` root and 68 files, with no forbidden content. Every archived file matches the committed theme source byte-for-byte. ZIP SHA-256: `2087CF1029B6160ECDBA70A33C3494CCE84CD5A8844A058619DC4DBFD634C0B7`. |

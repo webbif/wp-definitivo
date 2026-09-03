@@ -7,13 +7,13 @@
 ## Code and package
 
 - [ ] All automated checks pass from a clean checkout.
-- [ ] Theme Check reports no required errors.
-- [ ] No PHP notices, warnings, deprecated messages, or JavaScript errors with `WP_DEBUG` enabled.
-- [ ] The ZIP contains exactly one `wp-definitivo/` top-level directory.
-- [ ] The ZIP excludes `.git`, `.github`, dependencies, caches, logs, IDE files, tests, and build configuration.
-- [ ] Readable sources for minified CSS and JavaScript are present in the theme.
-- [ ] Font files and both OFL license files are present and credited.
-- [ ] `readme.txt`, POT, screenshot, GPL license, and changelog match version 1.0.64.
+- [x] Theme Check reports no required errors.
+- [x] No PHP notices, warnings, deprecated messages, or JavaScript errors with `WP_DEBUG` enabled.
+- [x] The ZIP contains exactly one `wp-definitivo/` top-level directory.
+- [x] The ZIP excludes `.git`, `.github`, dependencies, caches, logs, IDE files, tests, and build configuration.
+- [x] Readable sources for minified CSS and JavaScript are present in the theme.
+- [x] Font files and both OFL license files are present and credited.
+- [x] `readme.txt`, POT, screenshot, GPL license, and changelog match version 1.0.64.
 
 ## Functional and visual QA
 
