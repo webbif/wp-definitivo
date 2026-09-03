@@ -150,6 +150,56 @@ test.describe( 'public theme', () => {
 		await expect( page.locator( '.primary-navigation' ) ).toBeHidden();
 	} );
 
+	test( 'desktop nested submenus can be dismissed with Escape', async ( {
+		page,
+	} ) => {
+		await page.setViewportSize( { width: 1625, height: 900 } );
+		await page.goto( '/' );
+		const navigation = page.locator( '.primary-navigation' );
+		const levelOneLink = navigation
+			.getByRole( 'link', { exact: true, name: 'Level 1' } )
+			.first();
+		const levelOneItem = levelOneLink.locator( '..' );
+		const levelTwoLink = levelOneItem
+			.getByRole( 'link', { exact: true, name: 'Level 2' } )
+			.first();
+		const levelTwoItem = levelTwoLink.locator( '..' );
+		const levelOneSubmenu = levelOneItem.locator( ':scope > .sub-menu' );
+		const levelTwoSubmenu = levelTwoItem.locator( ':scope > .sub-menu' );
+
+		await levelOneLink.focus();
+		await expect( levelOneSubmenu ).toBeVisible();
+		await levelTwoLink.focus();
+		await expect( levelTwoSubmenu ).toBeVisible();
+		await page.keyboard.press( 'Escape' );
+		await expect( levelTwoSubmenu ).toBeHidden();
+		await expect( levelOneSubmenu ).toBeVisible();
+		await expect( levelTwoLink ).toBeFocused();
+		await page.keyboard.press( 'Escape' );
+		await expect( levelOneSubmenu ).toBeHidden();
+		await expect( levelOneLink ).toBeFocused();
+	} );
+
+	test( 'header search remains accessible without JavaScript', async ( {
+		browser,
+	}, testInfo ) => {
+		const context = await browser.newContext( {
+			javaScriptEnabled: false,
+		} );
+		const page = await context.newPage();
+		const baseURL = testInfo.project.use.baseURL;
+
+		await page.goto( new URL( '/', baseURL ).toString() );
+		const searchPanel = page.locator( '#header-search' );
+		await expect( searchPanel ).toBeVisible();
+		await expect( searchPanel ).not.toHaveAttribute(
+			'aria-hidden',
+			'true'
+		);
+		await expect( searchPanel.getByRole( 'searchbox' ) ).toBeVisible();
+		await context.close();
+	} );
+
 	test( 'header search moves focus and closes with Escape', async ( {
 		page,
 	} ) => {

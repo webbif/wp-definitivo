@@ -55,6 +55,7 @@
 
 		const compactNavigation = window.matchMedia( '(max-width: 1280px)' );
 		const submenuLabels = window.wpdefNavigationL10n || {};
+		const submenuItems = [];
 
 		function formatSubmenuLabel( template, itemLabel ) {
 			return template.replace( '%s', itemLabel );
@@ -91,8 +92,21 @@
 			navigation
 				.querySelectorAll( '.wpdef-submenu-toggle' )
 				.forEach( function ( toggle ) {
-					setSubmenuState( toggle.parentElement, toggle, false );
+					const item = toggle.parentElement;
+					setSubmenuState( item, toggle, false );
+					item.classList.remove( 'is-submenu-dismissed' );
 				} );
+		}
+
+		function restoreDismissedSubmenuWhenInactive( item ) {
+			window.requestAnimationFrame( function () {
+				if (
+					! item.matches( ':hover' ) &&
+					! item.contains( item.ownerDocument.activeElement )
+				) {
+					item.classList.remove( 'is-submenu-dismissed' );
+				}
+			} );
 		}
 
 		navigation.querySelectorAll( 'li' ).forEach( function ( item, index ) {
@@ -131,6 +145,14 @@
 			);
 			setSubmenuState( item, toggle, false );
 			link.insertAdjacentElement( 'afterend', toggle );
+			submenuItems.push( { item, link, submenu } );
+
+			item.addEventListener( 'mouseleave', function () {
+				restoreDismissedSubmenuWhenInactive( item );
+			} );
+			item.addEventListener( 'focusout', function () {
+				restoreDismissedSubmenuWhenInactive( item );
+			} );
 
 			toggle.addEventListener( 'click', function () {
 				if ( ! compactNavigation.matches ) {
@@ -148,6 +170,41 @@
 			} );
 		} );
 
+		document.addEventListener( 'keydown', function ( event ) {
+			if ( 'Escape' !== event.key || compactNavigation.matches ) {
+				return;
+			}
+
+			const activeElement = navigation.ownerDocument.activeElement;
+			const openSubmenu = submenuItems
+				.filter( function ( entry ) {
+					return (
+						! entry.item.classList.contains(
+							'is-submenu-dismissed'
+						) &&
+						'none' !==
+							window.getComputedStyle( entry.submenu ).display &&
+						( entry.item.matches( ':hover' ) ||
+							entry.item.contains( activeElement ) )
+					);
+				} )
+				.pop();
+
+			if ( ! openSubmenu ) {
+				return;
+			}
+
+			event.preventDefault();
+			openSubmenu.item.classList.add( 'is-submenu-dismissed' );
+
+			if (
+				openSubmenu.item.contains( activeElement ) &&
+				activeElement !== openSubmenu.link
+			) {
+				openSubmenu.link.focus();
+			}
+		} );
+
 		compactNavigation.addEventListener( 'change', closeAllSubmenus );
 	}
 
@@ -159,6 +216,8 @@
 		if ( ! openButton || ! panel || ! closeButton ) {
 			return;
 		}
+
+		panel.setAttribute( 'aria-hidden', 'true' );
 
 		function closeSearch() {
 			openButton.setAttribute( 'aria-expanded', 'false' );

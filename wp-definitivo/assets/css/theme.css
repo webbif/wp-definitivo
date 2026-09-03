@@ -599,6 +599,14 @@ input[type="submit"]:hover {
 	display: block;
 }
 
+@media (min-width: 1280.02px) {
+
+	.wpdef-js .primary-navigation li.is-submenu-dismissed > .sub-menu,
+	.wpdef-js .primary-navigation li.is-submenu-dismissed > :where(.children) {
+		display: none;
+	}
+}
+
 .wpdef-submenu-toggle {
 	display: none;
 }
@@ -695,7 +703,7 @@ input[type="submit"]:hover {
 	box-shadow: 0 0.75rem 2rem rgb(15 48 87 / 0.04);
 }
 
-.wpdef-js .header-search[aria-hidden="true"] {
+.wpdef-js .header-search:not(.is-open) {
 	display: none;
 }
 

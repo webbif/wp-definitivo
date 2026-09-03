@@ -71,7 +71,7 @@
 			</div>
 
 			<?php if ( get_theme_mod( 'wpdef_header_search', true ) ) : ?>
-				<div id="header-search" class="header-search" aria-hidden="true">
+				<div id="header-search" class="header-search">
 					<div class="wpdef-shell header-search__inner">
 						<?php get_search_form(); ?>
 						<button class="search-close" type="button">
