@@ -19,20 +19,31 @@
 			return;
 		}
 
+		function closeNavigation() {
+			setExpanded( button, navigation, false );
+			navigation.dispatchEvent( new Event( 'wpdef-navigation-closed' ) );
+		}
+
 		button.addEventListener( 'click', function () {
-			setExpanded(
-				button,
-				navigation,
-				button.getAttribute( 'aria-expanded' ) !== 'true'
-			);
+			const expanded = button.getAttribute( 'aria-expanded' ) !== 'true';
+
+			setExpanded( button, navigation, expanded );
+
+			if ( ! expanded ) {
+				navigation.dispatchEvent(
+					new Event( 'wpdef-navigation-closed' )
+				);
+			}
 		} );
 
 		document.addEventListener( 'keydown', function ( event ) {
 			if (
 				'Escape' === event.key &&
+				! event.defaultPrevented &&
 				'true' === button.getAttribute( 'aria-expanded' )
 			) {
-				setExpanded( button, navigation, false );
+				event.preventDefault();
+				closeNavigation();
 				button.focus();
 			}
 		} );
@@ -48,13 +59,30 @@
 		const compactNavigation = window.matchMedia( '(max-width: 1280px)' );
 		const submenuLabels = window.wpdefNavigationL10n || {};
 		const submenuItems = [];
+		const expandedSubmenuHistory = [];
 
 		function formatSubmenuLabel( template, itemLabel ) {
 			return template.replace( '%s', itemLabel );
 		}
 
-		function setSubmenuState( item, toggle, expanded ) {
+		function applySubmenuState( item, toggle, expanded ) {
+			const previousHistoryIndex =
+				expandedSubmenuHistory.indexOf( toggle );
+
+			if ( -1 !== previousHistoryIndex ) {
+				expandedSubmenuHistory.splice( previousHistoryIndex, 1 );
+			}
+
+			if ( expanded ) {
+				expandedSubmenuHistory.push( toggle );
+			}
+
 			item.classList.toggle( 'is-submenu-open', expanded );
+
+			if ( ! expanded ) {
+				item.classList.remove( 'is-submenu-dismissed' );
+			}
+
 			toggle.setAttribute( 'aria-expanded', expanded ? 'true' : 'false' );
 			toggle.setAttribute(
 				'aria-label',
@@ -62,13 +90,30 @@
 			);
 		}
 
+		function setSubmenuState( item, toggle, expanded ) {
+			applySubmenuState( item, toggle, expanded );
+
+			if ( expanded ) {
+				return;
+			}
+
+			item.querySelectorAll(
+				':scope > :is(.sub-menu, .children) .wpdef-submenu-toggle'
+			).forEach( function ( descendantToggle ) {
+				applySubmenuState(
+					descendantToggle.parentElement,
+					descendantToggle,
+					false
+				);
+			} );
+		}
+
 		function closeAllSubmenus() {
 			navigation
 				.querySelectorAll( '.wpdef-submenu-toggle' )
 				.forEach( function ( toggle ) {
 					const item = toggle.parentElement;
-					setSubmenuState( item, toggle, false );
-					item.classList.remove( 'is-submenu-dismissed' );
+					applySubmenuState( item, toggle, false );
 				} );
 		}
 
@@ -119,7 +164,7 @@
 			);
 			setSubmenuState( item, toggle, false );
 			link.insertAdjacentElement( 'afterend', toggle );
-			submenuItems.push( { item, link, submenu } );
+			submenuItems.push( { item, link, submenu, toggle } );
 
 			item.addEventListener( 'mouseleave', function () {
 				restoreDismissedSubmenuWhenInactive( item );
@@ -141,11 +186,46 @@
 		} );
 
 		document.addEventListener( 'keydown', function ( event ) {
-			if ( 'Escape' !== event.key || compactNavigation.matches ) {
+			if ( 'Escape' !== event.key ) {
 				return;
 			}
 
 			const activeElement = navigation.ownerDocument.activeElement;
+
+			if ( compactNavigation.matches ) {
+				const focusedOpenSubmenu = submenuItems
+					.filter( function ( entry ) {
+						return (
+							'true' ===
+								entry.toggle.getAttribute( 'aria-expanded' ) &&
+							entry.item.contains( activeElement )
+						);
+					} )
+					.pop();
+				const fallbackToggle = expandedSubmenuHistory
+					.slice()
+					.reverse()
+					.find( function ( toggle ) {
+						return (
+							'true' === toggle.getAttribute( 'aria-expanded' )
+						);
+					} );
+				const openSubmenu =
+					focusedOpenSubmenu ||
+					submenuItems.find( function ( entry ) {
+						return entry.toggle === fallbackToggle;
+					} );
+
+				if ( ! openSubmenu ) {
+					return;
+				}
+
+				event.preventDefault();
+				setSubmenuState( openSubmenu.item, openSubmenu.toggle, false );
+				openSubmenu.toggle.focus();
+				return;
+			}
+
 			const openSubmenu = submenuItems
 				.filter( function ( entry ) {
 					return (
@@ -175,6 +255,10 @@
 			}
 		} );
 
+		navigation.addEventListener(
+			'wpdef-navigation-closed',
+			closeAllSubmenus
+		);
 		compactNavigation.addEventListener( 'change', closeAllSubmenus );
 	}
 
@@ -257,8 +341,8 @@
 		updateVisibility();
 	}
 
-	initializeNavigation();
 	initializeSubmenus();
+	initializeNavigation();
 	initializeSearch();
 	initializeBackToTop();
 } )();

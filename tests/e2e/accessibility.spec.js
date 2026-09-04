@@ -1172,6 +1172,117 @@ test.describe( 'public theme', () => {
 		await expect( thirdToggle ).toHaveAttribute( 'aria-expanded', 'true' );
 	} );
 
+	test( 'compact navigation dismisses nested submenus before the main menu', async ( {
+		page,
+	} ) => {
+		await page.setViewportSize( { width: 390, height: 844 } );
+		await page.setContent( `
+			<button class="menu-toggle" type="button" aria-expanded="false">
+				Menu
+			</button>
+			<nav class="primary-navigation">
+				<ul class="primary-menu">
+					<li>
+						<a href="#level-1">Level 1</a>
+						<ul class="sub-menu">
+							<li>
+								<a href="#level-2">Level 2</a>
+								<ul class="sub-menu">
+									<li><a href="#level-3">Level 3</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		` );
+		await page.addScriptTag( {
+			path: 'wp-definitivo/assets/js/navigation.js',
+		} );
+
+		const menu = page.getByRole( 'button', {
+			exact: true,
+			name: 'Menu',
+		} );
+		await menu.click();
+
+		const navigation = page.locator( '.primary-navigation' );
+		const levelOneLink = navigation
+			.getByRole( 'link', { exact: true, name: 'Level 1' } )
+			.first();
+		const levelOneItem = levelOneLink.locator( '..' );
+		const levelOneToggle = levelOneItem.locator(
+			':scope > .wpdef-submenu-toggle'
+		);
+		const levelTwoLink = levelOneItem.getByRole( 'link', {
+			exact: true,
+			name: 'Level 2',
+		} );
+		const levelTwoItem = levelTwoLink.locator( '..' );
+		const levelTwoToggle = levelTwoItem.locator(
+			':scope > .wpdef-submenu-toggle'
+		);
+
+		await levelOneToggle.click();
+		await levelTwoToggle.click();
+		await expect( levelOneToggle ).toHaveAttribute(
+			'aria-expanded',
+			'true'
+		);
+		await expect( levelTwoToggle ).toHaveAttribute(
+			'aria-expanded',
+			'true'
+		);
+
+		await page.keyboard.press( 'Escape' );
+		await expect( levelTwoToggle ).toHaveAttribute(
+			'aria-expanded',
+			'false'
+		);
+		await expect( levelTwoToggle ).toBeFocused();
+		await expect( levelOneToggle ).toHaveAttribute(
+			'aria-expanded',
+			'true'
+		);
+		await expect( menu ).toHaveAttribute( 'aria-expanded', 'true' );
+
+		await page.keyboard.press( 'Escape' );
+		await expect( levelOneToggle ).toHaveAttribute(
+			'aria-expanded',
+			'false'
+		);
+		await expect( levelOneToggle ).toBeFocused();
+		await expect( menu ).toHaveAttribute( 'aria-expanded', 'true' );
+
+		await page.keyboard.press( 'Escape' );
+		await expect( menu ).toHaveAttribute( 'aria-expanded', 'false' );
+		await expect( menu ).toBeFocused();
+
+		await menu.click();
+		await expect( levelOneToggle ).toHaveAttribute(
+			'aria-expanded',
+			'false'
+		);
+		await expect( levelTwoToggle ).toHaveAttribute(
+			'aria-expanded',
+			'false'
+		);
+
+		await levelOneToggle.click();
+		await levelTwoToggle.click();
+		await menu.click();
+		await expect( menu ).toHaveAttribute( 'aria-expanded', 'false' );
+		await menu.click();
+		await expect( levelOneToggle ).toHaveAttribute(
+			'aria-expanded',
+			'false'
+		);
+		await expect( levelTwoToggle ).toHaveAttribute(
+			'aria-expanded',
+			'false'
+		);
+	} );
+
 	test( 'desktop navigation labels stay intact and compact mode starts before crowding', async ( {
 		page,
 	} ) => {
@@ -1348,6 +1459,38 @@ test.describe( 'public theme', () => {
 					.every( ( value ) => Number.parseFloat( value ) <= 0.001 )
 			).toBe( true );
 		}
+	} );
+
+	test( 'back-to-top stays compact in RTL desktop and hidden at tablet widths', async ( {
+		page,
+	} ) => {
+		await page.setViewportSize( { width: 1159, height: 800 } );
+		await page.setContent( `
+			<html dir="rtl">
+				<head>
+					<meta name="viewport" content="width=device-width, initial-scale=1">
+				</head>
+				<body>
+					<button class="wpdef-button wpdef-back-to-top is-visible">
+						<span>Back to top</span>
+					</button>
+				</body>
+			</html>
+		` );
+		await page.addStyleTag( {
+			path: 'wp-definitivo/assets/css/theme.css',
+		} );
+
+		const button = page.locator( '.wpdef-back-to-top' );
+		await expect( button ).toBeVisible();
+		const desktopBox = await button.boundingBox();
+		expect( desktopBox ).not.toBeNull();
+		expect( desktopBox.width ).toBeLessThan( 300 );
+		expect( desktopBox.x ).toBeGreaterThanOrEqual( 15 );
+		expect( desktopBox.x ).toBeLessThanOrEqual( 33 );
+
+		await page.setViewportSize( { width: 960, height: 800 } );
+		await expect( button ).toBeHidden();
 	} );
 
 	test( 'header search moves focus and closes with Escape', async ( {

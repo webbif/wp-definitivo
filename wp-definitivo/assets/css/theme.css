@@ -318,8 +318,7 @@ input[type="submit"] {
 .wpdef-button.wpdef-back-to-top {
 	position: fixed;
 	z-index: 30;
-	right: clamp(1rem, 3vw, 2rem);
-	left: auto;
+	inset-inline-start: auto;
 	inset-inline-end: clamp(1rem, 3vw, 2rem);
 	bottom: clamp(1rem, 3vw, 2rem);
 	width: auto;

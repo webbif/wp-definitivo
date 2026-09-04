@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.72 — 2026-09-04
+
+- Made Escape dismiss the active compact submenu before closing the main navigation, while restoring focus and clearing submenu state when the navigation closes.
+- Kept the back-to-top button compact in right-to-left desktop layouts by using logical inline positioning.
+
 ## 1.0.71 — 2026-09-04
 
 - Prevented WordPress from printing a second unversioned copy of the parent theme's RTL stylesheet while preserving child-theme RTL stylesheets.
