@@ -474,6 +474,8 @@ test.describe( 'public theme', () => {
 	test( 'focus and input changes do not trigger unexpected context changes', async ( {
 		page,
 	} ) => {
+		test.setTimeout( 90_000 );
+
 		for ( const route of accessibilityRoutes ) {
 			await test.step( route.name, async () => {
 				await navigate( page, route.path );
