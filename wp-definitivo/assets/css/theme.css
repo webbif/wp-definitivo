@@ -3788,12 +3788,20 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 	}
 
 	:where(.entry-content, .comment-content) table {
-		table-layout: fixed;
+		display: block;
+		width: 100%;
+		max-width: 100%;
+		overflow-x: auto;
+		overscroll-behavior-inline: contain;
+		table-layout: auto;
+		-webkit-overflow-scrolling: touch;
 	}
 
 	:where(.entry-content, .comment-content) :where(th, td) {
+		min-width: 10rem;
 		padding: 0.5rem;
-		overflow-wrap: anywhere;
+		overflow-wrap: normal;
+		word-break: normal;
 	}
 
 	.comment-body,

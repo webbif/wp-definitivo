@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.68 — 2026-09-04
+
+- Replaced compressed fixed-layout content tables with readable, keyboard-focusable local horizontal scrolling at compact widths.
+
 ## 1.0.67 — 2026-09-04
 
 - Added directional indicators to desktop menu items that contain submenus, including mirrored nested indicators in RTL layouts.

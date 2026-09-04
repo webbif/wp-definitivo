@@ -1444,7 +1444,7 @@ test.describe( 'public theme', () => {
 		);
 	} );
 
-	test( 'classic content tables reflow inside comments at 320 CSS pixels', async ( {
+	test( 'classic content tables use a keyboard-accessible local scroller at 320 CSS pixels', async ( {
 		page,
 	} ) => {
 		await page.setViewportSize( { width: 320, height: 800 } );
@@ -1457,28 +1457,60 @@ test.describe( 'public theme', () => {
 			const container = element.closest( '.comment-content' );
 			const tableBox = element.getBoundingClientRect();
 			const containerBox = container.getBoundingClientRect();
-			const overflowingCells = Array.from(
-				element.querySelectorAll( 'th, td' )
-			)
-				.filter( ( cell ) => cell.scrollWidth > cell.clientWidth + 1 )
-				.map( ( cell ) => cell.textContent.trim() );
+			const tableStyle = window.getComputedStyle( element );
+			const cells = Array.from( element.querySelectorAll( 'th, td' ) );
 
 			return {
+				documentClientWidth: document.documentElement.clientWidth,
+				documentScrollWidth: document.documentElement.scrollWidth,
 				containerLeft: containerBox.left,
 				containerRight: containerBox.right,
 				tableLeft: tableBox.left,
 				tableRight: tableBox.right,
-				overflowingCells,
+				tableClientWidth: element.clientWidth,
+				tableScrollWidth: element.scrollWidth,
+				overflowX: tableStyle.overflowX,
+				tableLayout: tableStyle.tableLayout,
+				tabIndex: element.tabIndex,
+				cellWrapping: cells.map( ( cell ) => {
+					const style = window.getComputedStyle( cell );
+					return {
+						overflowWrap: style.overflowWrap,
+						wordBreak: style.wordBreak,
+					};
+				} ),
 			};
 		} );
 
+		expect( layout.documentScrollWidth ).toBeLessThanOrEqual(
+			layout.documentClientWidth
+		);
 		expect( layout.tableLeft ).toBeGreaterThanOrEqual(
 			layout.containerLeft - 1
 		);
 		expect( layout.tableRight ).toBeLessThanOrEqual(
 			layout.containerRight + 1
 		);
-		expect( layout.overflowingCells ).toEqual( [] );
+		expect( layout.tableScrollWidth ).toBeGreaterThan(
+			layout.tableClientWidth
+		);
+		expect( layout.overflowX ).toBe( 'auto' );
+		expect( layout.tableLayout ).toBe( 'auto' );
+		expect( layout.tabIndex ).toBe( 0 );
+		for ( const wrapping of layout.cellWrapping ) {
+			expect( wrapping.overflowWrap ).toBe( 'normal' );
+			expect( wrapping.wordBreak ).toBe( 'normal' );
+		}
+
+		await table.focus();
+		await expect( table ).toBeFocused();
+		await table.evaluate( ( element ) => {
+			element.scrollLeft = 0;
+		} );
+		await page.keyboard.press( 'ArrowRight' );
+		await expect
+			.poll( () => table.evaluate( ( element ) => element.scrollLeft ) )
+			.toBeGreaterThan( 0 );
 	} );
 
 	test( 'deeply nested comment headers reflow at 320 CSS pixels', async ( {

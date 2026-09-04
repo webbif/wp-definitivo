@@ -6,6 +6,34 @@
  */
 
 /**
+ * Make content tables keyboard focusable when they become local scroll regions.
+ *
+ * The compact layout keeps wide tables inside their content column with horizontal
+ * scrolling. A focusable table lets keyboard users reach and scroll that region
+ * without changing the table's native semantics.
+ *
+ * @param string $html Post or comment HTML.
+ * @return string
+ */
+function wpdef_make_content_tables_focusable( $html ) {
+	if ( false === stripos( $html, '<table' ) || ! class_exists( 'WP_HTML_Tag_Processor' ) ) {
+		return $html;
+	}
+
+	$processor = new WP_HTML_Tag_Processor( $html );
+
+	while ( $processor->next_tag( 'table' ) ) {
+		if ( null === $processor->get_attribute( 'tabindex' ) ) {
+			$processor->set_attribute( 'tabindex', '0' );
+		}
+	}
+
+	return $processor->get_updated_html();
+}
+add_filter( 'the_content', 'wpdef_make_content_tables_focusable', 20 );
+add_filter( 'comment_text', 'wpdef_make_content_tables_focusable', 20 );
+
+/**
  * Return an explicit excerpt only when it is visible to the current visitor.
  *
  * This intentionally does not generate an automatic excerpt. It preserves the

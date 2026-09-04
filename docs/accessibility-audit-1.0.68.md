@@ -1,4 +1,4 @@
-# WP Definitivo 1.0.67 accessibility audit
+# WP Definitivo 1.0.68 accessibility audit
 
 Started: 2026-09-03  
 Primary test site: https://mytemplateswoo.com/  
@@ -10,13 +10,13 @@ This file tracks internal execution and evidence. The official Google Sheet rema
 ## 1. Test candidate and environment
 
 - [x] The audit started from clean, synchronized release `fe3c59d` / `v1.0.61`.
-- [x] Accessibility remediation is prepared as version `1.0.67` in the working tree.
+- [x] Accessibility remediation is prepared as version `1.0.68` in the working tree.
 - [x] Create the version 1.0.64 audit-candidate commit (`848e477`).
-- [ ] Create the version 1.0.67 candidate commit after the formal audit passes.
+- [ ] Create the version 1.0.68 candidate commit after the formal audit passes.
 - [ ] Create the final tag after the formal audit is complete.
-- [x] `style.css`, `readme.txt`, and `package.json` report version `1.0.67`.
+- [x] `style.css`, `readme.txt`, and `package.json` report version `1.0.68`.
 - [x] MyTemplatesWoo runs WordPress 7.1.
-- [ ] Synchronize WP Definitivo 1.0.67 to MyTemplatesWoo and verify the final hashes after local audit changes are complete.
+- [ ] Synchronize WP Definitivo 1.0.68 to MyTemplatesWoo and verify the final hashes after local audit changes are complete.
 - [x] No regular plugins are active; only Hostinger must-use infrastructure plugins are present.
 - [x] Verify the deployed theme file hashes against the current audit candidate immediately before formal testing.
 - [x] Create the official Google Sheet report and add its URL above.
@@ -105,8 +105,8 @@ Record page-by-page statuses and detailed evidence in the official report.
 - [ ] The official Summary tab accurately reflects the Full Review evidence.
 - [ ] The generated Markdown for Trac is reviewed and ready to paste into the submission ticket.
 - [ ] `accessibility.txt` is updated with the final, truthful audit status and methodology.
-- [x] Build and validate the current 1.0.67 local candidate after the desktop submenu-indicator correction.
-- [ ] Record the final 1.0.67 ZIP contents and hashes.
+- [ ] Build and validate the current 1.0.68 local candidate after the compact-table correction.
+- [ ] Record the final 1.0.68 ZIP contents and hashes.
 
 ## Execution log
 
@@ -168,7 +168,7 @@ Record page-by-page statuses and detailed evidence in the official report.
 | 2026-09-04 | Version 1.0.67 release checks and deployment integrity | Pass | Build, generated translations, JavaScript/CSS/JSON lint, PHPCS 38/38, PHPUnit 36 tests with 80 assertions, package validation, 68-file inventory, 1200 x 900 screenshot, and asset budgets passed. MyTemplatesWoo runs 1.0.67; its 68 theme files exactly match the canonical source with zero missing, extra, or SHA-256-mismatched files. |
 | 2026-09-04 | Manual zoom: Post with Comments at 200% | Pass | In Chrome, the Post with Comments route reflowed correctly at real 200% browser zoom with no reported clipping, overlap, horizontal scrolling, or unusable controls. |
 | 2026-09-04 | Manual zoom: Post with Comments at 400% | Remediated and deployed; manual retest pending | The page content reflowed, but the opened header search kept its field, submit button, and close control in one horizontal row, clipping the controls beyond the compact viewport. Version 1.0.67 stacks the form controls and places the close button on its own line at widths up to 700 CSS pixels. The focused 320px regression passed across all five browser profiles. |
-| 2026-09-04 | Manual zoom: comment table at 400% | Remediated and deployed; manual retest pending | The unwrapped classic HTML table in a Theme Unit Test comment exceeded its content column and the site's clipping boundary hid the third column. Version 1.0.67 applies fixed table layout and safe cell wrapping to entry and comment tables at widths up to 700 CSS pixels, preserving native table semantics. The focused 320px regression confirms that the table remains inside the comment and no cell overflows in all five browser profiles. |
+| 2026-09-04 | Manual zoom: comment table at 400% | Failed after 1.0.67; 1.0.68 remediation prepared | Version 1.0.67 kept the table inside the page but fixed equal-width columns and arbitrary character wrapping made its content unreadable at 400% zoom. Version 1.0.68 restores automatic column sizing and whole-word wrapping, contains horizontal scrolling within the table, and makes the table keyboard focusable without replacing its native semantics. Automated and manual retesting remain pending. |
 | 2026-09-04 | Manual zoom: nested comment metadata at 400% | Remediated and deployed; manual retest pending | Comment author rows did not wrap and cumulative nesting indents left deep comments too narrow, causing “disse:” and long author names to touch or cross the card boundary. Version 1.0.67 arranges avatar, author, and “disse:” in a compact grid, safely wraps names, and removes cumulative nested-list indentation at widths up to 700 CSS pixels. The focused regression covers the content labelled Comment Depth 10 and passed across all five browser profiles. |
 | 2026-09-04 | Version 1.0.67 focused post-deployment matrix | Pass | Compact accordion stability, desktop nested submenu position/Escape/indicator behavior, opened header-search reflow, classic comment-table reflow, and deeply nested comment headers passed 25/25 across Chromium, Firefox, WebKit, Mobile Chrome, and Mobile Safari. Test selectors were corrected to inspect hidden submenu markup only after display and to identify the deepest fixture by its content because WordPress caps the structural depth class at five. |
 | 2026-09-04 | Version 1.0.67 complete post-deployment browser matrix | Pass | The public accessibility suite completed with 196 passes and 8 intentional project-specific skips across Chromium, Firefox, WebKit, Mobile Chrome, and Mobile Safari. One Chromium control-semantics run timed out while loading `/blog/`; the same isolated test passed immediately in 1.9 seconds, confirming transient remote latency rather than a theme defect. |

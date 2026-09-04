@@ -6,7 +6,7 @@
  */
 
 if ( ! defined( 'WPDEF_VERSION' ) ) {
-	define( 'WPDEF_VERSION', '1.0.67' );
+	define( 'WPDEF_VERSION', '1.0.68' );
 }
 
 require get_template_directory() . '/inc/setup.php';
