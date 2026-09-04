@@ -213,9 +213,11 @@ const plurals = {
 const potPath = 'wp-definitivo/languages/wp-definitivo.pot';
 const poPath = 'wp-definitivo/languages/pt_BR.po';
 const moPath = 'wp-definitivo/languages/pt_BR.mo';
+const packageMetadata = JSON.parse( await readFile( 'package.json', 'utf8' ) );
 const catalog = gettextParser.po.parse( await readFile( potPath ) );
 const missingTranslations = [];
 
+catalog.headers['project-id-version'] = `WP Definitivo ${ packageMetadata.version }`;
 catalog.headers.language = 'pt_BR';
 catalog.headers['plural-forms'] = 'nplurals=2; plural=(n > 1);';
 catalog.headers['language-team'] = 'Portuguese (Brazil)';

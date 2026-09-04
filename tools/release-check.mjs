@@ -29,9 +29,29 @@ for ( const file of requiredFiles ) {
 
 const style = await readFile( `${ themeRoot }/style.css`, 'utf8' );
 const themeCss = await readFile( `${ themeRoot }/assets/css/theme.css`, 'utf8' );
+const functionsPhp = await readFile( `${ themeRoot }/functions.php`, 'utf8' );
+const readme = await readFile( `${ themeRoot }/readme.txt`, 'utf8' );
+const pot = await readFile( `${ themeRoot }/languages/wp-definitivo.pot`, 'utf8' );
+const po = await readFile( `${ themeRoot }/languages/pt_BR.po`, 'utf8' );
+const packageMetadata = JSON.parse( await readFile( 'package.json', 'utf8' ) );
 for ( const header of [ 'Theme Name: WP Definitivo', 'Text Domain: wp-definitivo', 'Domain Path: /languages', 'Requires PHP: 7.4' ] ) {
 	if ( ! style.includes( header ) ) {
 		throw new Error( `Missing style.css header: ${ header }` );
+	}
+}
+
+const version = packageMetadata.version;
+const versionChecks = [
+	[ style, `Version: ${ version }`, 'style.css' ],
+	[ functionsPhp, `WPDEF_VERSION', '${ version }'`, 'functions.php' ],
+	[ readme, `Stable tag: ${ version }`, 'readme.txt' ],
+	[ pot, `Project-Id-Version: WP Definitivo ${ version }`, 'POT catalog' ],
+	[ po, `Project-Id-Version: WP Definitivo ${ version }`, 'pt_BR PO catalog' ],
+];
+
+for ( const [ contents, expected, label ] of versionChecks ) {
+	if ( ! contents.includes( expected ) ) {
+		throw new Error( `${ label } does not match package version ${ version }.` );
 	}
 }
 

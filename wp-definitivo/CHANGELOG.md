@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.0.67 — 2026-09-04
+
+- Added directional indicators to desktop menu items that contain submenus, including mirrored nested indicators in RTL layouts.
+- Stacked header-search controls at compact widths so the opened panel reflows without horizontal clipping at 400% zoom.
+- Kept classic content tables within compact viewports by using fixed columns and safe cell wrapping.
+- Reflowed comment author details and removed cumulative nesting indents at compact widths so deeply nested comments remain readable.
+
+## 1.0.66 — 2026-09-04
+
+- Kept compact-menu groups independently expanded so opening a later submenu does not cause a disorienting layout jump at high zoom.
+
+## 1.0.65 — 2026-09-03
+
+- Kept desktop dropdowns and nested submenus inside the viewport, including in RTL layouts.
+- Kept the comment form heading at the correct level when no earlier comments heading is present.
+- Matched the compact navigation button's accessible name to its visible “Menu” label while preserving the expanded state.
+
 ## 1.0.64 — 2026-09-03
 
 - Kept text links in sidebar widgets permanently underlined with a non-color hover change.

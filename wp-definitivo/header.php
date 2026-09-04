@@ -36,8 +36,7 @@
 				</div>
 
 				<button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-					<span class="screen-reader-text" data-open-label="<?php echo esc_attr__( 'Open menu', 'wp-definitivo' ); ?>" data-close-label="<?php echo esc_attr__( 'Close menu', 'wp-definitivo' ); ?>"><?php esc_html_e( 'Open menu', 'wp-definitivo' ); ?></span>
-					<span class="menu-toggle__label" aria-hidden="true"><?php esc_html_e( 'Menu', 'wp-definitivo' ); ?></span>
+					<span class="menu-toggle__label"><?php esc_html_e( 'Menu', 'wp-definitivo' ); ?></span>
 				</button>
 
 				<nav id="site-navigation" class="primary-navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'wp-definitivo' ); ?>">

@@ -3,7 +3,7 @@ Contributors: leandrobiffi
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.64
+Stable tag: 1.0.67
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,23 @@ When comments or WooCommerce are enabled, WordPress and those plugins may proces
 WP Definitivo does not include forms, SEO tools, analytics, custom post types, shortcodes, custom blocks, social sharing, favicons, or demo content. These features belong in plugins or WordPress core.
 
 == Changelog ==
+
+= 1.0.67 - 2026-09-04 =
+
+* Added directional indicators to desktop menu items that contain submenus, including mirrored nested indicators in RTL layouts.
+* Stacked header-search controls at compact widths so the opened panel reflows without horizontal clipping at 400% zoom.
+* Kept classic content tables within compact viewports by using fixed columns and safe cell wrapping.
+* Reflowed comment author details and removed cumulative nesting indents at compact widths so deeply nested comments remain readable.
+
+= 1.0.66 - 2026-09-04 =
+
+* Kept compact-menu groups independently expanded so opening a later submenu does not cause a disorienting layout jump at high zoom.
+
+= 1.0.65 - 2026-09-03 =
+
+* Kept desktop dropdowns and nested submenus inside the viewport, including in RTL layouts.
+* Kept the comment form heading at the correct level when no earlier comments heading is present.
+* Matched the compact navigation button's accessible name to its visible "Menu" label while preserving the expanded state.
 
 = 1.0.64 - 2026-09-03 =
 

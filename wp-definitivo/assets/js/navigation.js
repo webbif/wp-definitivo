@@ -7,16 +7,8 @@
 	document.documentElement.classList.add( 'wpdef-js' );
 
 	function setExpanded( button, target, expanded ) {
-		const label = button.querySelector( '.screen-reader-text' );
-
 		button.setAttribute( 'aria-expanded', expanded ? 'true' : 'false' );
 		target.classList.toggle( 'is-open', expanded );
-
-		if ( label ) {
-			label.textContent = expanded
-				? label.dataset.closeLabel
-				: label.dataset.openLabel;
-		}
 	}
 
 	function initializeNavigation() {
@@ -67,24 +59,6 @@
 			toggle.setAttribute(
 				'aria-label',
 				expanded ? toggle.dataset.closeLabel : toggle.dataset.openLabel
-			);
-		}
-
-		function closeSiblingSubmenus( item ) {
-			Array.from( item.parentElement.children ).forEach(
-				function ( sibling ) {
-					if ( sibling === item ) {
-						return;
-					}
-
-					const toggle = sibling.querySelector(
-						':scope > .wpdef-submenu-toggle'
-					);
-
-					if ( toggle ) {
-						setSubmenuState( sibling, toggle, false );
-					}
-				}
 			);
 		}
 
@@ -161,10 +135,6 @@
 
 				const expanded =
 					'true' !== toggle.getAttribute( 'aria-expanded' );
-
-				if ( expanded ) {
-					closeSiblingSubmenus( item );
-				}
 
 				setSubmenuState( item, toggle, expanded );
 			} );
