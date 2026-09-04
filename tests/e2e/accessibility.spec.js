@@ -1210,13 +1210,19 @@ test.describe( 'public theme', () => {
 			.first();
 		const levelOneItem = levelOneLink.locator( '..' );
 		const levelTwoLink = levelOneItem
-			.getByRole( 'link', { exact: true, name: 'Level 2' } )
+			.locator( ':scope > :is(.sub-menu, .children) > li > a' )
+			.filter( { hasText: /^Level 2$/ } )
 			.first();
 		const levelTwoItem = levelTwoLink.locator( '..' );
-		const levelOneSubmenu = levelOneItem.locator( ':scope > .sub-menu' );
-		const levelTwoSubmenu = levelTwoItem.locator( ':scope > .sub-menu' );
+		const levelOneSubmenu = levelOneItem.locator(
+			':scope > :is(.sub-menu, .children)'
+		);
+		const levelTwoSubmenu = levelTwoItem.locator(
+			':scope > :is(.sub-menu, .children)'
+		);
 		const levelThreeLink = levelTwoSubmenu
-			.getByRole( 'link', { exact: true, name: 'Level 3' } )
+			.locator( ':scope > li > a' )
+			.filter( { hasText: /^Level 3$/ } )
 			.first();
 		const indicatorStyles = async ( link ) =>
 			link.evaluate( ( element ) => {
@@ -1230,12 +1236,18 @@ test.describe( 'public theme', () => {
 				};
 			} );
 		const levelOneIndicator = await indicatorStyles( levelOneLink );
-		const levelTwoIndicator = await indicatorStyles( levelTwoLink );
 
 		expect( levelOneIndicator.content ).not.toBe( 'none' );
 		expect( levelOneIndicator.borderBottomWidth ).not.toBe( '0px' );
 		expect( levelOneIndicator.borderRightWidth ).not.toBe( '0px' );
 		expect( levelOneIndicator.transform ).not.toBe( 'none' );
+
+		await page.mouse.move( 0, 0 );
+		await expect( levelOneSubmenu ).toBeHidden();
+		await levelOneLink.hover();
+		await expect( levelOneSubmenu ).toBeVisible();
+
+		const levelTwoIndicator = await indicatorStyles( levelTwoLink );
 		expect( levelTwoIndicator.content ).not.toBe( 'none' );
 		expect( levelTwoIndicator.borderBottomWidth ).not.toBe( '0px' );
 		expect( levelTwoIndicator.borderRightWidth ).not.toBe( '0px' );
@@ -1244,10 +1256,6 @@ test.describe( 'public theme', () => {
 			levelOneIndicator.transform
 		);
 
-		await page.mouse.move( 0, 0 );
-		await expect( levelOneSubmenu ).toBeHidden();
-		await levelOneLink.hover();
-		await expect( levelOneSubmenu ).toBeVisible();
 		await levelTwoLink.hover();
 		await expect( levelTwoSubmenu ).toBeVisible();
 		await levelThreeLink.hover();
@@ -1479,7 +1487,9 @@ test.describe( 'public theme', () => {
 		await page.setViewportSize( { width: 320, height: 800 } );
 		await navigate( page, '/template-comments/' );
 
-		const deepestComment = page.locator( '.comment.depth-10' ).first();
+		const deepestComment = page.getByText( 'Comment Depth 10', {
+			exact: true,
+		} );
 		await expect( deepestComment ).toBeVisible();
 
 		const layout = await page.evaluate( () => {
