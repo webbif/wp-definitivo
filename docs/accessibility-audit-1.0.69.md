@@ -13,12 +13,12 @@ This file tracks internal execution and evidence. The official Google Sheet rema
 - [x] Accessibility remediation is prepared as version `1.0.69` in the working tree.
 - [x] Create the version 1.0.64 audit-candidate commit (`848e477`).
 - [x] Create the version 1.0.68 table-remediation commit (`e3b4f4a`).
-- [ ] Create the version 1.0.69 404-layout remediation commit.
+- [x] Create the version 1.0.69 404-layout remediation commit (`4761ab4`).
 - [ ] Create the final tag after the formal audit is complete.
 - [x] `style.css`, `readme.txt`, and `package.json` report version `1.0.69`.
 - [x] MyTemplatesWoo runs WordPress 7.1.
 - [x] Synchronize WP Definitivo 1.0.68 to MyTemplatesWoo and verify all deployed file hashes.
-- [ ] Synchronize WP Definitivo 1.0.69 to MyTemplatesWoo and verify all deployed file hashes.
+- [x] Synchronize WP Definitivo 1.0.69 to MyTemplatesWoo and verify all deployed file hashes.
 - [x] No regular plugins are active; only Hostinger must-use infrastructure plugins are present.
 - [x] Verify the deployed theme file hashes against the current audit candidate immediately before formal testing.
 - [x] Create the official Google Sheet report and add its URL above.
@@ -107,7 +107,7 @@ Record page-by-page statuses and detailed evidence in the official report.
 - [ ] The official Summary tab accurately reflects the Full Review evidence.
 - [ ] The generated Markdown for Trac is reviewed and ready to paste into the submission ticket.
 - [ ] `accessibility.txt` is updated with the final, truthful audit status and methodology.
-- [ ] Build and validate the current 1.0.69 local candidate after the 404-layout correction.
+- [x] Build and validate the current 1.0.69 local candidate after the 404-layout correction.
 - [ ] Record the final 1.0.69 ZIP contents and hashes.
 
 ## Execution log
@@ -181,4 +181,6 @@ Record page-by-page statuses and detailed evidence in the official report.
 | 2026-09-04 | Manual zoom: Page Markup and Formatting at 200% and 400% | Pass | Headings, paragraphs, lists, quotations, images, captions, preformatted content, links, and tables remained readable and operable at both zoom levels. No clipping, overlap, or page-level horizontal scrolling was reported; any wide table movement remained contained to its keyboard-accessible local scroll region. |
 | 2026-09-04 | Manual zoom: Block Patterns at 200% and 400% | Pass | The test page remained readable and operable without clipping, overlap, or page-level horizontal scrolling at both zoom levels. Its title, available content, links, compact navigation, and header search remained visible and usable; no theme-owned block patterns apply. |
 | 2026-09-04 | Manual zoom: Search Results at 200% and 400% | Pass | The search title, results, labels, field, submit control, post information, compact navigation, and header search remained visible and usable at both zoom levels. The form submitted successfully without clipping, overlap, or page-level horizontal scrolling. |
-| 2026-09-04 | Manual zoom: 404 page at 200% and 400% | Failed; 1.0.69 remediation prepared | The search form itself remained usable, but the Return home action touched the form boundary at 200% and 400%; at 400%, the side-by-side search controls also left too little usable width for the field. Version 1.0.69 adds explicit spacing between the form and return action and stacks the search controls at narrow reflow widths. Automated and manual retesting remain pending. |
+| 2026-09-04 | Manual zoom: 404 page at 200% and 400% | Remediated and deployed; manual retest pending | The search form itself remained usable, but the Return home action touched the form boundary at 200% and 400%; at 400%, the side-by-side search controls also left too little usable width for the field. Version 1.0.69 adds explicit spacing between the form and return action and stacks the search controls at narrow reflow widths. Automated testing passed; real browser-zoom retesting remains pending. |
+| 2026-09-04 | Version 1.0.69 404 regression | Pass | The focused 200%/400%-equivalent check confirms at least 8 CSS pixels between the search form and Return home action, stacked search controls at 320 CSS pixels, and no page-level horizontal scrolling. Together with 404 Axe, visible-label, and all-route reflow checks, 20/20 related tests passed across Chromium, Firefox, WebKit, Mobile Chrome, and Mobile Safari. |
+| 2026-09-04 | Version 1.0.69 deployment and integrity | Pass | Build, lint, release packaging, PHPCS 38/38, and PHPUnit 36 tests with 80 assertions passed. MyTemplatesWoo runs active version 1.0.69, and its 68 theme files exactly match the canonical source with zero missing, extra, or SHA-256-mismatched files. Version 1.0.68 is preserved in archive and tree backups under `/home/u976587618/backups/`. |
