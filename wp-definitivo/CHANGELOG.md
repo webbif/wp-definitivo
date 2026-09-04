@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.70 — 2026-09-04
+
+- Kept desktop dropdowns inside the viewport in right-to-left layouts by removing a legacy physical-position override.
+- Made compact submenu indentation follow the document's writing direction.
+
 ## 1.0.69 — 2026-09-04
 
 - Added clear spacing between the 404 search form and return action, and stacked the search controls at narrow reflow widths.

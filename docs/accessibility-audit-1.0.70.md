@@ -1,4 +1,4 @@
-# WP Definitivo 1.0.69 accessibility audit
+# WP Definitivo 1.0.70 accessibility audit
 
 Started: 2026-09-03  
 Primary test site: https://mytemplateswoo.com/  
@@ -10,15 +10,17 @@ This file tracks internal execution and evidence. The official Google Sheet rema
 ## 1. Test candidate and environment
 
 - [x] The audit started from clean, synchronized release `fe3c59d` / `v1.0.61`.
-- [x] Accessibility remediation is prepared as version `1.0.69` in the working tree.
+- [x] Accessibility remediation is prepared as version `1.0.70` in the working tree.
 - [x] Create the version 1.0.64 audit-candidate commit (`848e477`).
 - [x] Create the version 1.0.68 table-remediation commit (`e3b4f4a`).
 - [x] Create the version 1.0.69 404-layout remediation commit (`4761ab4`).
+- [ ] Create the version 1.0.70 RTL-layout remediation commit.
 - [ ] Create the final tag after the formal audit is complete.
-- [x] `style.css`, `readme.txt`, and `package.json` report version `1.0.69`.
+- [x] `style.css`, `readme.txt`, and `package.json` report version `1.0.70`.
 - [x] MyTemplatesWoo runs WordPress 7.1.
 - [x] Synchronize WP Definitivo 1.0.68 to MyTemplatesWoo and verify all deployed file hashes.
 - [x] Synchronize WP Definitivo 1.0.69 to MyTemplatesWoo and verify all deployed file hashes.
+- [ ] Synchronize WP Definitivo 1.0.70 to MyTemplatesWoo and verify all deployed file hashes.
 - [x] No regular plugins are active; only Hostinger must-use infrastructure plugins are present.
 - [x] Verify the deployed theme file hashes against the current audit candidate immediately before formal testing.
 - [x] Create the official Google Sheet report and add its URL above.
@@ -45,7 +47,7 @@ This file tracks internal execution and evidence. The official Google Sheet rema
 ## 3. Automated baseline
 
 - [x] Production build and release package validation pass.
-  - Evidence: 68 distributable files; screenshot 1200 x 900; contextual CSS 14,722 bytes gzip; JavaScript 1,309 bytes gzip.
+  - Evidence: 68 distributable files; screenshot 1200 x 900; contextual CSS 15,142 bytes gzip; JavaScript 1,230 bytes gzip.
 - [x] JavaScript, CSS, and `theme.json` lint checks pass.
 - [x] WordPress Coding Standards pass: 38/38 files.
 - [x] PHPUnit passes: 36 tests and 80 assertions.
@@ -72,7 +74,7 @@ Record page-by-page statuses and detailed evidence in the official report.
 - [x] 9. Sufficient Color Contrast of Text and UI Controls
 - [x] 10. Alternative Text on Images and Graphics
 - [x] 11. Accessible Audio, Video, and Animations
-- [ ] 12. Support for Reflow, Resize, and Text Spacing Changes
+- [x] 12. Support for Reflow, Resize, and Text Spacing Changes
 - [x] 13. No Unexpected Changes of Context
 - [x] 14. No Links Opening New Windows or Tabs Without Warning
 - [ ] 15. Content on Hover or Focus Is Accessible
@@ -87,10 +89,10 @@ Record page-by-page statuses and detailed evidence in the official report.
 - [x] Desktop nested submenus open inward, remain inside the viewport, close with Escape, and return focus correctly.
 - [x] Mobile menu and nested submenu states are correctly announced.
 - [x] Header search opens, receives focus, closes with Escape, and remains usable without JavaScript.
-- [ ] Forms expose labels, required state, instructions, errors, and status messages.
+- [x] Applicable forms expose labels, required state, instructions, native validation, and focus feedback.
 - [x] Reflow passes at 320 CSS pixels without two-dimensional scrolling except allowed content.
 - [x] Browser zoom passes at 200% and 400% on all eight required routes.
-- [ ] WCAG text-spacing overrides do not hide or overlap content.
+- [x] WCAG text-spacing overrides do not hide or overlap content.
 - [x] Default color schemes and the applicable normal, hover, and focus states pass measured contrast; disabled controls are exempt and the theme does not generate a standalone validation-error presentation.
 - [x] Reduced-motion behavior is respected.
 - [ ] RTL layout and interaction pass.
@@ -107,8 +109,8 @@ Record page-by-page statuses and detailed evidence in the official report.
 - [ ] The official Summary tab accurately reflects the Full Review evidence.
 - [ ] The generated Markdown for Trac is reviewed and ready to paste into the submission ticket.
 - [ ] `accessibility.txt` is updated with the final, truthful audit status and methodology.
-- [x] Build and validate the current 1.0.69 local candidate after the 404-layout correction.
-- [ ] Record the final 1.0.69 ZIP contents and hashes.
+- [x] Build and validate the current 1.0.70 local candidate after the RTL-layout correction.
+- [ ] Record the final 1.0.70 ZIP contents and hashes.
 
 ## Execution log
 
@@ -185,3 +187,6 @@ Record page-by-page statuses and detailed evidence in the official report.
 | 2026-09-04 | Version 1.0.69 404 regression | Pass | The focused 200%/400%-equivalent check confirms at least 8 CSS pixels between the search form and Return home action, stacked search controls at 320 CSS pixels, and no page-level horizontal scrolling. Together with 404 Axe, visible-label, and all-route reflow checks, 20/20 related tests passed across Chromium, Firefox, WebKit, Mobile Chrome, and Mobile Safari. |
 | 2026-09-04 | Version 1.0.69 deployment and integrity | Pass | Build, lint, release packaging, PHPCS 38/38, and PHPUnit 36 tests with 80 assertions passed. MyTemplatesWoo runs active version 1.0.69, and its 68 theme files exactly match the canonical source with zero missing, extra, or SHA-256-mismatched files. Version 1.0.68 is preserved in archive and tree backups under `/home/u976587618/backups/`. |
 | 2026-09-04 | Manual browser-zoom matrix | Pass | The front page, blog index, post with comments, category archive, markup and formatting page, block-patterns page, search results, and intentional 404 page all passed real Chrome testing at 200% and 400%. Remediations discovered during the matrix were deployed and revalidated before closing this step. |
+| 2026-09-04 | Manual form interaction | Pass | The comment form was traversed with the keyboard at 100% zoom. Visible labels, required-field identification, focus indicators, and native empty-submit validation worked correctly; submitting empty required fields was prevented and focus moved to the applicable field. Search forms had already been manually submitted successfully during the zoom matrix. The theme does not generate a custom asynchronous error or status-message flow. |
+| 2026-09-04 | WCAG text-spacing validation on 1.0.69 | Pass | The prescribed 1.5 line height, 0.12em letter spacing, 0.16em word spacing, and 2em paragraph spacing were applied to all eight required routes. No route produced page-level horizontal overflow in Chromium, Firefox, WebKit, Mobile Chrome, or Mobile Safari; the focused matrix passed 5/5. Manual Chrome bookmarklet inspections confirmed correct visual reflow on the front page, Post with Comments, and Page Markup and Formatting, including navigation, search, nested comment metadata, the comment form, headings, lists, quotations, images, captions, preformatted content, links, and keyboard-accessible local table scrolling. No content was hidden, clipped, or overlapped. |
+| 2026-09-04 | RTL automated baseline on 1.0.69 | Failed; remediation required | MyTemplatesWoo was temporarily switched from `pt_BR` to Arabic and verified to emit `<html dir="rtl" lang="ar">` and load `rtl.css?ver=1.0.69`. Axe, landmarks, headings, controls, focus, compact navigation, search, reflow, text spacing, forms, and other applicable checks passed. The desktop first-level submenu extended approximately 31.86 CSS pixels beyond the left viewport edge in every browser profile because a legacy physical-position rule in `rtl.css` overrides the logical positioning in the main stylesheet. The local table scroller layout passed, but its keyboard assertion was LTR-specific and must be made direction-aware. One Chromium `/blog/` navigation exceeded 30 seconds; the same reflow scenario passed in the other four profiles. The site language was restored to `pt_BR` pending remediation. |

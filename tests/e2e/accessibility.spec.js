@@ -1556,12 +1556,17 @@ test.describe( 'public theme', () => {
 
 		await table.focus();
 		await expect( table ).toBeFocused();
-		await table.evaluate( ( element ) => {
+		const direction = await table.evaluate( ( element ) => {
 			element.scrollLeft = 0;
+			return window.getComputedStyle( element ).direction;
 		} );
-		await page.keyboard.press( 'ArrowRight' );
+		await page.keyboard.press(
+			'rtl' === direction ? 'ArrowLeft' : 'ArrowRight'
+		);
 		await expect
-			.poll( () => table.evaluate( ( element ) => element.scrollLeft ) )
+			.poll( () =>
+				table.evaluate( ( element ) => Math.abs( element.scrollLeft ) )
+			)
 			.toBeGreaterThan( 0 );
 	} );
 

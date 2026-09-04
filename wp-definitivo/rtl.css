@@ -3,12 +3,6 @@ body {
 	unicode-bidi: embed;
 }
 
-.primary-navigation .sub-menu,
-.primary-navigation :where(.children) {
-	right: 0;
-	left: auto;
-}
-
 .wp-block-quote.is-style-wpdef-organic-quote::before {
 	right: 0.25em;
 	left: auto;
@@ -22,14 +16,6 @@ body {
 .alignright {
 	float: left;
 	margin: 0 1.5rem 1rem 0;
-}
-
-@media (max-width: 960px) {
-
-	.primary-navigation .sub-menu,
-	.primary-navigation :where(.children) {
-		padding: 0 1.25rem 0 0;
-	}
 }
 
 @media (max-width: 700px) {

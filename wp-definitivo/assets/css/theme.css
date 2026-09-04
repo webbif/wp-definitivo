@@ -3197,7 +3197,8 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 	.primary-navigation :where(.children) {
 		position: static;
 		display: block;
-		padding: 0 0 0 1.25rem;
+		padding-block: 0;
+		padding-inline: 1.25rem 0;
 		border: 0;
 		background: transparent;
 		box-shadow: none;
