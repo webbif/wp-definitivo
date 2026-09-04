@@ -789,6 +789,15 @@ input[type="submit"]:hover {
 	transform: translateY(-50%);
 }
 
+.error-404 .page-content {
+	display: grid;
+	gap: 1rem;
+}
+
+.error-404 .page-content > p {
+	margin: 0;
+}
+
 #page .search-form__control .search-field {
 	padding-inline: 2.65rem 0.75rem;
 }
@@ -3867,6 +3876,18 @@ body.woocommerce-checkout .wc-block-components-checkout-place-order-button {
 
 }
 /* stylelint-enable no-descending-specificity */
+
+@media (max-width: 480px) {
+
+	.error-404 .search-form {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.error-404 .search-submit {
+		width: 100%;
+	}
+}
 
 @media (prefers-reduced-motion: reduce) {
 

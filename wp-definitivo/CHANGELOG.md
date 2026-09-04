@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.69 — 2026-09-04
+
+- Added clear spacing between the 404 search form and return action, and stacked the search controls at narrow reflow widths.
+
 ## 1.0.68 — 2026-09-04
 
 - Replaced compressed fixed-layout content tables with readable, keyboard-focusable local horizontal scrolling at compact widths.

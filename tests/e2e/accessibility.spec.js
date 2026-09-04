@@ -1444,6 +1444,58 @@ test.describe( 'public theme', () => {
 		);
 	} );
 
+	test( '404 search and return actions remain separated at high zoom', async ( {
+		page,
+	} ) => {
+		for ( const width of [ 640, 320 ] ) {
+			await page.setViewportSize( { width, height: 800 } );
+			await navigate( page, '/accessibility-audit-intentional-404/' );
+
+			const searchForm = page.locator( '.error-404 .search-form' );
+			const returnLink = page.locator( '.error-404 .wpdef-button' );
+
+			await expect( searchForm ).toBeVisible();
+			await expect( returnLink ).toBeVisible();
+
+			const layout = await page.evaluate( () => {
+				const form = document.querySelector(
+					'.error-404 .search-form'
+				);
+				const field = form.querySelector( '.search-field' );
+				const submit = form.querySelector( '.search-submit' );
+				const link = document.querySelector(
+					'.error-404 .wpdef-button'
+				);
+				const formBox = form.getBoundingClientRect();
+				const fieldBox = field.getBoundingClientRect();
+				const submitBox = submit.getBoundingClientRect();
+				const linkBox = link.getBoundingClientRect();
+
+				return {
+					clientWidth: document.documentElement.clientWidth,
+					scrollWidth: document.documentElement.scrollWidth,
+					formBottom: formBox.bottom,
+					fieldBottom: fieldBox.bottom,
+					submitTop: submitBox.top,
+					linkTop: linkBox.top,
+				};
+			} );
+
+			expect( layout.scrollWidth ).toBeLessThanOrEqual(
+				layout.clientWidth
+			);
+			expect( layout.linkTop ).toBeGreaterThanOrEqual(
+				layout.formBottom + 8
+			);
+
+			if ( 320 === width ) {
+				expect( layout.submitTop ).toBeGreaterThanOrEqual(
+					layout.fieldBottom
+				);
+			}
+		}
+	} );
+
 	test( 'classic content tables use a keyboard-accessible local scroller at 320 CSS pixels', async ( {
 		page,
 	} ) => {
