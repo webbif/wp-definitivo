@@ -1,4 +1,4 @@
-# WP Definitivo 1.0.70 accessibility audit
+# WP Definitivo 1.0.71 accessibility audit
 
 Started: 2026-09-03  
 Primary test site: https://mytemplateswoo.com/  
@@ -10,17 +10,19 @@ This file tracks internal execution and evidence. The official Google Sheet rema
 ## 1. Test candidate and environment
 
 - [x] The audit started from clean, synchronized release `fe3c59d` / `v1.0.61`.
-- [x] Accessibility remediation is prepared as version `1.0.70` in the working tree.
+- [x] Accessibility remediation is prepared as version `1.0.71` in the working tree.
 - [x] Create the version 1.0.64 audit-candidate commit (`848e477`).
 - [x] Create the version 1.0.68 table-remediation commit (`e3b4f4a`).
 - [x] Create the version 1.0.69 404-layout remediation commit (`4761ab4`).
-- [ ] Create the version 1.0.70 RTL-layout remediation commit.
+- [x] Create the version 1.0.70 RTL-layout remediation commit (`0b2e708`).
+- [ ] Create the version 1.0.71 single-RTL-stylesheet remediation commit.
 - [ ] Create the final tag after the formal audit is complete.
-- [x] `style.css`, `readme.txt`, and `package.json` report version `1.0.70`.
+- [x] `style.css`, `readme.txt`, and `package.json` report version `1.0.71`.
 - [x] MyTemplatesWoo runs WordPress 7.1.
 - [x] Synchronize WP Definitivo 1.0.68 to MyTemplatesWoo and verify all deployed file hashes.
 - [x] Synchronize WP Definitivo 1.0.69 to MyTemplatesWoo and verify all deployed file hashes.
-- [ ] Synchronize WP Definitivo 1.0.70 to MyTemplatesWoo and verify all deployed file hashes.
+- [x] Synchronize WP Definitivo 1.0.70 to MyTemplatesWoo and verify all deployed file hashes.
+- [ ] Synchronize WP Definitivo 1.0.71 to MyTemplatesWoo and verify all deployed file hashes.
 - [x] No regular plugins are active; only Hostinger must-use infrastructure plugins are present.
 - [x] Verify the deployed theme file hashes against the current audit candidate immediately before formal testing.
 - [x] Create the official Google Sheet report and add its URL above.
@@ -109,8 +111,8 @@ Record page-by-page statuses and detailed evidence in the official report.
 - [ ] The official Summary tab accurately reflects the Full Review evidence.
 - [ ] The generated Markdown for Trac is reviewed and ready to paste into the submission ticket.
 - [ ] `accessibility.txt` is updated with the final, truthful audit status and methodology.
-- [x] Build and validate the current 1.0.70 local candidate after the RTL-layout correction.
-- [ ] Record the final 1.0.70 ZIP contents and hashes.
+- [x] Build and validate the current 1.0.71 local candidate after the RTL-stylesheet correction.
+- [ ] Record the final 1.0.71 ZIP contents and hashes.
 
 ## Execution log
 

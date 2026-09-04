@@ -228,6 +228,28 @@ function wpdef_get_asset_context() {
 }
 
 /**
+ * Prevent WordPress from printing a second, unversioned copy of the parent RTL stylesheet.
+ *
+ * A child theme's locale stylesheet remains untouched and may load alongside the
+ * versioned parent stylesheet enqueued by this theme.
+ *
+ * @param string $stylesheet_uri     Localized stylesheet URI.
+ * @param string $stylesheet_dir_uri Stylesheet directory URI.
+ * @return string
+ */
+function wpdef_filter_locale_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
+	$template_dir_uri = rtrim( get_template_directory_uri(), '/' );
+	$locale_dir_uri   = rtrim( (string) $stylesheet_dir_uri, '/' );
+
+	if ( $template_dir_uri === $locale_dir_uri && $template_dir_uri . '/rtl.css' === $stylesheet_uri ) {
+		return '';
+	}
+
+	return $stylesheet_uri;
+}
+add_filter( 'locale_stylesheet_uri', 'wpdef_filter_locale_stylesheet_uri', 10, 2 );
+
+/**
  * Enqueue only the theme modules needed by the current request.
  *
  * @return void
@@ -254,7 +276,7 @@ function wpdef_scripts() {
 	}
 
 	if ( $context['base'] && is_rtl() ) {
-		wp_enqueue_style( 'wpdef-rtl', get_theme_file_uri( '/rtl.css' ), array( 'wpdef-style' ), WPDEF_VERSION );
+		wp_enqueue_style( 'wpdef-rtl', get_template_directory_uri() . '/rtl.css', array( 'wpdef-style' ), WPDEF_VERSION );
 	}
 
 	if ( $context['navigation'] || ( $context['base'] && get_theme_mod( 'wpdef_back_to_top', true ) ) ) {

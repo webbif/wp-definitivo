@@ -21,7 +21,36 @@ final class AssetLoadingTest extends TestCase {
 		$GLOBALS['wpdef_test_post_meta']                  = array();
 		$GLOBALS['wpdef_test_query_conditions']           = array();
 		$GLOBALS['wpdef_test_queried_object_id']          = 48;
+		$GLOBALS['wpdef_test_template_directory_uri']     = 'https://example.test/wp-content/themes/wp-definitivo';
 		unset( $GLOBALS['wpdef_asset_context'], $GLOBALS['wpdef_woocommerce_asset_context'] );
+	}
+
+	/**
+	 * The parent theme suppresses WordPress's duplicate unversioned RTL link.
+	 *
+	 * @return void
+	 */
+	public function test_parent_rtl_stylesheet_duplicate_is_suppressed() {
+		$parent_uri = $GLOBALS['wpdef_test_template_directory_uri'];
+
+		$this->assertSame(
+			'',
+			wpdef_filter_locale_stylesheet_uri( $parent_uri . '/rtl.css', $parent_uri )
+		);
+	}
+
+	/**
+	 * A child theme may still supply its own locale stylesheet.
+	 *
+	 * @return void
+	 */
+	public function test_child_locale_stylesheet_is_preserved() {
+		$child_uri = 'https://example.test/wp-content/themes/wp-definitivo-child';
+
+		$this->assertSame(
+			$child_uri . '/rtl.css',
+			wpdef_filter_locale_stylesheet_uri( $child_uri . '/rtl.css', $child_uri )
+		);
 	}
 
 	/**

@@ -1,6 +1,6 @@
 {
   "name": "wp-definitivo",
-	"version": "1.0.70",
+	"version": "1.0.71",
   "private": true,
   "description": "Build, lint, and integration tooling for the WP Definitivo theme.",
   "type": "module",

@@ -3,7 +3,7 @@ Contributors: leandrobiffi
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.70
+Stable tag: 1.0.71
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,10 @@ When comments or WooCommerce are enabled, WordPress and those plugins may proces
 WP Definitivo does not include forms, SEO tools, analytics, custom post types, shortcodes, custom blocks, social sharing, favicons, or demo content. These features belong in plugins or WordPress core.
 
 == Changelog ==
+
+= 1.0.71 - 2026-09-04 =
+
+* Prevented WordPress from printing a second unversioned copy of the parent theme's RTL stylesheet while preserving child-theme RTL stylesheets.
 
 = 1.0.70 - 2026-09-04 =
 

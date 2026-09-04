@@ -131,6 +131,12 @@ if ( ! function_exists( 'get_theme_mod' ) ) {
 	}
 }
 
+if ( ! function_exists( 'get_template_directory_uri' ) ) {
+	function get_template_directory_uri() {
+		return isset( $GLOBALS['wpdef_test_template_directory_uri'] ) ? $GLOBALS['wpdef_test_template_directory_uri'] : 'https://example.test/wp-content/themes/wp-definitivo';
+	}
+}
+
 require dirname( __DIR__, 2 ) . '/wp-definitivo/inc/template-functions.php';
 require dirname( __DIR__, 2 ) . '/wp-definitivo/inc/integrations/elementor.php';
 require dirname( __DIR__, 2 ) . '/wp-definitivo/inc/assets.php';

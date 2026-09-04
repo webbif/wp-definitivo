@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.71 — 2026-09-04
+
+- Prevented WordPress from printing a second unversioned copy of the parent theme's RTL stylesheet while preserving child-theme RTL stylesheets.
+
 ## 1.0.70 — 2026-09-04
 
 - Kept desktop dropdowns inside the viewport in right-to-left layouts by removing a legacy physical-position override.
